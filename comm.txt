@@ -1,0 +1,11 @@
+npx create-react-app appName
+npm run start
+npm install
+npx json-server --watch data/db.json --port 8000
+npm install react-router-dom@(v)
+npm install 
+npm run dev
+(js func)rsf
+(jsx def func) rfc
+npm install react-router-dom
+npm install @chatscope/chat-ui-kit-react
