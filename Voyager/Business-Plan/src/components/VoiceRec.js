@@ -46,18 +46,14 @@ function VoiceRec({ handleNoteChange }) {
     };
   };
 
-  const handleSaveNote = () => {
-    // Handle saving the note if needed
-  };
+
 
   return (
     <>
       <div className="container">
         <div className="box">
           {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
-          <Button onClick={handleSaveNote} disabled={!isListening} colorScheme="blue">
-            Send
-          </Button>
+       
           <Button onClick={() => setIsListening((prevState) => !prevState)} colorScheme="blue">
             {isListening ? 'Stop' : 'Start'} Listening
           </Button>
