@@ -29,7 +29,24 @@ function BuisinessChatContainer() {
         overflowY="scroll"
         padding="10px"
       >
-        {/* Display messages here */}
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+
+
       </Flex>
       <Flex
         direction="row"
