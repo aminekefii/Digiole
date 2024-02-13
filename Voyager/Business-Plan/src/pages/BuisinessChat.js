@@ -39,7 +39,7 @@ const BuisnessChat = () => {
     return (
 
 
-        <Stack w="100%" minH="100vh">
+        <Stack w="100%" minH="90vh">
             <Grid templateColumns="1fr 6fr" mt="30px" w="100%">
                 <Sidebar />
                 <GridItem as="main" p="40px" height="100%" w="100%">

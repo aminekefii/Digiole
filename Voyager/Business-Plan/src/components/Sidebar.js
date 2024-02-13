@@ -17,7 +17,7 @@ const Sidebar = () => {
             colSpan={{ base: 6, lg: 2, xl: 1 }}
             py="20px"
             mt="10px"
-            minHeight="90vh" // Adjusted minHeight
+            minHeight="80vh" // Adjusted minHeight
             p={{ base: "20px", lg: "30px" }}
             display="flex"
             flexDirection="column"
