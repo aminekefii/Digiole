@@ -49,13 +49,14 @@ function VoiceRec({ handleNoteChange }) {
 
 
   return (
-    <>
-      <div className="container">
-        <div className="box">
-          {isListening ? <span onClick={() => setIsListening(false)} style={{ cursor: 'pointer' }}>🎙️</span> : <span onClick={() => setIsListening(true)} style={{ cursor: 'pointer' }}>🛑🎙️</span>}
-        </div>
-      </div>
-    </>
+<>
+  <div className="container">
+    <div className="box">
+      {isListening ? <span onClick={() => setIsListening(false)} style={{ cursor: 'pointer' }}>🎤</span> : <span onClick={() => setIsListening(true)} style={{ cursor: 'pointer' }}>🎙️</span>}
+    </div>
+  </div>
+</>
+
 
 
   );
