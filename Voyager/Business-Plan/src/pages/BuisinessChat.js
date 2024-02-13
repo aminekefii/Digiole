@@ -47,12 +47,7 @@ const BuisnessChat = () => {
                     <BuisinessChatContainer></BuisinessChatContainer>
                  
                     <VoiceRec setNote={setNote} />
-            
-
-
-
-
-
+ 
 
                 </GridItem>
             </Grid>
