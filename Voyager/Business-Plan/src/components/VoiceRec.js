@@ -52,14 +52,11 @@ function VoiceRec({ handleNoteChange }) {
     <>
       <div className="container">
         <div className="box">
-          {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
-       
-          <Button onClick={() => setIsListening((prevState) => !prevState)} colorScheme="blue">
-            {isListening ? 'Stop' : 'Start'} Listening
-          </Button>
+          {isListening ? <span onClick={() => setIsListening(false)}>🎙️</span> : <span onClick={() => setIsListening(true)}>🛑🎙️</span>}
         </div>
       </div>
     </>
+
   );
 }
 
