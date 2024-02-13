@@ -9,9 +9,8 @@ mic.continuous = true;
 mic.interimResults = true;
 mic.lang = 'en-US';
 
-function VoiceRec({ setNote }) {
+function VoiceRec({ handleNoteChange }) {
   const [isListening, setIsListening] = useState(false);
-  const [note, setNoteState] = useState('');
 
   useEffect(() => {
     handleListen();
@@ -40,7 +39,7 @@ function VoiceRec({ setNote }) {
         .map((result) => result.transcript)
         .join('');
       console.log(transcript);
-      setNoteState(transcript); // Use setNoteState instead of setNote
+      handleNoteChange(transcript);
       mic.onerror = (event) => {
         console.log(event.error);
       };
@@ -56,13 +55,12 @@ function VoiceRec({ setNote }) {
       <div className="container">
         <div className="box">
           {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
-          <Button onClick={handleSaveNote} disabled={!note} colorScheme="blue">
+          <Button onClick={handleSaveNote} disabled={!isListening} colorScheme="blue">
             Send
           </Button>
           <Button onClick={() => setIsListening((prevState) => !prevState)} colorScheme="blue">
-            Start/Stop
+            {isListening ? 'Stop' : 'Start'} Listening
           </Button>
-          <p>{note}</p>
         </div>
       </div>
     </>

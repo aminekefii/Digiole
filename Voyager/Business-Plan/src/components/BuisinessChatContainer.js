@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { Flex, Input, Button, Spacer } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Flex, Input, Button } from "@chakra-ui/react";
 import "../chatContainer.css";
 import VoiceRec from "./VoiceRec";
 
 function BuisinessChatContainer() {
-  const [input, setInput] = useState(""); // Use input state for the input field
+  const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [note, setNote] = useState(""); 
+  const [isListening, setIsListening] = useState(false);
+
+  const handleNoteChange = (note) => {
+    setInput(note);
+  };
 
   const handleMessageSubmit = () => {
     // Handle sending the message
@@ -35,11 +39,11 @@ function BuisinessChatContainer() {
         height="20%"
         padding="10px"
       >
-        <VoiceRec setNote={setNote} />
+        <VoiceRec handleNoteChange={handleNoteChange} />
 
         <Input
           type="text"
-          value={input}  // Use input state for the value
+          value={input}
           onChange={(e) => setInput(e.target.value)}
           width="80%"
           padding="10px"
@@ -60,7 +64,6 @@ function BuisinessChatContainer() {
         >
           Send
         </Button>
-        <p>{note}</p>
       </Flex>
     </Flex>
   );
