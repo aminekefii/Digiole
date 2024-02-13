@@ -57,7 +57,10 @@ function Welcome() {
 
 
 
-                        <Flex rounded="xl" direction="column" mt={isNotSmallerScreen ? 4 : 0} ml={isNotSmallerScreen ? 4 : 0} bg="gray.100" h="30vh" w="30vh" justify="flex-end" _hover={{ bg: "teal.400", }}>
+                        <Flex
+                         as={Link}
+                         to="/chatContainer"
+                        rounded="xl" direction="column" mt={isNotSmallerScreen ? 4 : 0} ml={isNotSmallerScreen ? 4 : 0} bg="gray.100" h="30vh" w="30vh" justify="flex-end" _hover={{ bg: "teal.400", }}>
                             <Text color="black" p="4" fontSize="xl" fontWeight="semibold">
                                 Other Plans
                             </Text>

@@ -6,6 +6,7 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import { useState } from "react";
 import VoiceRec from "../components/VoiceRec";
+import BuisinessChatContainer from "../components/BuisinessChatContainer";
 
 
 
@@ -59,6 +60,12 @@ const BuisnessChat = () => {
                  
                     <VoiceRec setNote={setNote} />
             
+
+
+
+
+
+
                 </GridItem>
             </Grid>
         </Stack>
