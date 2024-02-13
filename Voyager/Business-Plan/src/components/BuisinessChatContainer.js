@@ -3,25 +3,15 @@ import { Flex, Input, Button, Spacer } from "@chakra-ui/react";
 import "../chatContainer.css";
 import VoiceRec from "./VoiceRec";
 
-
 function BuisinessChatContainer() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(""); // Use input state for the input field
   const [messages, setMessages] = useState([]);
+  const [note, setNote] = useState(""); 
 
-  const [note, setNote] = useState("");
-
-
-
-
-  const handleMessageSubmit = /*async*/ () => {
-    /*const response = await sendMessageToOpenAI(input);
-    setMessages([
-      ...messages,
-      { text: input, isUser: true },
-      { text: response, isUser: false },
-    ]);
-    setInput("");*/
-    console.log("sent");
+  const handleMessageSubmit = () => {
+    // Handle sending the message
+    console.log("Message sent:", input);
+    setInput(""); // Clear input after sending
   };
 
   return (
@@ -35,29 +25,21 @@ function BuisinessChatContainer() {
         overflowY="scroll"
         padding="10px"
       >
-        
-        <div className="user-message">user message</div>
-        <div className="bot-message">bot message</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {/* Display messages here */}
       </Flex>
-      <Flex direction="row" align="center" justify="center" className="input-container" height="20%" padding="10px">
+      <Flex
+        direction="row"
+        align="center"
+        justify="center"
+        className="input-container"
+        height="20%"
+        padding="10px"
+      >
+        <VoiceRec setNote={setNote} />
 
-      <VoiceRec setNote={setNote} />  
-            <Input
+        <Input
           type="text"
-          value={input}
+          value={input}  // Use input state for the value
           onChange={(e) => setInput(e.target.value)}
           width="80%"
           padding="10px"
@@ -78,8 +60,7 @@ function BuisinessChatContainer() {
         >
           Send
         </Button>
-
-
+        <p>{note}</p>
       </Flex>
     </Flex>
   );
