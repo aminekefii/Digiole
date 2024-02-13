@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Flex, Input, Button, Spacer } from "@chakra-ui/react";
 import "../chatContainer.css";
+import VoiceRec from "./VoiceRec";
 
 
 function BuisinessChatContainer() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+
+  const [note, setNote] = useState("");
+
+
+
 
   const handleMessageSubmit = /*async*/ () => {
     /*const response = await sendMessageToOpenAI(input);
@@ -47,7 +53,9 @@ function BuisinessChatContainer() {
 
       </Flex>
       <Flex direction="row" align="center" justify="center" className="input-container" height="20%" padding="10px">
-        <Input
+
+      <VoiceRec setNote={setNote} />  
+            <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -70,6 +78,8 @@ function BuisinessChatContainer() {
         >
           Send
         </Button>
+
+
       </Flex>
     </Flex>
   );
