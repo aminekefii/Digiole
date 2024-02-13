@@ -43,20 +43,8 @@ const BuisnessChat = () => {
             <Grid templateColumns="1fr 6fr" mt="30px" w="100%">
                 <Sidebar />
                 <GridItem as="main" p="40px" height="100%" w="100%">
-                    <MainContainer>
-                        <ChatContainer>
-                            <MessageList
-                                scrollBehavior="smooth"
-                                typingIndicator={isTyping ? <TypingIndicator content="Voyager is typing" /> : null}
-                            >
-                                {messages.map((message, i) => {
-                                    console.log(message)
-                                    return <Message key={i} model={message} />
-                                })}
-                            </MessageList>
-                            <MessageInput attachButton={false} placeholder="Type message here" onSend={handleSend}/>
-                        </ChatContainer>
-                    </MainContainer>
+                    
+                    <BuisinessChatContainer></BuisinessChatContainer>
                  
                     <VoiceRec setNote={setNote} />
             

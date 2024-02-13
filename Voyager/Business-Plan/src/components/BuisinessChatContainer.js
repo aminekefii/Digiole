@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Flex, Input, Button } from "@chakra-ui/react";
+import { Flex, Input, Button, Spacer } from "@chakra-ui/react";
+import "../chatContainer.css";
+
 
 function BuisinessChatContainer() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const handleMessageSubmit = async () => {
+  const handleMessageSubmit = /*async*/ () => {
     /*const response = await sendMessageToOpenAI(input);
     setMessages([
       ...messages,
@@ -27,21 +29,29 @@ function BuisinessChatContainer() {
         overflowY="scroll"
         padding="10px"
       >
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={message.isUser ? "user-message" : "bot-message"}
-          >
-            {message.text}
-          </div>
-        ))}
+        
+        <div className="user-message">user message</div>
+        <div className="bot-message">bot message</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
       </Flex>
       <Flex direction="row" align="center" justify="center" className="input-container" height="20%" padding="10px">
         <Input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          width="70%"
+          width="80%"
           padding="10px"
           borderRadius="5px"
           border="1px solid green"
@@ -49,7 +59,6 @@ function BuisinessChatContainer() {
         />
         <Button
           onClick={handleMessageSubmit}
-          width="20%"
           padding="10px"
           borderRadius="5px"
           border="none"

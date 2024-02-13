@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
   }
   
   .chat {
@@ -23,7 +23,7 @@
     margin: 5px 0;
     padding: 10px;
     border-radius: 10px;
-    max-width: 50%;
+    max-width: 60%;
     word-wrap: break-word;
   }
   
@@ -48,15 +48,16 @@
   }
   
   input[type="text"] {
-    width: 70%;
+    width: 50%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid green;
     outline: none;
+    height: 50px;
   }
   
   button {
-    width: 20%;
+    width: 10%;
     padding: 10px;
     border-radius: 5px;
     border: none;
