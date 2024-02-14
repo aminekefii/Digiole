@@ -8,4 +8,9 @@ npm run dev
 (js func)rsf
 (jsx def func) rfc
 npm install react-router-dom
+npm install @chakra-ui/react @chakra-ui/icons
 npm install @chatscope/chat-ui-kit-react
+npm install axios --save --force
+Remove-Item -Path node_modules -Recurse -Force
+npm install --legacy-peer-deps
+npm i @chakra-ui/icons@1.1.7 @chakra-ui/system@1 react@17 react-dom@17

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Flex, Input, Button } from "@chakra-ui/react";
 import "../chatContainer.css";
 import VoiceRec from "./VoiceRec";
+import { sendMessageToOpenAI } from "../axios";
 
 function BuisinessChatContainer() {
   const [input, setInput] = useState("");
@@ -12,11 +13,17 @@ function BuisinessChatContainer() {
     setInput(note);
   };
 
-  const handleMessageSubmit = () => {
-    // Handle sending the message
-    console.log("Message sent:", input);
-    setInput(""); // Clear input after sending
+
+  const handleMessageSubmit = async () => {
+    const response = await sendMessageToOpenAI(input);
+    setMessages([
+      ...messages,
+      { text: input, isUser: true },
+      { text: response, isUser: false },
+    ]);
+    setInput("");
   };
+
 
   return (
     <Flex direction="column" align="center" justify="center" className="App">

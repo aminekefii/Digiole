@@ -45,9 +45,6 @@ const BuisnessChat = () => {
                 <GridItem as="main" p="40px" height="100%" w="100%">
                     
                     <BuisinessChatContainer></BuisinessChatContainer>
-                 
-            
- 
 
                 </GridItem>
             </Grid>
