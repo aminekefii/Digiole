@@ -26,7 +26,7 @@ app.post("/chat", async (req, res) => {
   res.send(completion.data.choices[0].text);
 });
 
-const PORT = 8020;
+const PORT = 8080;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
