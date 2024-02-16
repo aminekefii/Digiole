@@ -25,7 +25,7 @@ export default function ChatBot() {
     <Flex direction="column" align="center" justify="center">
       <Box
         className="chat"
-        height="80vh"
+        height="50vh"
         width="80%"
         overflowY="scroll"
         padding="10px"
@@ -59,7 +59,7 @@ export default function ChatBot() {
           type="text"
           value={prompt}
           onChange={handlePrompt}
-          width="80%"
+          width="90%"
           padding="10px"
           borderRadius="5px"
           border="1px solid green"
