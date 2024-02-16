@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Flex, Input, Button, Box } from "@chakra-ui/react";
+import VoiceRec from "./VoiceRec";
 
 export default function ChatBot() {
   const [prompt, setPrompt] = useState("");
@@ -14,22 +15,17 @@ export default function ChatBot() {
       { text: prompt, isUser: true },
       { text: response.data, isUser: false },
     ]);
-    setPrompt("");
+    setPrompt(""); // Reset the input field
   };
+  
 
-  const handlePrompt = (e) => {
-    setPrompt(e.target.value);
+  const handlePromptChange = (note) => {
+    setPrompt(note);
   };
 
   return (
     <Flex direction="column" align="center" justify="center">
-      <Box
-        className="chat"
-        height="50vh"
-        width="80%"
-        overflowY="scroll"
-        padding="10px"
-      >
+      <Box className="chat" height="50vh" width="80%" overflowY="scroll" padding="10px">
         {messages.map((message, index) => (
           <Box
             key={index}
@@ -55,11 +51,13 @@ export default function ChatBot() {
         height="20vh"
         padding="10px"
       >
+        <VoiceRec handleNoteChange={handlePromptChange} />
         <Input
           type="text"
           value={prompt}
-          onChange={handlePrompt}
-          width="90%"
+          onChange={(e) => setPrompt(e.target.value)}
+          width="350px"
+          height="30px"
           padding="10px"
           borderRadius="5px"
           border="1px solid green"
