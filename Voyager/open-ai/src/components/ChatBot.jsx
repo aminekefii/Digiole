@@ -9,15 +9,19 @@ export default function ChatBot() {
   const HTTP = "http://localhost:8080/testchat";
 
   const handleMessageSubmit = async () => {
+    const userMessage = { text: prompt, isUser: true }; // Create a user message object
+    setMessages([...messages, userMessage]); // Add the user message to the messages state
+  
     setPrompt(""); // Reset the input field
   
     const response = await axios.post(HTTP, { prompt });
     setMessages([
-      ...messages,
-      { text: prompt, isUser: true },
+      ...messages.filter((msg) => msg !== userMessage), // Remove the user message
+      userMessage, // Add the user message again at the end
       { text: response.data, isUser: false },
     ]);
   };
+  
   
   
 
