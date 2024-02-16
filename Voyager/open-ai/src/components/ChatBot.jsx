@@ -9,14 +9,16 @@ export default function ChatBot() {
   const HTTP = "http://localhost:8080/testchat";
 
   const handleMessageSubmit = async () => {
+    setPrompt(""); // Reset the input field
+  
     const response = await axios.post(HTTP, { prompt });
     setMessages([
       ...messages,
       { text: prompt, isUser: true },
       { text: response.data, isUser: false },
     ]);
-    setPrompt(""); // Reset the input field
   };
+  
   
 
   const handlePromptChange = (note) => {
