@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Flex, Input, Button, Box } from "@chakra-ui/react";
+
 export default function ChatBot() {
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
+  const [messages, setMessages] = useState([]);
   const HTTP = "http://localhost:8080/testchat";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post(`${HTTP}`, { prompt })
-      .then((res) => {
-        setResponse(res.data);
-        console.log(prompt);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+  const handleMessageSubmit = async () => {
+    const response = await axios.post(HTTP, { prompt });
+    setMessages([
+      ...messages,
+      { text: prompt, isUser: true },
+      { text: response.data, isUser: false },
+    ]);
     setPrompt("");
   };
 
@@ -26,30 +22,63 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="container container-sm p-1">
-      {" "}
-      <h1 className="title text-center text-darkGreen">ChatBot API</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-
-          <label htmlFor="">Ask questions</label>
-          <input
-            className="shadow-sm"
-            type="text"
-            placeholder="Enter text"
-            value={prompt}
-            onChange={handlePrompt}
-          />
-        </div>{" "}
-        { <button className="btn btn-accept w-100" type="submit">
-          Go
-        </button> }
-      </form>
-      <div className="bg-darkGreen  mt-2 p-1 border-5">
-        <p className="text-light">
-          {response ? response : "Ask me anything..."}
-        </p>
-      </div>
-    </div>
+    <Flex direction="column" align="center" justify="center">
+      <Box
+        className="chat"
+        height="80vh"
+        width="80%"
+        overflowY="scroll"
+        padding="10px"
+      >
+        {messages.map((message, index) => (
+          <Box
+            key={index}
+            className={message.isUser ? "user-message" : "bot-message"}
+            bg={message.isUser ? "#f2f2f2" : "#4caf50"}
+            color={message.isUser ? "black" : "white"}
+            alignSelf={message.isUser ? "flex-end" : "flex-start"}
+            margin="5px 0"
+            padding="10px"
+            borderRadius="10px"
+            maxWidth={message.isUser ? "60%" : "50%"}
+            wordWrap="break-word"
+          >
+            {message.text}
+          </Box>
+        ))}
+      </Box>
+      <Flex
+        direction="row"
+        align="center"
+        justify="center"
+        className="input-container"
+        height="20vh"
+        padding="10px"
+      >
+        <Input
+          type="text"
+          value={prompt}
+          onChange={handlePrompt}
+          width="80%"
+          padding="10px"
+          borderRadius="5px"
+          border="1px solid green"
+          outline="none"
+        />
+        <Button
+          onClick={handleMessageSubmit}
+          padding="10px"
+          borderRadius="5px"
+          border="none"
+          outline="none"
+          backgroundColor="#4caf50"
+          color="white"
+          cursor="pointer"
+          _hover={{ opacity: 0.8 }}
+        >
+          Send
+        </Button>
+      </Flex>
+    </Flex>
   );
 }
