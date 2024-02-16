@@ -1,41 +1,29 @@
-/*const express = require("express");
 
+const express = require("express");
 const cors = require("cors");
-
 const bodyParser = require("body-parser");
-
-const { Configuration, OpenAIApi } = require("openai");
-
-const config = new Configuration({
-  apiKey: "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",
-});
-
-const openai = new OpenAIApi(config);
-
-// Setup server
+const OpenAI = require("openai");
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// endpoint for ChatGPT
+const openai = new OpenAI({
+  apiKey: "",
+});
 
-app.post("/chat", async (req, res) => {
+app.post("/testchat", async (req, res) => {
   const { prompt } = req.body;
 
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
-    max_tokens: 512,
-    temperature: 0,
-    prompt: prompt,
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: prompt }],
+    model: "gpt-3.5-turbo",
   });
-  res.send(completion.data.choices[0].text);
+
+  res.send(completion.choices[0].message.content);
 });
 
 const PORT = 8080;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
-
-//run node server.js*/

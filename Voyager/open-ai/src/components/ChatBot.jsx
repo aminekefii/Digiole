@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import apiService from "../apiService";
-
+import axios from "axios";
 export default function ChatBot() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
+  const HTTP = "http://localhost:8080/testchat";
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = await apiService.chat(prompt);
-    if (data) {
-      setResponse(data);
-    }
+    axios
+      .post(`${HTTP}`, { prompt })
+      .then((res) => {
+        setResponse(res.data);
+        console.log(prompt);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setPrompt("");
   };
 
@@ -21,9 +27,11 @@ export default function ChatBot() {
 
   return (
     <div className="container container-sm p-1">
+      {" "}
       <h1 className="title text-center text-darkGreen">ChatBot API</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
+
           <label htmlFor="">Ask questions</label>
           <input
             className="shadow-sm"
@@ -32,13 +40,15 @@ export default function ChatBot() {
             value={prompt}
             onChange={handlePrompt}
           />
-        </div>
-        <button className="btn btn-accept w-100" type="submit">
+        </div>{" "}
+        { <button className="btn btn-accept w-100" type="submit">
           Go
-        </button>
+        </button> }
       </form>
-      <div className="bg-darkGreen mt-2 p-1 border-5">
-        <p className="text-light">{response ? response : "Ask me anything..."}</p>
+      <div className="bg-darkGreen  mt-2 p-1 border-5">
+        <p className="text-light">
+          {response ? response : "Ask me anything..."}
+        </p>
       </div>
     </div>
   );

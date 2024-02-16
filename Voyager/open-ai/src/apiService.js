@@ -1,4 +1,4 @@
-const axios = require("axios");
+/*const axios = require("axios");
 
 const HTTP = "https://localhost:3001";
 
@@ -15,3 +15,4 @@ const apiService = {
 };
 
 module.exports = apiService;
+*/

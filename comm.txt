@@ -15,3 +15,4 @@ Remove-Item -Path node_modules -Recurse -Force
 npm install --legacy-peer-deps
 npm i @chakra-ui/icons@1.1.7 @chakra-ui/system@1 react@17 react-dom@17
 npm install express openai body-parse cors axios
+ setx OPENAI_API_KEY "ApiKey"
