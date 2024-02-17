@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Flex, Input, Button, Box } from "@chakra-ui/react";
 import VoiceRec from "./VoiceRec";
+import TextToSpeech from "./TextToSpeech";
 
 export default function ChatBot() {
     const [prompt, setPrompt] = useState("");
@@ -22,42 +23,37 @@ export default function ChatBot() {
         ]);
     };
 
-
-
-
     const handlePromptChange = (note) => {
         setPrompt(note);
     };
 
-
-
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
-          e.preventDefault(); // Prevent the default behavior of the "Enter" key (e.g., new line in textarea)
-          handleMessageSubmit(); // Call the handleMessageSubmit function
+            e.preventDefault(); // Prevent the default behavior of the "Enter" key (e.g., new line in textarea)
+            handleMessageSubmit(); // Call the handleMessageSubmit function
         }
-      };
-
-      
+    };
 
     return (
         <Flex direction="column" align="center" justify="center">
             <Box className="chat" height="50vh" width="80%" overflowY="scroll" padding="10px">
                 {messages.map((message, index) => (
-                    <Box
-                        key={index}
-                        className={message.isUser ? "user-message" : "bot-message"}
-                        bg={message.isUser ? "#f2f2f2" : "#4caf50"}
-                        color={message.isUser ? "black" : "white"}
-                        alignSelf={message.isUser ? "flex-end" : "flex-start"}
-                        margin="5px 0"
-                        padding="10px"
-                        borderRadius="10px"
-                        maxWidth={message.isUser ? "60%" : "50%"}
-                        wordWrap="break-word"
-                    >
-                        {message.text}
-                    </Box>
+                   <Box
+                   key={index}
+                   className={message.isUser ? "user-message" : "bot-message"}
+                   bg={message.isUser ? "#f2f2f2" : "#4caf50"}
+                   color={message.isUser ? "black" : "white"}
+                   alignSelf={message.isUser ? "flex-end" : "flex-start"}
+                   margin="5px 0"
+                   padding="10px"
+                   borderRadius="10px"
+                   maxWidth={message.isUser ? "60%" : "50%"}
+                   // Remove wordWrap prop from here
+                 >
+                   {message.text}
+                   {!message.isUser && <TextToSpeech text={message.text} />}
+                 </Box>
+                 
                 ))}
             </Box>
             <Flex
@@ -73,7 +69,7 @@ export default function ChatBot() {
                     type="text"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    onKeyDown={handleKeyDown} // Add the handleKeyDown event listener
+                    onKeyDown={handleKeyDown}
                     width="350px"
                     height="30px"
                     padding="10px"
