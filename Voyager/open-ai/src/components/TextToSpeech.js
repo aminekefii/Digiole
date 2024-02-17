@@ -1,15 +1,28 @@
-import React from "react";
+
+import React, { useState } from "react";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
-  dangerouslyAllowBrowser: true
-});
-
+    apiKey: "",
+    dangerouslyAllowBrowser: true
+  });
 const TextToSpeech = ({ text }) => {
-  const handleTextToSpeech = () => {
-    // Implement text to speech functionality here
-    console.log("Text to speech for:", text);
+  const [audioUrl, setAudioUrl] = useState("");
+
+  const handleTextToSpeech = async () => {
+    const response = await openai.audio.speech.create({
+      model: "tts-1",
+      voice: "alloy",
+      input: text,
+    });
+
+    const audioBlob = await response.arrayBuffer();
+    const audioUrl = URL.createObjectURL(new Blob([audioBlob]));
+    setAudioUrl(audioUrl);
+
+    // Play the audio
+    const audio = new Audio(audioUrl);
+    audio.play();
   };
 
   return (
