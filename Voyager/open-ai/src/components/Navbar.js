@@ -18,10 +18,10 @@ const Navbar = () => {
       <HStack spacing="20px">
         <ul style={{ display: 'flex', listStyle: 'none', padding: 0, margin: 0 }}>
           <li style={{ marginRight: '10px' }}>
-            <Link to="/chatbot">Some Page</Link>
+            <Link to="/chat">Chat</Link>
           </li>
           <li style={{ marginRight: '10px' }}>
-            <Link to="/another-page">Another Page</Link>
+            <Link to="/another-page">Upload</Link>
           </li>
        
         </ul>
