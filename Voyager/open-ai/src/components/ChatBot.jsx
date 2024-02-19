@@ -3,22 +3,25 @@ import axios from "axios";
 import { Flex, Input, Button, Box } from "@chakra-ui/react";
 import VoiceRec from "./VoiceRec";
 import TextToSpeech from "./TextToSpeech";
+import FileUpload from "./FileUpload";
 
 export default function ChatBot() {
+
+    
     const [prompt, setPrompt] = useState("");
     const [messages, setMessages] = useState([]);
     const HTTP = "http://localhost:8080/testchat";
 
     const handleMessageSubmit = async () => {
-        const userMessage = { text: prompt, isUser: true }; // Create a user message object
-        setMessages([...messages, userMessage]); // Add the user message to the messages state
+        const userMessage = { text: prompt, isUser: true };
+        setMessages([...messages, userMessage]);
 
-        setPrompt(""); // Reset the input field
+        setPrompt("");
 
         const response = await axios.post(HTTP, { prompt });
         setMessages([
-            ...messages.filter((msg) => msg !== userMessage), // Remove the user message
-            userMessage, // Add the user message again at the end
+            ...messages.filter((msg) => msg !== userMessage),
+            userMessage,
             { text: response.data, isUser: false },
         ]);
     };
@@ -29,8 +32,8 @@ export default function ChatBot() {
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault(); // Prevent the default behavior of the "Enter" key (e.g., new line in textarea)
-            handleMessageSubmit(); // Call the handleMessageSubmit function
+            e.preventDefault();
+            handleMessageSubmit();
         }
     };
 
@@ -38,22 +41,20 @@ export default function ChatBot() {
         <Flex direction="column" align="center" justify="center">
             <Box className="chat" height="50vh" width="80%" overflowY="scroll" padding="10px">
                 {messages.map((message, index) => (
-                   <Box
-                   key={index}
-                   className={message.isUser ? "user-message" : "bot-message"}
-                   bg={message.isUser ? "#f2f2f2" : "#4caf50"}
-                   color={message.isUser ? "black" : "white"}
-                   alignSelf={message.isUser ? "flex-end" : "flex-start"}
-                   margin="5px 0"
-                   padding="10px"
-                   borderRadius="10px"
-                   maxWidth={message.isUser ? "60%" : "50%"}
-                   // Remove wordWrap prop from here
-                 >
-                   {message.text}
-                   {!message.isUser && <TextToSpeech text={message.text} />}
-                 </Box>
-                 
+                    <Box
+                        key={index}
+                        className={message.isUser ? "user-message" : "bot-message"}
+                        bg={message.isUser ? "#f2f2f2" : "#4caf50"}
+                        color={message.isUser ? "black" : "white"}
+                        alignSelf={message.isUser ? "flex-end" : "flex-start"}
+                        margin="5px 0"
+                        padding="10px"
+                        borderRadius="10px"
+                        maxWidth={message.isUser ? "60%" : "50%"}
+                    >
+                        {message.text}
+                        {!message.isUser && <TextToSpeech text={message.text} />}
+                    </Box>
                 ))}
             </Box>
             <Flex
@@ -91,6 +92,7 @@ export default function ChatBot() {
                 >
                     Send
                 </Button>
+                <FileUpload />
             </Flex>
         </Flex>
     );
