@@ -18,7 +18,7 @@ function FileTable() {
     <table>
       <thead>
         <tr>
-          <th>File Name</th>
+          <th>Files</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +26,7 @@ function FileTable() {
           <tr key={index}>
             <td>{file}</td>
           </tr>
+          
         ))}
       </tbody>
     </table>
