@@ -21,7 +21,7 @@ const Navbar = () => {
             <Link to="/chat">Chat</Link>
           </li>
           <li style={{ marginRight: '10px' }}>
-            <Link to="/another-page">Upload</Link>
+            <Link to="/uploads">Upload</Link>
           </li>
        
         </ul>

@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import ChatBot from './components/ChatBot';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; // Import BrowserRouter, Switch, and Route
+import UploadedFiles from './UploadedFiles';
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
           <Route path="/chat">
             <ChatBot />
           </Route>
-          <Route path="/about">
-            <h1>About Page</h1>
+          <Route path="/uploads">
+            <UploadedFiles></UploadedFiles>
           </Route>
         </Switch>
       </div>
