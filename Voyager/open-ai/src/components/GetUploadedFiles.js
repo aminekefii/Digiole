@@ -55,15 +55,41 @@ function FileTable() {
 
   const handleConvertToJson = async (filename) => {
     try {
-      const fileData = await getFileData(filename);
-      if (fileData) {
-        const jsonData = convertCSVToJson(fileData);
-        console.log(jsonData);
-      }
+      const response = await axios.get(`/uploads/${filename}`);
+      const csvData = response.data;
+      const jsonData = convertCSVToJson(csvData);
+  
+      const jsonBlob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(jsonBlob);
+  
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${filename.replace(".csv", "")}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+  
+      // Optionally, you can move the file to the public/convertedFiles directory
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        const fileContent = fileReader.result;
+        const convertedFile = new Blob([fileContent], { type: "application/json" });
+        const convertedUrl = URL.createObjectURL(convertedFile);
+        const convertedLink = document.createElement("a");
+        convertedLink.href = convertedUrl;
+        convertedLink.download = `${filename.replace(".csv", "")}.json`;
+        document.body.appendChild(convertedLink);
+        convertedLink.click();
+        document.body.removeChild(convertedLink);
+      };
+      fileReader.readAsText(jsonBlob);
+  
     } catch (error) {
-      console.error('Error converting to JSON:', error);
+      console.error("Error converting to JSON:", error);
     }
   };
+  
   return (
     <table>
       <thead>
