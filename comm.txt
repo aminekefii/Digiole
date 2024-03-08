@@ -19,3 +19,4 @@ npm install express openai body-parse cors axios
 setx OPENAI_API_KEY "ApiKey"
 npm install csvtojson --save
 npm i multer
+$env:OPENAI_API_KEY = "Api KEy"
