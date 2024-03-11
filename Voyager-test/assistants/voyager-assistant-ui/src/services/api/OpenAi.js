@@ -1,7 +1,11 @@
 import OpenAI from "openai";
 
 // Replace "YOUR_API_KEY" with your actual OpenAI API key
+<<<<<<< HEAD
+const apiKey = "";
+=======
 const apiKey = "YOUR_API_KEY";
+>>>>>>> parent of c3979d5 (fix assistant creation multiple times)
 
 // Replace "YOUR_ASSISTANT_ID" with the ID of your assistant
 const assistantId = "asst_zpYkcSHyNuLbtebUMAY9RFYq";
