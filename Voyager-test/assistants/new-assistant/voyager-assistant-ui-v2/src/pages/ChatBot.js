@@ -1,6 +1,8 @@
+"use client";
+
 import { useRef, useState } from "react";
-import marked from "marked"; // renamed import
-import htmlParse from "html-react-parser"; // renamed import
+import { parse } from 'marked';
+import htmlParse from "html-react-parser";
 import { Box, Button, Container, Flex, Input, Text } from "@chakra-ui/react";
 
 export default function Home() {
@@ -26,7 +28,7 @@ export default function Home() {
     ];
 
     try {
-      const response = await fetch("/api/bot", {
+      const response = await fetch("/assistant", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,8 +80,8 @@ export default function Home() {
             transform="rotate(45deg)"
           />
           <Text fontSize="2xl" color="white" fontWeight="bold">Botty Says:</Text>
-          <Text color="white">
-            {loading ? "[Botty is thinking]" : htmlParse(marked(displayMessage))}
+          <Text color="white" as="div">
+            {loading ? "[Botty is thinking]" : htmlParse(parse(displayMessage))}
           </Text>
         </Box>
 
@@ -130,7 +132,7 @@ export default function Home() {
               )}
             </Box>
 
-            <Box bg="gray.100" py="2" px="4" border="1px" borderColor="gray.400" borderRadius="xl">
+            <Box bg="gray.100" py="2" px="4" border="1px" borderColor="gray.400" borderRadius="xl" as="div">
               {message.content}
             </Box>
           </Flex>
