@@ -9,7 +9,6 @@ const corsOptions = {
   origin: "http://localhost:3001",
 };
 
-
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -55,7 +54,7 @@ app.post("/chat", async (req, res) => {
       threadByUser[userId], // Use the stored thread ID for this user
       {
         assistant_id: assistantIdToUse,
-        instructions: "you are voyage a helpful assistant  as a personal advisor leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding , support services and strategic planning based on your startup's stage and needs.", // Your instructions here
+        instructions: "You are speaking to Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.", // Include the assistant name and description in the instructions
         tools: [
           { type: "code_interpreter" }, // Code interpreter tool
           { type: "retrieval" }, // Retrieval tool
@@ -64,7 +63,7 @@ app.post("/chat", async (req, res) => {
     );
     console.log("This is the run object: ", myRun, "\n");
 
-    // Periodically retrieve the Run to check on its status
+    // Periodically retrieve the Run to check its status
     const retrieveRun = async () => {
       let keepRetrievingRun;
 
@@ -84,7 +83,7 @@ app.post("/chat", async (req, res) => {
     };
     retrieveRun();
 
-    // Retrieve the Messages added by the Assistant to the Thread
+    // Retrieve the messages added by the Assistant to the Thread
     const waitForAssistantMessage = async () => {
       await retrieveRun();
 
