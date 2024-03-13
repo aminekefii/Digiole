@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Input, Button, Box } from "@chakra-ui/react";
 
+import TextToSpeech from "../../services/api/TextToSpeech";
+import VoiceRec from "./VoiceRec";
+
 export default function Chatbot() {
     const [prompt, setPrompt] = useState("");
     const [messages, setMessages] = useState([]);
@@ -31,6 +34,10 @@ export default function Chatbot() {
         }
     };
 
+    const handlePromptChange = (note) => {
+        setPrompt(note);
+    };
+
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -44,7 +51,7 @@ export default function Chatbot() {
                 {messages.map((message, index) => (
                     <Box
                         key={index}
-                        className={message.role === 'user' ? "user-message" : "bot-message"}
+                        className={message.role === 'user' ? "user-message" : "bot-message"} // Fix the className based on the message role
                         bg={message.role === 'user' ? "#f2f2f2" : "#4caf50"}
                         color={message.role === 'user' ? "black" : "white"}
                         alignSelf={message.role === 'user' ? "flex-end" : "flex-start"}
@@ -54,6 +61,7 @@ export default function Chatbot() {
                         maxWidth={message.role === 'user' ? "60%" : "50%"}
                     >
                         {message.text}
+                        {message.role === 'assistant' && <TextToSpeech text={message.text} />} {/* Only render TextToSpeech for assistant messages */}
                     </Box>
                 ))}
             </Box>
@@ -65,6 +73,7 @@ export default function Chatbot() {
                 height="20vh"
                 padding="10px"
             >
+                <VoiceRec handleNoteChange={handlePromptChange} />
                 <Input
                     type="text"
                     value={prompt}
