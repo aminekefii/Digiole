@@ -4,7 +4,7 @@ import OpenAI from "openai";
 const apiKey = "";
 
 // Remplacez "YOUR_ASSISTANT_ID" par l'identifiant de votre assistant
-const assistantId = "asst_zpYkcSHyNuLbtebUMAY9RFYq";
+const assistantId = "asst_6lIwUz1YZMllZwQpJkhWzqYL";
 
 // Initialisez la bibliothèque OpenAI avec votre clé API
 const openai = new OpenAI(apiKey);
