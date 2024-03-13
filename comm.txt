@@ -21,3 +21,4 @@ npm i multer
 $env:OPENAI_API_KEY = "API KEY"
 npm install html-react-parser
 npm install marked
+npm i openai dotenv
