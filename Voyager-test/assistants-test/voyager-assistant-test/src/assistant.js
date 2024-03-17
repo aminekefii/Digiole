@@ -4,14 +4,14 @@ import OpenAI from "openai";
 const apiKey = "";
 
 // Remplacez "YOUR_ASSISTANT_ID" par l'identifiant de votre assistant
-const assistantId = "asst_6lIwUz1YZMllZwQpJkhWzqYL";
+const assistantId = "asst_9fyQ7060fGulfskySPoEG5Xm";
 
-// Initialisez la bibliothèque OpenAI avec votre clé API
+// Initialisez la bibliothèque OpenAI 
 const openai = new OpenAI(apiKey);
 
 (async () => {
     try {
-        // Créez un assistant avec les informations nécessaires
+        // Créez un assistant 
         const assistant = await openai.beta.assistants.create({
             name: "voyager",
             instructions: "you are voyage a helpful assistant  as a personal advisor leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding , support services and strategic planning based on your startup's stage and needs.",
