@@ -3,7 +3,7 @@ import { Image, Flex, Box, Text, AbsoluteCenter, Container, Heading } from "@cha
 
 export default function VoyagervOneFourteen({
   expertiseat = "Expertise at Your Fingertips",
-  voyagerapps = "Voyager App&#39;s AI is equipped with specialized knowledge",
+  voyagerapps = "Voyager App's AI is equipped with specialized knowledge",
   funding = (
     <>
       Funding Opportunities <br />& Application Strategies
