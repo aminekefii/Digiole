@@ -1,15 +1,15 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 import NotFound from "pages/NotFound";
-import VoyagervOne from "pages/VoyagervOne";
+import LandingPage from "pages/LandingPage";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
-    { path: "/", element: <VoyagervOne /> },
+    { path: "/", element: <LandingPage /> },
     { path: "*", element: <NotFound /> },
     {
-      path: "voyagervone",
-      element: <VoyagervOne />,
+      path: "landingpage",
+      element: <LandingPage></LandingPage>,
     },
   ]);
 

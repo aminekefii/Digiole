@@ -20,7 +20,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 
-export default function VoyagervOnePage() {
+export default function LandingPage() {
   return (
     <>
       <Helmet>
