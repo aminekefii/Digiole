@@ -40,7 +40,7 @@ export default function VoyagervOneEleven({
         />
       </Flex>
       <AbsoluteCenter
-        w="100%"
+        w="80%"
         display="flex"
         justifyContent="center"
         alignItems="start"

@@ -50,9 +50,10 @@ export default function LandingPage() {
             flexDirection="column"
             py={{ md: "69px", base: "20px" }}
           />
-          <VoyagervOneFive h="477px" mt="-1px" bg="indigo.800_05" position="relative"  textAlign="center"/>          <VoyagervOneThirteen
+          <VoyagervOneFive h="477px" mt="-1px" bg="indigo.800_05" position="relative"  textAlign="center"/> 
+           <VoyagervOneThirteen
             mt="-1px"
-            pl="58px"
+            pl="50px"
             pr="56px"
             gap={{ md: "71px", base: "35px", sm: "53px" }}
             zIndex={3}
