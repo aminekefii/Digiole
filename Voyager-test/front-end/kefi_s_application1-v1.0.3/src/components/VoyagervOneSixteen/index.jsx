@@ -73,23 +73,42 @@ export default function VoyagervOneSixteen({
                     >
                       <Flex w={{ base: "100%", sm: "55%" }} justifyContent="space-between" gap="20px">
                         <Link href="#">
-                          <Text color="gray.50" letterSpacing="-0.08px" textAlign="center" fontWeight={500}>
+                          <Text
+                            color="gray.50"
+                            letterSpacing="-0.08px"
+                            textAlign="center"
+                            fontWeight={500}
+                            _hover={{ textDecoration: "underline", color: "white" }}
+                          >
                             {features}
                           </Text>
                         </Link>
                         <Flex w="43%" justifyContent="space-between" gap="20px">
                           <Link href="#">
-                            <Text color="gray.50" letterSpacing="-0.08px" textAlign="center" fontWeight={500}>
+                            <Text
+                              color="gray.50"
+                              letterSpacing="-0.08px"
+                              textAlign="center"
+                              fontWeight={500}
+                              _hover={{ textDecoration: "underline", color: "white" }}
+                            >
                               {featuresOne}
                             </Text>
                           </Link>
                           <Link href="#">
-                            <Text color="gray.50" letterSpacing="-0.08px" textAlign="center" fontWeight={500}>
+                            <Text
+                              color="gray.50"
+                              letterSpacing="-0.08px"
+                              textAlign="center"
+                              fontWeight={500}
+                              _hover={{ textDecoration: "underline", color: "white" }}
+                            >
                               {featuresTwo}
                             </Text>
                           </Link>
                         </Flex>
                       </Flex>
+
                       <Button
                         size="sm"
                         variant="outline"
@@ -98,7 +117,7 @@ export default function VoyagervOneSixteen({
                         fontWeight={500}
                         minW="204px"
                         borderRadius="20px"
-                        _hover={{ bg: "#EAF2BB" }} 
+                        _hover={{ bg: "#EAF2BB" }}
                       >
                         {signInWith}
                       </Button>
