@@ -126,10 +126,10 @@ export default function VoyagervOneSixteen({
                     >
                       <Image
                         src="images/img_rectangle_623x830.png"
-                        h={{ md: "623px", base: "auto" }}
+                        h={{ md: "760px", base: "auto" }}
                         w="100%"
                         position="absolute"
-                        left="0px"
+                        left="50px"
                         bottom="0px"
                         right="0px"
                         top="0px"
