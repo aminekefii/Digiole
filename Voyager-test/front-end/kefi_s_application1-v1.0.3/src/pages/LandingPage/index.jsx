@@ -316,7 +316,7 @@ export default function LandingPage() {
                         </Flex>
                         <Button
                           size="md"
-                          colorScheme="lime_300"
+                          bgColor="yellow"
                           fontWeight={500}
                           w="100%"
                           borderRadius="6px"

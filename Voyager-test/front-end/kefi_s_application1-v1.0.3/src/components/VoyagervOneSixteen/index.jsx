@@ -37,7 +37,7 @@ export default function VoyagervOneSixteen({
       />
       <AbsoluteCenter w="100%" h="100%" m="auto">
         <Box alignSelf="end">
-      
+
           <Box h="820px" position="relative">
             <Image
               src="images/img_rectangle_820x1440.png"
@@ -98,9 +98,11 @@ export default function VoyagervOneSixteen({
                         fontWeight={500}
                         minW="204px"
                         borderRadius="20px"
+                        _hover={{ bg: "#EAF2BB" }} 
                       >
                         {signInWith}
                       </Button>
+
                     </Flex>
                   </Flex>
                 </Container>
