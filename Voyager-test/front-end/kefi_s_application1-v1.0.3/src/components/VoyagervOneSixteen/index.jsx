@@ -138,8 +138,8 @@ export default function VoyagervOneSixteen({
                       />
                       <Image
                         src="images/img_man_working_1.png"
-                        h="219px"
-                        w="18%"
+                        h="215px"
+                        w="12%"
                         position="absolute"
                         bottom="19%"
                         right="32%"
