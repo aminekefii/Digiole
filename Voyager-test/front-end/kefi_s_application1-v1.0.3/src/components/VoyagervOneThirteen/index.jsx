@@ -13,7 +13,7 @@ export default function VoyagervOneThirteen({
 }) {
   return (
     <Box {...props}>
-      <Flex ml={{ md: "26px", base: "0px" }} justifyContent="center">
+      <Flex ml="84px" justifyContent="left">
         <Heading size="s" as="h1" fontSize="33px" alignSelf="end">
           {transforming}
         </Heading>
