@@ -48,6 +48,7 @@ export default function VoyagervOneEleven({
         h="100%"
         m="auto"
         flexDirection={{ md: "row", base: "column" }}
+        zIndex={1}
       >
         <Heading
           size="lg"
@@ -55,14 +56,13 @@ export default function VoyagervOneEleven({
           color="blue_gray.900_04"
           mt="162px"
           fontSize="57px"
-          zIndex={1}
           w={{ md: "60%", base: "100%" }}
         >
           {beginyour}
         </Heading>
-        <Flex ml={{ md: "-40px", base: "0px" }} w={{ md: "40%", base: "100%" }} flexDirection="column" alignItems="end">
-          <Image src="images/img_mockup_copia_4.png" mr={{ md: "7px", base: "0px" }} zIndex={1} w="369px" h="734px" ml="898px" mt="10px"/>
-          <Image src="images/img_group_8399.svg" h={{ md: "567px", base: "auto" }} mt="-39px" alignSelf="stretch" />
+        <Flex ml={{ md: "-40px", base: "0px" }} w={{ md: "40%", base: "100%" }}  flexDirection="column" alignItems="end"  zIndex={1}  position="relative" >
+          <Image src="images/img_mockup_copia_4.png" mr={{ md: "7px", base: "0px" }}  w="369px" h="734px" ml="898px" mt="10px"  zIndex={1}  position="relative"/>
+          <Image src="images/img_group_8399.svg" h={{ md: "567px", base: "auto" }} mt="700px"  position="absolute" zIndex={2}  />
         </Flex>
       </AbsoluteCenter>
       <Text
@@ -83,8 +83,8 @@ export default function VoyagervOneEleven({
       <Box
         h="453.83px"
         ml="692.12px"
-        transform="rotate(101deg)"
-        bgGradient="linear-gradient(180deg, #3745de,#3745de00)"
+        transform="rotate(-100deg)"
+        bgGradient="linear-gradient(180deg, #3745de, #3745de00)"
         w="453.83px"
         position="absolute"
         right="21%"
@@ -92,7 +92,9 @@ export default function VoyagervOneEleven({
         top="0px"
         my="auto"
         borderRadius="50%"
+        zIndex={0}
       />
+
       <Flex
         borderColor="indigo.800_05"
         borderWidth="2px"
@@ -107,6 +109,8 @@ export default function VoyagervOneEleven({
         p={{ base: "20px", sm: "34px" }}
         m="auto"
         borderRadius="40px"
+        zIndex={1} 
+       
       >
         <Heading size="s" mt="9px" ml={{ md: "17px", base: "0px" }} fontSize="33px" w={{ md: "39%", base: "100%" }}>
           {title}
