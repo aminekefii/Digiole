@@ -32,8 +32,9 @@ export default function VoyagervOneEleven({
       >
         <Box
           h="112px"
-          mt="26px"
+          mt="63px"
           mb="1060px"
+          ml="1291px"
           bgGradient="linear-gradient(180deg, #3745de,#3745de00)"
           w="112px"
           borderRadius="50%"
@@ -59,8 +60,8 @@ export default function VoyagervOneEleven({
         >
           {beginyour}
         </Heading>
-        <Flex ml={{ md: "-47px", base: "0px" }} w={{ md: "47%", base: "100%" }} flexDirection="column" alignItems="end">
-          <Image src="images/img_mockup_copia_4.png" mr={{ md: "7px", base: "0px" }} zIndex={1} w="65%" />
+        <Flex ml={{ md: "-40px", base: "0px" }} w={{ md: "40%", base: "100%" }} flexDirection="column" alignItems="end">
+          <Image src="images/img_mockup_copia_4.png" mr={{ md: "7px", base: "0px" }} zIndex={1} w="369px" h="734px" ml="898px" mt="10px"/>
           <Image src="images/img_group_8399.svg" h={{ md: "567px", base: "auto" }} mt="-39px" alignSelf="stretch" />
         </Flex>
       </AbsoluteCenter>
@@ -80,11 +81,11 @@ export default function VoyagervOneEleven({
         {description}
       </Text>
       <Box
-        h="534px"
-        mr="302px"
+        h="453.83px"
+        ml="692.12px"
         transform="rotate(101deg)"
         bgGradient="linear-gradient(180deg, #3745de,#3745de00)"
-        w="534px"
+        w="453.83px"
         position="absolute"
         right="21%"
         bottom="0px"
