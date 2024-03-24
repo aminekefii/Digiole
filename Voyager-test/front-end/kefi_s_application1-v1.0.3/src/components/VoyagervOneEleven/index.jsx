@@ -60,9 +60,9 @@ export default function VoyagervOneEleven({
         >
           {beginyour}
         </Heading>
-        <Flex ml={{ md: "-40px", base: "0px" }} w={{ md: "40%", base: "100%" }}  flexDirection="column" alignItems="end"  zIndex={1}  position="relative" >
+        <Flex ml={{ md: "-40px", base: "0px" }} w={{ md: "50%", base: "100%" }}  flexDirection="column" alignItems="end"  zIndex={1}  position="relative" >
           <Image src="images/img_mockup_copia_4.png" mr={{ md: "7px", base: "0px" }}  w="369px" h="734px" ml="898px" mt="10px"  zIndex={1}  position="relative"/>
-          <Image src="images/img_group_8399.svg" h={{ md: "567px", base: "auto" }} mt="700px"  position="absolute" zIndex={2}  />
+          <Image src="images/img_group_8399.svg" h={{ md: "560px", base: "auto" }}   position="relative" zIndex={2} />
         </Flex>
       </AbsoluteCenter>
       <Text
@@ -100,7 +100,7 @@ export default function VoyagervOneEleven({
         borderWidth="2px"
         borderStyle="solid"
         bg="white.A700_01"
-        w="75%"
+        w="70%"
         flexDirection="column"
         alignItems="start"
         position="absolute"
