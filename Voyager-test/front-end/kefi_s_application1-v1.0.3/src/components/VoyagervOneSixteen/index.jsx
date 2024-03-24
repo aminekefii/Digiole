@@ -16,41 +16,22 @@ export default function VoyagervOneSixteen({
 }) {
   return (
     <Box {...props}>
-      <Image
-        src="images/img_rectangle.png"
-        h={{ md: "820px", base: "auto" }}
-        w="100%"
-        position="absolute"
-        bottom="0px"
-        right="0px"
-        left="0px"
-        m="auto"
-      />
-      <Image
-        src="images/img_rectangle_820x1180.png"
-        h="820px"
-        w="82%"
-        position="absolute"
-        bottom="0px"
-        left="0px"
-        m="auto"
-      />
+  
       <AbsoluteCenter w="100%" h="100%" m="auto">
+      <Image
+                        src="images/16.png"
+                        w="100%" h="100%"
+                        position="absolute"
+                       
+                        bottom="0px"
+                        right="0px"
+                        top="0px"
+                        justifyContent="center"
+                      />
         <Box alignSelf="end">
 
           <Box h="820px" position="relative">
-            <Image
-              src="images/img_rectangle_820x1440.png"
-              h={{ md: "820px", base: "auto" }}
-              w="100%"
-              position="absolute"
-              left="0px"
-              bottom="0px"
-              right="0px"
-              top="0px"
-              justifyContent="center"
-              m="auto"
-            />
+          
             <Flex w="94%" justifyContent="flex-end" position="absolute" right="0px" top="3%" m="auto">
               <Flex gap="25px" w="100%" flexDirection="column">
                 <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
@@ -138,35 +119,7 @@ export default function VoyagervOneSixteen({
                     <Text size="2xl" color="white.A700" mt="257px" textAlign="center" zIndex={1}>
                       {voyagerapp}
                     </Text>
-                    <Box
-                      h="623px"
-                      ml={{ md: "-70px", base: "0px" }}
-                      flex={{ md: 1, base: "unset" }}
-                      position="relative"
-                      w={{ md: "auto", base: "100%" }}
-                    >
-                      <Image
-                        src="images/img_rectangle_623x830.png"
-                        h={{ md: "760px", base: "auto" }}
-                        w="100%"
-                        position="absolute"
-                        left="50px"
-                        bottom="0px"
-                        right="0px"
-                        top="0px"
-                        justifyContent="center"
-                        m="auto"
-                      />
-                      <Image
-                        src="images/img_man_working_1.png"
-                        h="215px"
-                        w="12%"
-                        position="absolute"
-                        bottom="19%"
-                        right="32%"
-                        m="auto"
-                      />
-                    </Box>
+                  
                   </AbsoluteCenter>
                   <Heading
                     size="xl"

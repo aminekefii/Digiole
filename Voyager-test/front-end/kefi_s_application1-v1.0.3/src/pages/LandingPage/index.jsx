@@ -33,7 +33,6 @@ export default function LandingPage() {
             <Box>
               <VoyagervOneSixteen
                 h="820px"
-                bgGradient="linear-gradient(180deg, #3745de,#3745dee2)"
                 position="relative"
               />
             </Box>
@@ -316,8 +315,7 @@ export default function LandingPage() {
                         </Flex>
                         <Button
                           size="md"
-                          bg="lime.200"
-                          bgColor="lime_200"
+                          bgColor="lime.200"
                           fontWeight={500}
                           w="100%"
                           borderRadius="6px"
