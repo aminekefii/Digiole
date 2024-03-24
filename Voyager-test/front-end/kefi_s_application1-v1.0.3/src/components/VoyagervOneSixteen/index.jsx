@@ -16,22 +16,22 @@ export default function VoyagervOneSixteen({
 }) {
   return (
     <Box {...props}>
-  
+
       <AbsoluteCenter w="100%" h="100%" m="auto">
-      <Image
-                        src="images/16.png"
-                        w="100%" h="100%"
-                        position="absolute"
-                       
-                        bottom="0px"
-                        right="0px"
-                        top="0px"
-                        justifyContent="center"
-                      />
+        <Image
+          src="images/16.png"
+          w="100%" h="100%"
+          position="absolute"
+
+          bottom="0px"
+          right="0px"
+          top="0px"
+          justifyContent="center"
+        />
         <Box alignSelf="end">
 
           <Box h="820px" position="relative">
-          
+
             <Flex w="94%" justifyContent="flex-end" position="absolute" right="0px" top="3%" m="auto">
               <Flex gap="25px" w="100%" flexDirection="column">
                 <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
@@ -41,12 +41,12 @@ export default function VoyagervOneSixteen({
                     gap="20px"
                     flexDirection={{ md: "row", base: "column" }}
                   >
-                    <Flex gap="12px" w={{ md: "10%", base: "100%" }} justifyContent="center" alignItems="center">
+                    <Flex gap="12px" w={{ md: "10%", base: "100%" }} justifyContent="left" alignItems="center">
                       <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
                       <Image src="images/img_voyager.svg" h="12px" />
                     </Flex>
                     <Flex
-                      w={{ md: "50%", base: "100%" }}
+                      w={{ md: "50%", base: "30%" }}
                       justifyContent="space-between"
                       alignItems="center"
                       gap="20px"
@@ -96,12 +96,15 @@ export default function VoyagervOneSixteen({
                         colorScheme="lime_100"
                         letterSpacing="-0.08px"
                         fontWeight={500}
-                        minW="204px"
+                        minW={{ base: "120px", md: "204px" }} 
                         borderRadius="20px"
                         _hover={{ bg: "#EAF2BB" }}
+                        fontSize={{ base: "xs", md: "sm" }} 
                       >
                         {signInWith}
                       </Button>
+
+
 
                     </Flex>
                   </Flex>
@@ -119,7 +122,7 @@ export default function VoyagervOneSixteen({
                     <Text size="2xl" color="white.A700" mt="257px" textAlign="center" zIndex={1}>
                       {voyagerapp}
                     </Text>
-                  
+
                   </AbsoluteCenter>
                   <Heading
                     size="xl"
