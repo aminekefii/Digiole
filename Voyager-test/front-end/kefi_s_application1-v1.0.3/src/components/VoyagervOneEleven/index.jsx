@@ -40,7 +40,7 @@ export default function VoyagervOneEleven({
         />
       </Flex>
       <AbsoluteCenter
-        w="80%"
+        w="85%"
         display="flex"
         justifyContent="center"
         alignItems="start"
@@ -52,10 +52,10 @@ export default function VoyagervOneEleven({
           size="lg"
           as="h1"
           color="blue_gray.900_04"
-          mt="152px"
+          mt="162px"
           fontSize="57px"
           zIndex={1}
-          w={{ md: "53%", base: "100%" }}
+          w={{ md: "60%", base: "100%" }}
         >
           {beginyour}
         </Heading>
@@ -158,7 +158,7 @@ export default function VoyagervOneEleven({
         minW="231px"
         position="absolute"
         left="8%"
-        top="37%"
+        top="35%"
         px={{ base: "20px", sm: "23px" }}
         m="auto"
         borderRadius="24px"
