@@ -48,7 +48,7 @@ export default function VoyagervOneEleven({
         h="100%"
         m="auto"
         flexDirection={{ md: "row", base: "column" }}
-        zIndex={1}
+        zIndex={2}
       >
         <Heading
           size="lg"
