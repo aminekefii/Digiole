@@ -43,7 +43,7 @@ export default function VoyagervOneFourteen({
       <Container mb="49px" w="100%" display="flex" maxW="1452px" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
         <Flex gap="100px" w="91%" flexDirection={{ md: "row", base: "column" }}>
           <Flex gap="49px" w={{ md: "21%", base: "100%" }} flexDirection="column" alignItems="center">
-            <Image src="images/img_funding.svg" h={{ md: "248px", base: "auto" }} alignSelf="stretch" />
+            <Image src="images/img_funding.svg" h={{ md: "248.48px", base: "auto" }} mt="25.48px" alignSelf="stretch" />
             <Text
               size="2xl"
               color="blue_gray.900_05"
@@ -55,7 +55,7 @@ export default function VoyagervOneFourteen({
             </Text>
           </Flex>
           <Flex gap="48px" w={{ md: "22%", base: "100%" }} flexDirection="column" alignItems="center">
-            <Image src="images/img_strategic_planning.svg" h={{ md: "229px", base: "auto" }} alignSelf="stretch" />
+            <Image src="images/img_strategic_planning.svg" h={{ md: "229.55px", base: "auto" }} mt="44.65px" alignSelf="stretch" />
             <Text
               size="2xl"
               color="blue_gray.900_06"
@@ -67,7 +67,7 @@ export default function VoyagervOneFourteen({
             </Text>
           </Flex>
           <Flex gap="48px" w={{ md: "23%", base: "100%" }} flexDirection="column" alignItems="center">
-            <Image src="images/img_eco_support.svg" h={{ md: "263px", base: "auto" }} alignSelf="stretch" />
+            <Image src="images/img_eco_support.svg" h={{ md: "263.04px", base: "auto" }} mt="10.96px" alignSelf="stretch" />
             <Text
               size="2xl"
               color="blue_gray.900_04"
@@ -79,7 +79,7 @@ export default function VoyagervOneFourteen({
             </Text>
           </Flex>
           <Flex gap="48px" w={{ md: "22%", base: "100%" }} flexDirection="column" alignItems="end">
-            <Image src="images/img_time.png" alignSelf="stretch" h="auto" />
+            <Image src="images/img_time.png" alignSelf="stretch" h="250px" mt="26px" />
             <Text
               size="2xl"
               color="blue_gray.900_06"
