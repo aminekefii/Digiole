@@ -3,7 +3,7 @@ import { Image, Flex, Box, Text, Heading, Container } from "@chakra-ui/react";
 
 export default function VoyagervOneFifteen({
   intelligent = "Intelligent Conversations Tailored to Startup Founders",
-  description = "Our AI chat feature acts as your personal advisor, leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning. Designed with startup founders in mind, it delivers personalized interactions based on your startup&#39;s stage and needs.",
+  description = "Our AI chat feature acts as your personal advisor, leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning. Designed with startup founders in mind, it delivers personalized interactions based on your startup's stage and needs.",
   ...props
 }) {
   return (
