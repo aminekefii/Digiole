@@ -17,7 +17,7 @@ export default function VoyagervOneSixteen({
   return (
     <Box {...props}>
 
-      <AbsoluteCenter w="100%" h="100%" m="auto">
+      <AbsoluteCenter w="100%" h="100%" m="auto" minW={{ base: "320px" }}>
         <Image
           src="images/16.png"
           w="100%" h="100%"
@@ -52,13 +52,18 @@ export default function VoyagervOneSixteen({
                       gap="20px"
                       flexDirection={{ base: "column", sm: "row" }}
                     >
-                      <Flex w={{ base: "100%", sm: "55%" }} justifyContent="space-between" gap="20px">
+                      <Flex
+                        w={{ base: "100%", sm: "55%" }}
+                        justifyContent="space-between"
+                        gap={{ base: "0", sm: "20px" }}
+                      >
                         <Link href="#">
                           <Text
                             color="gray.50"
                             letterSpacing="-0.08px"
                             textAlign="center"
                             fontWeight={500}
+                            fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
                             _hover={{ textDecoration: "underline", color: "white" }}
                           >
                             {features}
@@ -71,6 +76,7 @@ export default function VoyagervOneSixteen({
                               letterSpacing="-0.08px"
                               textAlign="center"
                               fontWeight={500}
+                              fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
                               _hover={{ textDecoration: "underline", color: "white" }}
                             >
                               {featuresOne}
@@ -82,12 +88,15 @@ export default function VoyagervOneSixteen({
                               letterSpacing="-0.08px"
                               textAlign="center"
                               fontWeight={500}
+                              fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
                               _hover={{ textDecoration: "underline", color: "white" }}
                             >
                               {featuresTwo}
                             </Text>
                           </Link>
                         </Flex>
+
+
                       </Flex>
 
                       <Button
@@ -96,10 +105,10 @@ export default function VoyagervOneSixteen({
                         colorScheme="lime_100"
                         letterSpacing="-0.08px"
                         fontWeight={500}
-                        minW={{ base: "120px", md: "204px" }} 
+                        minW={{ base: "120px", md: "204px" }}
                         borderRadius="20px"
                         _hover={{ bg: "#EAF2BB" }}
-                        fontSize={{ base: "xs", md: "sm" }} 
+                        fontSize={{ base: "xs", md: "sm" }}
                       >
                         {signInWith}
                       </Button>
@@ -169,8 +178,8 @@ export default function VoyagervOneSixteen({
               </Flex>
             </Flex>
           </Box>
-        </Box>
-      </AbsoluteCenter>
-    </Box>
+        </Box >
+      </AbsoluteCenter >
+    </Box >
   );
 }
