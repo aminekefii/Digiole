@@ -27,13 +27,14 @@ export default function LandingPage() {
         <title>landing page</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
-      <Box w="100%" minW={{ base: "500px" }}>
+      <Box w="100%" minW={{ base: "400px" }} >
         <Box>
           <Box>
             <Box>
               <VoyagervOneSixteen
-                h="820px"
+                h="780px"
                 position="relative"
+                
               />
             </Box>
             <VoyagervOneFifteen mt="-1px" zIndex={1} bg="white.A700" />

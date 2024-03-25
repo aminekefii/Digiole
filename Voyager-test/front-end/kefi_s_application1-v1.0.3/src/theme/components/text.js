@@ -4,8 +4,8 @@ const baseStyle = {
 };
 const sizes = {
   xs: {
-    fontSize: "12px",
-    fontWeight: 400,
+    fontSize: "5px",
+    fontWeight: 200,
     lineHeight: "15px",
   },
   lg: {
