@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import React from "react";
 import { Helmet } from "react-helmet";
 import VoyagervOneEleven from "../../components/VoyagervOneEleven";
@@ -20,7 +21,23 @@ import {
   Container,
 } from "@chakra-ui/react";
 
+const loadChatbotScript = () => {
+  const script = document.createElement("script");
+  script.src = "https://www.chatbase.co/embed.min.js";
+  script.defer = true;
+  script.setAttribute("chatbotId", "iz-X4O8UUvGPY7VpFbgGj");
+  script.setAttribute("domain", "www.chatbase.co");
+  document.body.appendChild(script);
+};
+
+
+
 export default function LandingPage() {
+
+  useEffect(() => {
+    loadChatbotScript();
+  }, []);
+  
   return (
     <>
       <Helmet>
