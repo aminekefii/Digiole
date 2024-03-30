@@ -3,6 +3,7 @@ import { Flex, Input, Button, Box } from "@chakra-ui/react";
 
 import TextToSpeech from "../../services/api/TextToSpeech";
 import VoiceRec from "./VoiceRec";
+import FileUpload from "./FilesUpload";
 
 export default function Chatbot() {
     const [prompt, setPrompt] = useState("");
@@ -100,6 +101,7 @@ export default function Chatbot() {
                 >
                     Send
                 </Button>
+                <FileUpload />
             </Flex>
         </Flex>
     );
