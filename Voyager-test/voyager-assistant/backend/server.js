@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
+const fsPromises = require("fs").promises;
 
 const app = express();
 
@@ -18,9 +19,44 @@ const openai = new OpenAI({
 
 const threadByUser = {}; // Store thread IDs by user
 
+async function getOrCreateAssistant() {
+  const assistantFilePath = "./voyager_assistant.json";
+
+  try {
+    const assistantData = await fsPromises.readFile(
+      assistantFilePath,
+      "utf8"
+    );
+    const assistantDetails = JSON.parse(assistantData);
+    console.log("\nExisting Voyager assistant detected.\n");
+    return assistantDetails.assistantId;
+  } catch (error) {
+    // If file does not exist or there is an error in reading it, create a new Voyager assistant
+    console.log("No existing Voyager assistant detected, creating new.\n");
+    const assistantConfig = {
+      name: "Voyager",
+      instructions:
+        "You are speaking to Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
+      tools: [
+        { type: "code_interpreter" }, // Code interpreter tool
+        { type: "retrieval" }, // Retrieval tool
+      ],
+      model: "gpt-3.5-turbo-0125",
+    };
+
+    const assistant = await openai.beta.assistants.create(assistantConfig);
+    const assistantDetails = { assistantId: assistant.id, ...assistantConfig };
+
+    // Save the Voyager assistant details to voyager_assistant.json
+    await fsPromises.writeFile(
+      assistantFilePath,
+      JSON.stringify(assistantDetails, null, 2)
+    );
+    return assistant.id;
+  }
+}
+
 app.post("/chat", async (req, res) => {
-  const assistantIdToUse = "asst_9fyQ7060fGulfskySPoEG5Xm"; // Replace with your assistant ID
-  const modelToUse = "gpt-3.5-turbo-0125"; // Specify the model you want to use
   const userId = req.body.userId; // You should include the user ID in the request
 
   // Create a new thread if it's the user's first message
@@ -38,8 +74,10 @@ app.post("/chat", async (req, res) => {
 
   const userMessage = req.body.message;
 
-  // Add a Message to the Thread
   try {
+    const assistantIdToUse = await getOrCreateAssistant();
+
+    // Add a Message to the Thread
     const myThreadMessage = await openai.beta.threads.messages.create(
       threadByUser[userId], // Use the stored thread ID for this user
       {
