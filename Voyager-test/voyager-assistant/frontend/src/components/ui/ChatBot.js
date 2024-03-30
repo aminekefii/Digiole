@@ -38,13 +38,13 @@ export default function Chatbot() {
     const handlePromptChange = (note) => {
         setPrompt(note);
     };
-
     const handleKeyDown = (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
+        if (e.key === "Enter") {
             e.preventDefault();
             handleMessageSubmit();
         }
     };
+    
 
     return (
         <Flex direction="column" align="center" justify="center">
