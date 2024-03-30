@@ -151,7 +151,7 @@ app.post("/chat", async (req, res) => {
 });
 
 // File upload functionality
-const uploadFolder = path.join(__dirname, './uploads');
+const uploadFolder = path.join(__dirname, './');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -167,17 +167,54 @@ const upload = multer({
   limits: { fileSize: 1024 * 1024 * 5 }, // 5MB limit
 }).single('file');
 
-app.post('/upload', (req, res) => {
-  upload(req, res, (err) => {
+app.post('/upload', async (req, res) => {
+  upload(req, res, async (err) => {
     if (err) {
       console.error('Error uploading file:', err);
       return res.status(500).json({ error: 'Failed to upload file' });
     }
-    console.log(req.body);
-    console.log(req.file);
-    res.send('File uploaded successfully');
+
+    try {
+      const fileName = req.file.filename;
+      
+      // Load assistant details from file
+      const assistantFilePath = "./voyager_assistant.json";
+      const assistantData = await fsPromises.readFile(assistantFilePath, "utf8");
+      const assistantDetails = JSON.parse(assistantData);
+
+      // Upload the file to OpenAI
+      const file = await openai.files.create({
+        file: fs.createReadStream(fileName),
+        purpose: "assistants",
+      });
+
+      // Retrieve existing file IDs from assistantDetails or initialize to an empty array
+      let existingFileIds = assistantDetails.file_ids || [];
+
+      // Update the assistant with the new file ID
+      await openai.beta.assistants.update(assistantDetails.assistantId, {
+        file_ids: [...existingFileIds, file.id],
+      });
+
+      // Update local assistantDetails and save to assistant.json
+      assistantDetails.file_ids = [...existingFileIds, file.id];
+      await fsPromises.writeFile(
+        assistantFilePath,
+        JSON.stringify(assistantDetails, null, 2)
+      );
+
+      console.log("File uploaded and successfully added to assistant\n");
+
+      // Send the file ID back to the frontend
+      res.status(200).json({ fileId: file.id });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to upload file' });
+    }
   });
 });
+
+
 
 const PORT = process.env.PORT || 3000;
 
