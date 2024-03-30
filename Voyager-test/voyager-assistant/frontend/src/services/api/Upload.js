@@ -28,10 +28,12 @@ app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       console.error('Error uploading file:', err);
+      console.log('Error uploading file');
       return res.status(500).json({ error: 'Failed to upload file' });
     }
     console.log(req.body);
     console.log(req.file);
+    console.log('File uploaded successfully');
     res.send('File uploaded successfully');
   });
 });

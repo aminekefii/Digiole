@@ -2,12 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
 const fsPromises = require("fs").promises;
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
 // Enable CORS for your front-end
 const corsOptions = {
-  origin: "http://localhost:3002",
+  origin: "http://localhost:3001",
 };
 
 app.use(cors(corsOptions));
@@ -145,6 +148,35 @@ app.post("/chat", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+// File upload functionality
+const uploadFolder = path.join(__dirname, './uploads');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, uploadFolder); // Specify the destination folder
+  },
+  filename: function(req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 1024 * 1024 * 5 }, // 5MB limit
+}).single('file');
+
+app.post('/upload', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      return res.status(500).json({ error: 'Failed to upload file' });
+    }
+    console.log(req.body);
+    console.log(req.file);
+    res.send('File uploaded successfully');
+  });
 });
 
 const PORT = process.env.PORT || 3000;
