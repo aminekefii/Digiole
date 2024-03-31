@@ -1,7 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
-import AssistantsComp from "../../components/AssistantsComp";
+import "../../styles/index.css";
+import "../../styles/font.css";
 
 export default function AssistantsPage() {
   return (
@@ -31,7 +32,6 @@ export default function AssistantsPage() {
                 color="gray.50"
                 ml="4px"
                 letterSpacing="-0.18px"
-                fontFamily="FK Grotesk Neue Trial"
                 fontWeight={300}
               >
                 Entrepreneurs
@@ -57,7 +57,7 @@ export default function AssistantsPage() {
             <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "100%" }} />
             <Text
               color="gray.900_01"
-              fontFamily="FK Grotesk Neue Trial"
+              
               fontWeight={300}
               w={{ md: "97%", base: "100%" }}
               lineHeight="23px"
@@ -74,7 +74,6 @@ export default function AssistantsPage() {
             mt="58px"
             ml={{ md: "69px", base: "0px" }}
             letterSpacing="-0.29px"
-            fontFamily="FK Grotesk Neue Trial"
             fontSize="26px"
           >
             Assistants
@@ -100,14 +99,13 @@ export default function AssistantsPage() {
                 borderRadius="8px"
               >
                 <Flex mt="11px" gap="7px" alignSelf="stretch" flexDirection="column" alignItems="start">
-                  <Heading size="xs" color="gray.700" fontFamily="FK Grotesk Neue Trial">
+                  <Heading size="xs" color="gray.700" >
                     Business Plan
                   </Heading>
                   <Text
                     size="s"
                     color="gray.900_01"
                     letterSpacing="-0.07px"
-                    fontFamily="FK Grotesk Neue Trial"
                     lineHeight="120%"
                   >
                     Get expert guidance with our AI Business Plan Assistant
@@ -118,7 +116,6 @@ export default function AssistantsPage() {
                   colorScheme="lime_300"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
                   mb="13px"
-                  fontFamily="Inter"
                   fontWeight={600}
                   gap="8px"
                   minW="161px"
@@ -138,14 +135,13 @@ export default function AssistantsPage() {
                 borderRadius="8px"
               >
                 <Flex mt="13px" gap="5px" alignSelf="stretch" flexDirection="column" alignItems="start">
-                  <Heading size="xs" as="h3" color="gray.700" fontFamily="FK Grotesk Neue Trial">
+                  <Heading size="xs" as="h3" color="gray.700" >
                     Journey Log
                   </Heading>
                   <Text
                     size="s"
                     color="gray.900_01"
                     letterSpacing="-0.07px"
-                    fontFamily="FK Grotesk Neue Trial"
                     lineHeight="120%"
                   >
                     Navigate your business jpurney with our AI-powered Log, connecting you with expert advice
@@ -156,7 +152,6 @@ export default function AssistantsPage() {
                   colorScheme="lime_300"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
                   mb="13px"
-                  fontFamily="Inter"
                   fontWeight={600}
                   gap="8px"
                   minW="161px"
@@ -172,7 +167,6 @@ export default function AssistantsPage() {
               color="gray.600"
               ml={{ md: "13px", base: "0px" }}
               letterSpacing="-0.29px"
-              fontFamily="FK Grotesk Neue Trial"
               fontSize="26px"
             >
               <Heading size="md" as="span" color="gray.600">
@@ -199,10 +193,10 @@ export default function AssistantsPage() {
             borderRadius="8px"
           >
             <Flex mt="21px" gap="5px" flexDirection="column" alignItems="start">
-              <Heading size="xs" color="gray.700" fontFamily="FK Grotesk Neue Trial">
+              <Heading size="xs" color="gray.700" >
                 Sha guidance
               </Heading>
-              <Text size="s" color="gray.900_01" letterSpacing="-0.07px" fontFamily="FK Grotesk Neue Trial">
+              <Text size="s" color="gray.900_01" letterSpacing="-0.07px" >
                 Get expert guidance with our..
               </Text>
             </Flex>
@@ -211,7 +205,6 @@ export default function AssistantsPage() {
               colorScheme="lime_300"
               rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
               mb="21px"
-              fontFamily="Inter"
               fontWeight={600}
               gap="8px"
               minW="161px"
