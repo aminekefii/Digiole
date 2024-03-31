@@ -26,15 +26,15 @@ export default function AssistantsPage() {
           >
             <Flex ml={{ md: "20px", base: "0px" }} w="18%" justifyContent="center" alignItems="center">
             <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-                      <Image src="images/img_voyager.svg" h="12px" />
+                      <Image src="images/img_voyager.svg" h="12px" ml="10px"/>
               <Box h="23px" ml="20px" bg="blue_gray.100" w="1px" />
               <Text
                 color="gray.50"
-                ml="4px"
+                ml="12px"
                 letterSpacing="-0.18px"
                 fontWeight={300}
               >
-                Entrepreneurs
+               Entrepreneurs
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
@@ -48,13 +48,15 @@ export default function AssistantsPage() {
             display="flex"
             w="100%"
             alignItems="start"
-            maxW="909px"
+            justifyContent="flex-start"
+            maxW="80%"
             px="0px"
             mx="auto"
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
+            
           >
-            <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "100%" }} />
+            <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "10%" }} />
             <Text
               color="gray.900_01"
               
@@ -72,9 +74,11 @@ export default function AssistantsPage() {
             as="h1"
             color="gray.600"
             mt="58px"
-            ml={{ md: "69px", base: "0px" }}
+            fontWeight={800}
+            ml={{ md: "100px", base: "0px" }}
             letterSpacing="-0.29px"
             fontSize="26px"
+            lineHeight="39px"
           >
             Assistants
           </Heading>
@@ -165,7 +169,7 @@ export default function AssistantsPage() {
               size="md"
               as="h4"
               color="gray.600"
-              ml={{ md: "13px", base: "0px" }}
+              ml={{ md: "20px", base: "0px" }}
               letterSpacing="-0.29px"
               fontSize="26px"
             >
@@ -192,7 +196,7 @@ export default function AssistantsPage() {
             p="20px"
             borderRadius="8px"
           >
-            <Flex mt="21px" gap="5px" flexDirection="column" alignItems="start">
+            <Flex mt="21px" gap="5px" flexDirection="column" alignItems="start" ml="20px">
               <Heading size="xs" color="gray.700" >
                 Sha guidance
               </Heading>
@@ -209,6 +213,7 @@ export default function AssistantsPage() {
               gap="8px"
               minW="161px"
               borderRadius="8px"
+              ml="17px"
             >
               Get Assistant
             </Button>
