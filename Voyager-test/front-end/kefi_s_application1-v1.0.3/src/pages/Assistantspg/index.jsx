@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 import "../../styles/index.css";
 import "../../styles/font.css";
+import { Link } from "react-router-dom";
+
 
 export default function AssistantsPage() {
   return (
@@ -117,6 +119,8 @@ export default function AssistantsPage() {
                   </Text>
                 </Flex>
                 <Button
+                as={Link}
+                to="/buissnessplan"
                   size="sm"
                   colorScheme="lime_200"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}

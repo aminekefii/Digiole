@@ -66,7 +66,7 @@ export default function VoyagervOneSixteen({
                             letterSpacing="-0.08px"
                             textAlign="center"
                             fontWeight={500}
-                            fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
+                            fontSize={{ base: "sm", sm: "md" }} 
                             _hover={{ textDecoration: "underline", color: "white" }}
                           >
                             {features}
