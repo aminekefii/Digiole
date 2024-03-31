@@ -149,7 +149,7 @@ export default function AssistantsPage() {
                     letterSpacing="-0.07px"
                     lineHeight="120%"
                   >
-                    Navigate your business jpurney with our AI-powered Log, connecting you with expert advice
+                    Navigate your business journey with our AI-powered Log, connecting you with expert advice
                   </Text>
                 </Flex>
                 <Button
