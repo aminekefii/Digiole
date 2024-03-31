@@ -2,7 +2,7 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import NotFound from "pages/NotFound";
 import LandingPage from "pages/LandingPage";
-import Assistants from "pages/Assistants";
+import AssistantsPage from "pages/Assistants";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -14,7 +14,7 @@ const ProjectRoutes = () => {
     },
     {
       path: "assistants",
-      element: <Assistants />,
+      element: <AssistantsPage />,
     },
   ]);
 
