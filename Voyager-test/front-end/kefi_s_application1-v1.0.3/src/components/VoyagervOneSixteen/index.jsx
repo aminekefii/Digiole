@@ -1,5 +1,8 @@
 import React from "react";
-import { Button, Image, Flex, Heading, Box, Text, AbsoluteCenter, Link, Container, IconButton } from "@chakra-ui/react";
+import { Button, Image, Flex, Heading, Box, Text, AbsoluteCenter, Container, IconButton } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
+
 
 export default function VoyagervOneSixteen({
   pagetitle = "Page Title",
@@ -57,7 +60,7 @@ export default function VoyagervOneSixteen({
                         justifyContent="space-between"
                         gap={{ base: "0", sm: "20px" }}
                       >
-                        <Link href="#">
+                        <Link to="" href="#">
                           <Text
                             color="gray.50"
                             letterSpacing="-0.08px"
@@ -70,7 +73,7 @@ export default function VoyagervOneSixteen({
                           </Text>
                         </Link>
                         <Flex w="43%" justifyContent="space-between" gap="20px">
-                          <Link href="#">
+                          <Link to="" href="#">
                             <Text
                               color="gray.50"
                               letterSpacing="-0.08px"
@@ -82,7 +85,7 @@ export default function VoyagervOneSixteen({
                               {featuresOne}
                             </Text>
                           </Link>
-                          <Link href="#">
+                          <Link to="" href="#">
                             <Text
                               color="gray.50"
                               letterSpacing="-0.08px"
@@ -100,6 +103,8 @@ export default function VoyagervOneSixteen({
                       </Flex>
 
                       <Button
+                      as={Link}
+                      to="/assistants"
                         size="sm"
                         variant="outline"
                         colorScheme="lime_100"

@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Assistants from "../../components/AssistantsComp";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 import AssistantsComp from "../../components/AssistantsComp";
 
@@ -9,7 +8,7 @@ export default function AssistantsPage() {
     <>
       <Helmet>
         <title>Assistants</title>
-        <meta name="description" content="" />
+        <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">

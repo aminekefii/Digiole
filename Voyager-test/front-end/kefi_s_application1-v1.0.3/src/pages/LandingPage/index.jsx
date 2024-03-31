@@ -9,6 +9,7 @@ import VoyagervOneSixteen from "../../components/VoyagervOneSixteen";
 import VoyagervOneThirteen from "../../components/VoyagervOneThirteen";
 import Footer from "../../components/Footer";
 
+
 import {
   Link,
   Text,
