@@ -34,7 +34,7 @@ export default function AssistantsPage() {
                 letterSpacing="-0.18px"
                 fontWeight={300}
               >
-               Entrepreneurs
+              | Entrepreneurs
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
