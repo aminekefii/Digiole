@@ -49,11 +49,12 @@ export default function AssistantsPage() {
             w="100%"
             alignItems="start"
             justifyContent="flex-start"
-            maxW="80%"
+            maxW="90%"
             px="0px"
-            mx="auto"
+           
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
+            pr="270px"
             
           >
             <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "10%" }} />
