@@ -45,7 +45,7 @@ export default function LandingPage() {
     <>
       <Helmet>
         <title>landing page</title>
-        <meta name="description" content="Web site created using create-react-app" />
+        <meta name="description" content="" />
       </Helmet>
       <Box w="100%" minW={{ base: "400px" }} >
         <Box>
