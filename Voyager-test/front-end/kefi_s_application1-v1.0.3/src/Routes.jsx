@@ -3,6 +3,7 @@ import { useRoutes } from "react-router-dom";
 import NotFound from "pages/NotFound";
 import LandingPage from "pages/LandingPage";
 import Assistantspg from "pages/Assistantspg";
+import Buissnessplan from "pages/BuissnessPlan";
 
 
 const ProjectRoutes = () => {
@@ -16,6 +17,10 @@ const ProjectRoutes = () => {
     {
       path: "assistants",
       element: <Assistantspg></Assistantspg>
+    },
+    {
+      path: "buissnessplan",
+      element: <Buissnessplan />,
     },
   ]);
 
