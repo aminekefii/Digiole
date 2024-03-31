@@ -24,45 +24,33 @@ export default function Buissnessplan() {
       </Helmet>
       <Box pb={{ md: "83px", base: "20px" }} bg="white.A700_01" w="100%">
         <Box>
-          <Flex
+        <Flex
             mt="-1px"
             position="relative"
-            bg="indigo.A700"
+            bg="indigo.A700_01"
+            alignSelf="stretch"
             justifyContent="space-between"
             alignItems="center"
             gap="20px"
             p={{ base: "20px", sm: "23px" }}
-            flexDirection={{ base: "column", sm: "row" }}
           >
-            <Flex
-              ml={{ md: "48px", base: "0px" }}
-              alignSelf="end"
-              alignItems="start"
-              flexDirection={{ base: "column", sm: "row" }}
-            >
-              <Image src="images/img_maximize.svg" h="30px" w={{ base: "100%", sm: "30px" }} />
-              <Flex ml={{ base: "0px", sm: "19px" }} gap="4px" alignItems="center">
-                <Box h="23px" bg="blue_gray.100" w="1px" />
-                <Text size="xl" color="gray.50">
-                  Business Plan
+            <Flex ml={{ md: "50px", base: "0px" }} w="50%" justifyContent="" alignItems="">
+            <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+              <Box h="23px" ml="20px" bg="blue_gray.100"  />
+              <Text size="xl" color="gray.50" ml="5px">
+                 | Business Plan
                 </Text>
-                <Box h="23px" bg="blue_gray.100" w="1px" />
-              </Flex>
-              <Text size="xl" color="gray.400" ml={{ base: "0px", sm: "8px" }} fontWeight={300}>
-                Create/Edit with AI Wisdom
+              
+              <Text size="xl" color="gray.400" ml={{ base: "0px", sm: "13px" }} fontWeight={300}>
+                | Create/Edit with AI Wisdom
               </Text>
             </Flex>
-            <Flex
-              mr={{ md: "20px", base: "0px" }}
-              gap="21px"
-              w={{ base: "100%", sm: "7%" }}
-              justifyContent="center"
-              alignItems="center"
-            >
+            <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
               <Image src="images/img_bell.svg" h="24px" w="24px" />
               <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" />
             </Flex>
           </Flex>
+         
           <Container
             mt="45px"
             display="flex"
