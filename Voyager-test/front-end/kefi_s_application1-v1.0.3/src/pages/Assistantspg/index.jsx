@@ -12,7 +12,7 @@ export default function AssistantsPage() {
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
-         
+
           <Flex
             mt="-1px"
             position="relative"
@@ -24,8 +24,8 @@ export default function AssistantsPage() {
             p={{ base: "20px", sm: "23px" }}
           >
             <Flex ml={{ md: "20px", base: "0px" }} w="18%" justifyContent="center" alignItems="center">
-              <Image src="images/img_maximize.svg" h="30px" w="30px" />
-              <Image src="images/img_settings.svg" h="12px" ml="11px" />
+            <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+                      <Image src="images/img_voyager.svg" h="12px" />
               <Box h="23px" ml="20px" bg="blue_gray.100" w="1px" />
               <Text
                 color="gray.50"
