@@ -117,7 +117,7 @@ export default function AssistantsPage() {
                 </Flex>
                 <Button
                   size="sm"
-                  colorScheme="lime_300"
+                  colorScheme="lime_200"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
                   mb="13px"
                   fontWeight={600}
@@ -153,7 +153,7 @@ export default function AssistantsPage() {
                 </Flex>
                 <Button
                   size="sm"
-                  colorScheme="lime_300"
+                  colorScheme="lime_200"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
                   mb="13px"
                   fontWeight={600}
@@ -206,7 +206,7 @@ export default function AssistantsPage() {
             </Flex>
             <Button
               size="sm"
-              colorScheme="lime_300"
+              colorScheme="lime_200"
               rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
               mb="21px"
               fontWeight={600}
