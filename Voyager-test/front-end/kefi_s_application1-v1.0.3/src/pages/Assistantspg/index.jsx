@@ -12,7 +12,7 @@ export default function AssistantsPage() {
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
-          <AssistantsComp zIndex={1} alignSelf="stretch" />
+         
           <Flex
             mt="-1px"
             position="relative"
