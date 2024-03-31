@@ -1,9 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Assistants from "../../components/Assistants";
+import Assistants from "../../components/AssistantsComp";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
+import AssistantsComp from "../../components/AssistantsComp";
 
-export default function Assistants() {
+export default function AssistantsPage() {
   return (
     <>
       <Helmet>
@@ -12,7 +13,7 @@ export default function Assistants() {
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
-          <Assistants zIndex={1} alignSelf="stretch" />
+          <AssistantsComp zIndex={1} alignSelf="stretch" />
           <Flex
             mt="-1px"
             position="relative"

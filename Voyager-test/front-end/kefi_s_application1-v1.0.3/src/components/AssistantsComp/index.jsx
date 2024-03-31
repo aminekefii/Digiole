@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Flex, Text, IconButton, Container, Box } from "@chakra-ui/react";
 
-export default function Assistants({ pagetitle = "Page Title", link, ...props }) {
+export default function AssistantsComp({ pagetitle = "Page Title", link, ...props }) {
   return (
     <Box {...props}>
       <Flex
