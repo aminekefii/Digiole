@@ -112,6 +112,7 @@ export default function VoyagervOneSixteen({
                     left="0px"
                     top="14%"
                     m="auto"
+                    fontWeight={800}
                   >
                     {p7xl}
                   </Heading>
