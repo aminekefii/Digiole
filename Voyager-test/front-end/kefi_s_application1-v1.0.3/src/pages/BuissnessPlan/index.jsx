@@ -156,8 +156,8 @@ export default function Buissnessplan() {
                 </Button>
               </Flex>
               <InputGroup w="76%">
-                <InputLeftElement>
-                  <Image src="images/img_component_19.svg" />
+                <InputLeftElement  >
+                  <Image src="images/img_component_19.svg"  />
                 </InputLeftElement>
                 <Input placeholder={`| Message Wisdom...`} pr={{ base: "20px", sm: 0 }} />
                 <InputRightElement>

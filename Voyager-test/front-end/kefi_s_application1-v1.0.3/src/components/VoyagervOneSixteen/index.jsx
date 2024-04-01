@@ -127,13 +127,13 @@ export default function VoyagervOneSixteen({
                   <AbsoluteCenter
                     w="100%"
                     display="flex"
-                    justifyContent="center"
+                    justifyContent="flex-start"
                     alignItems="start"
                     h="100%"
                     m="auto"
                     flexDirection={{ md: "row", base: "column" }}
                   >
-                    <Text size="2xl" color="white.A700" mt="257px" textAlign="center" zIndex={1}>
+                    <Text size="2xl" color="white.A700" mt="257px" textAlign="left" zIndex={1}>
                       {voyagerapp}
                     </Text>
 
