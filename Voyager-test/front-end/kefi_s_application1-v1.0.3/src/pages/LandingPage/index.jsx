@@ -8,6 +8,8 @@ import VoyagervOneFourteen from "../../components/VoyagervOneFourteen";
 import VoyagervOneSixteen from "../../components/VoyagervOneSixteen";
 import VoyagervOneThirteen from "../../components/VoyagervOneThirteen";
 import Footer from "../../components/Footer";
+import { useAuth } from '../../components/contexts/authContext'
+
 
 
 import {
@@ -40,7 +42,7 @@ export default function LandingPage() {
   useEffect(() => {
     loadChatbotScript();
   }, []);
-  
+  const { currentUser } = useAuth();
   return (
     <>
       <Helmet>

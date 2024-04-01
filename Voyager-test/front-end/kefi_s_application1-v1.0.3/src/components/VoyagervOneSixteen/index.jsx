@@ -68,7 +68,7 @@ export default function VoyagervOneSixteen({
       </Text>
       <Button
         as={Link}
-        to="/assistants"
+        to="/login"
         size="sm"
         variant="outline"
         colorScheme="lime_100"
