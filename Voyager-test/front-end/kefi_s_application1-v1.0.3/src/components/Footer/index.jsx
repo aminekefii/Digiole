@@ -37,16 +37,11 @@ export default function Footer({ ...props }) {
               <Flex flexDirection="column">
                 <Flex gap="14px" alignSelf="start" flexDirection="column" alignItems="start">
                   <Link href="#">
-                    <Heading as="h5" color="gray.100_01" fontSize="23px">
+                    <Heading as="h5" color="white.A700_01" fontSize="23px">
                       Learn More
                     </Heading>
                   </Link>
                   <UnorderedList styleType="none" gap="8px" display="flex" flexDirection="column" alignItems="start">
-                    <ListItem>
-                      <Link href="#">
-                        <Text letterSpacing="-0.05px">FAQs</Text>
-                      </Link>
-                    </ListItem>
                     <ListItem>
                       <Link href="#">
                         <Text letterSpacing="-0.05px">Blog</Text>
@@ -83,7 +78,7 @@ export default function Footer({ ...props }) {
               <Flex flexDirection="column">
                 <Flex gap="12px" alignSelf="start" flexDirection="column" alignItems="start">
                   <Link href="#">
-                    <Heading as="h5" color="gray.100_01" fontSize="23px">
+                    <Heading as="h5" color="white.A700_01" fontSize="23px">
                       Core Apps
                     </Heading>
                   </Link>
@@ -143,7 +138,7 @@ export default function Footer({ ...props }) {
               <Flex>
                 <Flex gap="12px" flexDirection="column" alignItems="start" justifyContent="center">
                   <Link href="Interoperability" target="_blank" rel="noreferrer">
-                    <Heading as="h5" color="gray.100_01" fontSize="23px">
+                    <Heading as="h5" color="white.A700_01" fontSize="23px">
                       Interoperability
                     </Heading>
                   </Link>
@@ -215,7 +210,7 @@ export default function Footer({ ...props }) {
                   <Flex gap="19px" alignSelf="stretch" flexDirection="column" alignItems="start">
                     <Checkbox
                       value="false"
-                      color="gray.100_01"
+                      color="white.A700_01"
                       letterSpacing="-0.07px"
                       fontSize="13px"
                       gap="6px"
