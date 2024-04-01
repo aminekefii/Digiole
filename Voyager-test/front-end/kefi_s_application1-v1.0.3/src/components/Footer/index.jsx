@@ -206,7 +206,7 @@ export default function Footer({ ...props }) {
                   <Text letterSpacing="-0.08px" fontWeight={500}>
                     Email
                   </Text>
-                  <Input size="xs" variant="outline" colorScheme="indigo_50_03" alignSelf="stretch" borderRadius="20px"/>
+                  <Input size="xs" variant="outline" colorScheme="indigo_50_03" alignSelf="stretch" borderRadius="20px"  borderColor="white.A700_01"/>
                   <Flex gap="19px" alignSelf="stretch" flexDirection="column" alignItems="start">
                     <Checkbox
                       value="false"
