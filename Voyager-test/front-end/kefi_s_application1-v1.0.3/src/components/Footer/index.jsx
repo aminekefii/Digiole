@@ -236,18 +236,23 @@ export default function Footer({ ...props }) {
                       Subscribe
                     </Button>
                   </Flex>
+                  
                 </Flex>
+              
               </Box>
-            </Flex>
-          </Flex>
-          <Flex mt="26px" w={{ md: "25%", base: "100%" }} justifyContent="flex-end">
+              <Flex mt="50px" w={{ md: "270px", base: "100%" }} justifyContent="flex-end" ml="120px">
             <Image src="images/img_ecosystemos_logo.svg" h="49px" />
           </Flex>
           <Link href="#">
-            <Text size="lg" textAlign="right">
+            <Text size="lg" textAlign="center" ml="300px" mt="2px">
               by Digiole
             </Text>
           </Link>
+            </Flex>
+          
+          </Flex>
+        
+         
         </Flex>
       </Container>
     </Box>
