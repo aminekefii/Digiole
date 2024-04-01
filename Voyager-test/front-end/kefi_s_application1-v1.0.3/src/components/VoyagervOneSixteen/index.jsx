@@ -37,92 +37,55 @@ export default function VoyagervOneSixteen({
 
             <Flex w="94%" justifyContent="flex-end" position="absolute" right="0px" top="3%" m="auto">
               <Flex gap="25px" w="100%" flexDirection="column">
-                <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
-                  <Flex
-                    justifyContent="space-between"
-                    alignItems="center"
-                    gap="20px"
-                    flexDirection={{ md: "row", base: "column" }}
-                  >
-                    <Flex gap="12px" w={{ md: "10%", base: "100%" }} justifyContent="left" alignItems="center">
-                      <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-                      <Image src="images/img_voyager.svg" h="12px" />
-                    </Flex>
-                    <Flex
-                      w={{ md: "50%", base: "30%" }}
-                      justifyContent="space-between"
-                      alignItems="center"
-                      gap="20px"
-                      flexDirection={{ base: "column", sm: "row" }}
-                    >
-                      <Flex
-                        w={{ base: "100%", sm: "55%" }}
-                        justifyContent="space-between"
-                        gap={{ base: "0", sm: "20px" }}
-                      >
-                        <Link to="" href="#">
-                          <Text
-                            color="gray.50"
-                            letterSpacing="-0.08px"
-                            textAlign="center"
-                            fontWeight={500}
-                            fontSize={{ base: "sm", sm: "md" }} 
-                            _hover={{ textDecoration: "underline", color: "white" }}
-                          >
-                            {features}
-                          </Text>
-                        </Link>
-                        <Flex w="43%" justifyContent="space-between" gap="20px">
-                          <Link to="" href="#">
-                            <Text
-                              color="gray.50"
-                              letterSpacing="-0.08px"
-                              textAlign="center"
-                              fontWeight={500}
-                              fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
-                              _hover={{ textDecoration: "underline", color: "white" }}
-                            >
-                              {featuresOne}
-                            </Text>
-                          </Link>
-                          <Link to="" href="#">
-                            <Text
-                              color="gray.50"
-                              letterSpacing="-0.08px"
-                              textAlign="center"
-                              fontWeight={500}
-                              fontSize={{ base: "sm", sm: "md" }} // Adjust font size for different screen sizes
-                              _hover={{ textDecoration: "underline", color: "white" }}
-                            >
-                              {featuresTwo}
-                            </Text>
-                          </Link>
-                        </Flex>
+              <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
+  <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: "row", base: "column" }}>
+    <Flex gap="12px" w={{ md: "10%", base: "100%" }} justifyContent="left" alignItems="center">
+      <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+      <Image src="images/img_voyager.svg" h="12px" />
+    </Flex>
+   
+    <Flex alignItems="center" justifyContent="space-between" gap="70px">
+      <Text
+        color="gray.50"
+        letterSpacing="-0.08px"
+        textAlign="center"
+        fontWeight={500}
+        fontSize={{ base: "sm", sm: "md" }}
+        _hover={{ textDecoration: "underline", color: "white" }}
+      >
+        FAQ
+      </Text>
+      <Text
+        color="gray.50"
+        letterSpacing="-0.08px"
+        textAlign="center"
+        fontWeight={500}
+        fontSize={{ base: "sm", sm: "md" }}
+        _hover={{ textDecoration: "underline", color: "white" }}
+        ml="20px"
+      >
+        Contact
+      </Text>
+      <Button
+        as={Link}
+        to="/assistants"
+        size="sm"
+        variant="outline"
+        colorScheme="lime_100"
+        letterSpacing="-0.08px"
+        fontWeight={500}
+        minW={{ base: "120px", md: "204px" }}
+        borderRadius="20px"
+        _hover={{ bg: "#EAF2BB" }}
+        fontSize={{ base: "xs", md: "sm" }}
+        ml="20px"
+      >
+        {signInWith}
+      </Button>
+    </Flex>
+  </Flex>
+</Container>
 
-
-                      </Flex>
-
-                      <Button
-                      as={Link}
-                      to="/assistants"
-                        size="sm"
-                        variant="outline"
-                        colorScheme="lime_100"
-                        letterSpacing="-0.08px"
-                        fontWeight={500}
-                        minW={{ base: "120px", md: "204px" }}
-                        borderRadius="20px"
-                        _hover={{ bg: "#EAF2BB" }}
-                        fontSize={{ base: "xs", md: "sm" }}
-                      >
-                        {signInWith}
-                      </Button>
-
-
-
-                    </Flex>
-                  </Flex>
-                </Container>
                 <Box h="623px" position="relative" maxW="1340px" w="100%" mx="auto" p={{ md: "", base: "20px" }}>
                   <AbsoluteCenter
                     w="100%"
