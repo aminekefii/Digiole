@@ -175,6 +175,7 @@ export default function VoyagervOneSixteen({
                       w="100%"
                       borderRadius="24px"
                       px={{ base: "20px", sm: "" }}
+                      color="white.A700"
                     >
                       {exploreUse}
                     </Button>
