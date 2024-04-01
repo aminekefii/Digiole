@@ -144,7 +144,7 @@ export default function VoyagervOneEleven({
           h="48px"
           minW="172px"
           px={{ base: "20px", sm: "23px" }}
-          borderRadius="6px"
+          borderRadius="20px"
         >
           {bookACall}
         </Button>
