@@ -225,8 +225,9 @@ export default function Footer({ ...props }) {
                     </Checkbox>
                     <Button
                       size="md"
-                      colorScheme="lime_300_03"
-                      color="blue_gray.900_01"
+                      colorScheme="lime_200"
+                      color="blue_gray.900_04"
+                   
                       fontWeight={500}
                       w="100%"
                       borderRadius="6px"
