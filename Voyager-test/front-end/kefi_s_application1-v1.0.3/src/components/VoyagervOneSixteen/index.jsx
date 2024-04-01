@@ -10,7 +10,7 @@ export default function VoyagervOneSixteen({
   features = "What is CirclePass?",
   featuresOne = "FAQ",
   featuresTwo = "Contact",
-  signInWith = "Sign In with Circle Pass",
+  signInWith = "Sign In",
   voyagerapp = "Voyager App: Your AI-powered guide through the startup ecosystem",
   p7xl = "Navigate Your Startup Journey with Precision and Ease",
   getEarlyAcces = "Get Early Acces",
@@ -44,7 +44,7 @@ export default function VoyagervOneSixteen({
       <Image src="images/img_voyager.svg" h="12px" />
     </Flex>
    
-    <Flex alignItems="center" justifyContent="space-between" gap="70px">
+    <Flex alignItems="center" justifyContent="space-between" gap="50px">
       <Text
         color="gray.50"
         letterSpacing="-0.08px"
@@ -72,11 +72,12 @@ export default function VoyagervOneSixteen({
         size="sm"
         variant="outline"
         colorScheme="lime_100"
+        color="white.A700_01"
         letterSpacing="-0.08px"
         fontWeight={500}
-        minW={{ base: "120px", md: "204px" }}
+        minW={{ base: "50px", md: "70px" }}
         borderRadius="20px"
-        _hover={{ bg: "#EAF2BB" }}
+        _hover={{ bg: "#EAF2BB" , color: "black" }}
         fontSize={{ base: "xs", md: "sm" }}
         ml="20px"
       >
