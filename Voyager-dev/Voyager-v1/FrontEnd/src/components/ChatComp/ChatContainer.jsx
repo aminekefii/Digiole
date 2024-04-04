@@ -56,23 +56,31 @@ const ChatContainer = () => {
 
   return (
     <Flex
-      gap={{ md: "97px", base: "48px", sm: "72px" }}
-      w={{ md: "69%", base: "100%" }}
-      flexDirection="column"
-      height="50vh"  overflowY="scroll" padding="10px"
-     
-
+    flexDirection="column"
+    height="50%"
+    width="50%"
+    mr="300px"
+    
+    justifyContent="center"
+    position="relative"
+  >
+    <Box
+      flex="1"
+     w="100%"
+      padding="10px"
     >
-      <ChatContent
-      
-       messages={messages}/>
+      <ChatContent messages={messages} overflowY="scroll"  />
+    </Box>
+
       <ChatInputGroup
         prompt={prompt}
         setPrompt={setPrompt}
         handleKeyDown={handleKeyDown}
         handleMessageSubmit={handleMessageSubmit}
-      
       />
+
+
+      
     </Flex>
   );
 };

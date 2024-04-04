@@ -10,39 +10,44 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
 
 
   return (
-    <InputGroup w="76%" position="relative" bottom="0"   >
-
-      <InputLeftElement width="20%" >
-      <VoiceRec handleNoteChange={handlePromptChange} />    
+    <InputGroup
+        bottom="10"
+        position="fixed"
+        width="40%"
+       
+        backgroundColor="white"
+        borderTop="1px solid #ccc"
+      >
+        <InputLeftElement width="20%">
+          <VoiceRec handleNoteChange={handlePromptChange} />
         </InputLeftElement>
-
-
-
-      <Input
-        type="text"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={`| Message Voyager...`}
-        pr={{ base: "20px", sm: 0 }}
-        h="50px"
-        pt="5px"
-        ml="5px"
-        fontSize="15px"
-      
-      />
-
-
-      <InputRightElement>
-        <Button onClick={handleMessageSubmit} padding="0" bg="transparent" border="none" outline="none" cursor="pointer">
-          <Center w="20px" h="20px">
-            <Image src="images/img_save.svg" />
-          </Center>
-        </Button>
-      </InputRightElement>
-
-      
-    </InputGroup>
+        <Input
+          type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={`| Message Voyager...`}
+          pr={{ base: "20px", sm: 0 }}
+          h="50px"
+          pt="5px"
+          ml="10px"
+          fontSize="15px"
+        />
+        <InputRightElement>
+          <Button
+            onClick={handleMessageSubmit}
+            padding="0"
+            bg="transparent"
+            border="none"
+            outline="none"
+            cursor="pointer"
+          >
+            <Center w="20px" h="20px">
+              <Image src="images/img_save.svg" />
+            </Center>
+          </Button>
+        </InputRightElement>
+      </InputGroup>
   );
 };
 

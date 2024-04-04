@@ -94,7 +94,7 @@ export default function Buissnessplan() {
             p={{ md: "", base: "20px" }}
           >
             <ChatHistory></ChatHistory>
-          <ChatContainer></ChatContainer>
+          <ChatContainer ></ChatContainer>
           </Container>
         </Box>
       </Box>

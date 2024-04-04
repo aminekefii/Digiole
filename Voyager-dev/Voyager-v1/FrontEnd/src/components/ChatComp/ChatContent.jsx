@@ -1,13 +1,15 @@
 import React from 'react';
-import { Flex, Image, Heading, Text } from '@chakra-ui/react';
+import { Flex, Image, Heading, Text, Box } from '@chakra-ui/react';
 
 const ChatContent = ({ messages }) => {
   return (
-    <Flex
+    <Flex     w="100%"  height="50vh" overflowY="scroll"
+    >
+    <Box
       ml={{ md: "34px", base: "0px" }}
-      alignSelf="stretch"
+      
       justifyContent="space-between"
-      alignItems="start"
+      alignItems="center"
       gap="20px"
       flexDirection="column"
       
@@ -29,6 +31,7 @@ const ChatContent = ({ messages }) => {
           </Text>
         </Flex>
       ))}
+    </Box>
     </Flex>
   );
 };
