@@ -15,6 +15,8 @@ import {
   Container,
 } from "@chakra-ui/react";
 import { doSignOut } from '../../components/firebase/auth';
+import { Link } from "react-router-dom";
+
 
 
 export default function Buissnessplan() {
@@ -100,6 +102,8 @@ export default function Buissnessplan() {
                 alignSelf="stretch"
               >
                 <Button
+                 as={Link}
+                 to="/assistants"
                   size="2xl"
                   variant="outline"
                   colorScheme="indigo_900"
