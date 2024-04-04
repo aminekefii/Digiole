@@ -14,8 +14,18 @@ import {
   Box,
   Container,
 } from "@chakra-ui/react";
+import { doSignOut } from '../../components/firebase/auth';
+
 
 export default function Buissnessplan() {
+
+  const handleLogout = () => {
+    doSignOut().then(() => {
+      window.location.href = '/landingpage';
+    });
+  };
+
+
   return (
     <>
       <Helmet>
@@ -48,6 +58,21 @@ export default function Buissnessplan() {
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
               <Image src="images/img_bell.svg" h="24px" w="24px" />
               <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" />
+              <Button 
+                    size="sm"
+                    variant="outline"
+                    colorScheme="lime_100"
+                    color="white.A700_01"
+                    letterSpacing="-0.08px"
+                    fontWeight={500}
+                    minW={{ base: '50px', md: '70px' }}
+                    borderRadius="20px"
+                    _hover={{ bg: '#EAF2BB', color: 'black' }}
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    mr="50px"
+              
+              
+              onClick={handleLogout}>Logout</Button>
             </Flex>
           </Flex>
          
