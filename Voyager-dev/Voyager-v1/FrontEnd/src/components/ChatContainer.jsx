@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+
 import {
     InputLeftElement,
     InputGroup,
@@ -13,8 +14,55 @@ import {
     Box,
     Container,
   } from "@chakra-ui/react";
+import ChatInputGroup from "./ChatInput";
+
 
 const ChatContainer = () => {
+
+
+    const [prompt, setPrompt] = useState("");
+    const [messages, setMessages] = useState([]);
+    const [loading, setLoading] = useState(false);
+  
+    const handleMessageSubmit = async () => {
+      setLoading(true);
+      
+      const userMessage = { text: prompt, role: 'user' };
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: 'your_user_id', message: prompt }),
+      };
+  
+      try {
+        const response = await fetch('http://localhost:3000/chat', requestOptions);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMessages([...messages, { text: prompt, role: 'user' }, { text: data.response, role: 'assistant' }]);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+        setPrompt("");
+      }
+    };
+  
+    const handlePromptChange = (note) => {
+      setPrompt(note);
+    };
+    
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleMessageSubmit();
+      }
+    };
+
+
+
+
   return (
     <Flex
               gap={{ md: "97px", base: "48px", sm: "72px" }}
@@ -64,17 +112,7 @@ const ChatContainer = () => {
                 </Flex>
         
               </Flex>
-              <InputGroup w="76%">
-                <InputLeftElement  >
-                  <Image src="images/img_component_19.svg"  />
-                </InputLeftElement>
-                <Input placeholder={`| Message Wisdom...`} pr={{ base: "20px", sm: 0 }} />
-                <InputRightElement>
-                  <Center w="20px" h="20px">
-                    <Image src="images/img_save.svg" />
-                  </Center>
-                </InputRightElement>
-              </InputGroup>
+            <ChatInputGroup></ChatInputGroup>
             </Flex>
   );
 };
