@@ -52,7 +52,7 @@ const Register = () => {
           </Text>
           <Button
             as={Link}
-            to="/register"
+            to="/login"
             size="sm"
             variant="outline"
             colorScheme="lime_100"
@@ -65,7 +65,7 @@ const Register = () => {
             fontSize={{ base: 'xs', md: 'sm' }}
             ml="20px"
           >
-            Sign up
+            Sign in
           </Button>
         </Flex>
       </Flex>
