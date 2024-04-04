@@ -11,7 +11,7 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
 
   return (
     <InputGroup
-        bottom="150"
+        bottom="50"
         position="fixed"
         width="30%"
        marginBottom="50px"
