@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   InputLeftElement,
   InputGroup,
@@ -16,11 +15,9 @@ import {
 } from "@chakra-ui/react";
 import ChatInputGroup from "./ChatInput";
 import ChatContent from "./ChatContent";
-
+import VoiceRec from "./VoiceRec";
 
 const ChatContainer = () => {
-
-
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -61,9 +58,6 @@ const ChatContainer = () => {
     }
   };
 
-
-
-
   return (
     <Flex
       gap={{ md: "97px", base: "48px", sm: "72px" }}
@@ -71,7 +65,9 @@ const ChatContainer = () => {
       flexDirection="column"
       alignItems="start"
     >
-      <ChatContent></ChatContent>
+      <ChatContent />
+
+     
 
       <ChatInputGroup
         prompt={prompt}
@@ -79,7 +75,6 @@ const ChatContainer = () => {
         handleKeyDown={handleKeyDown}
         handleMessageSubmit={handleMessageSubmit}
       />
-      
     </Flex>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@chakra-ui/react'; // Import Button from Chakra UI
+import { InputLeftElement, Image } from "@chakra-ui/react";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -49,13 +50,17 @@ function VoiceRec({ handleNoteChange }) {
 
 
   return (
-<>
-  <div className="container">
-    <div className="box">
-      {isListening ? <span onClick={() => setIsListening(false)} style={{ cursor: 'pointer' , marginRight:'10px'}}>🎤</span> : <span onClick={() => setIsListening(true)} style={{ cursor: 'pointer' }}>🎙️</span>}
-    </div>
-  </div>
-</>
+
+    <Image
+      src={isListening ? "images/img_component_19.svg" : "images/img_component_19.svg"}
+      alt="Microphone"
+      width="100px"
+      cursor="pointer"
+      onClick={() => setIsListening(!isListening)}
+      mr="70px"
+    />
+  
+
 
 
 

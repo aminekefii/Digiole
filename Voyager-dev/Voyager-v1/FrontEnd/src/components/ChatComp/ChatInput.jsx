@@ -1,13 +1,20 @@
 import React from 'react';
 import { InputGroup, InputLeftElement, Input, InputRightElement, Image, Button, Center } from '@chakra-ui/react';
+import VoiceRec from './VoiceRec';
 
 const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit }) => {
+
+  const handlePromptChange = (note) => {
+    setPrompt(note);
+  };
+
+
   return (
     <InputGroup w="76%">
 
-      <InputLeftElement>
-        <Image src="images/img_component_19.svg" />
-      </InputLeftElement>
+      <InputLeftElement width="20%" >
+      <VoiceRec handleNoteChange={handlePromptChange} />    
+        </InputLeftElement>
 
 
 
@@ -18,6 +25,11 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
         onKeyDown={handleKeyDown}
         placeholder={`| Message Voyager...`}
         pr={{ base: "20px", sm: 0 }}
+        h="50px"
+        pt="5px"
+        ml="5px"
+        fontSize="15px"
+      
       />
 
 
