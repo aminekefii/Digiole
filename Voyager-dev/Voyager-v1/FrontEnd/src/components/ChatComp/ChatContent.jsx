@@ -10,6 +10,7 @@ const ChatContent = ({ messages }) => {
       alignItems="start"
       gap="20px"
       flexDirection="column"
+      
     >
       {messages.map((message, index) => (
         <Flex

@@ -59,14 +59,19 @@ const ChatContainer = () => {
       gap={{ md: "97px", base: "48px", sm: "72px" }}
       w={{ md: "69%", base: "100%" }}
       flexDirection="column"
-      alignItems="start"
+      height="50vh"  overflowY="scroll" padding="10px"
+     
+
     >
-      <ChatContent messages={messages} />
+      <ChatContent
+      
+       messages={messages}/>
       <ChatInputGroup
         prompt={prompt}
         setPrompt={setPrompt}
         handleKeyDown={handleKeyDown}
         handleMessageSubmit={handleMessageSubmit}
+      
       />
     </Flex>
   );

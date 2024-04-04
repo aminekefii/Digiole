@@ -10,7 +10,7 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
 
 
   return (
-    <InputGroup w="76%">
+    <InputGroup w="76%" position="relative" bottom="0"   >
 
       <InputLeftElement width="20%" >
       <VoiceRec handleNoteChange={handlePromptChange} />    
