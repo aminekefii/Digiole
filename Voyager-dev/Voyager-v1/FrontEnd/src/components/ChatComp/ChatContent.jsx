@@ -23,9 +23,9 @@ const ChatContent = ({ messages }) => {
     >
       <Flex gap="4px" alignItems="center">
         {message.role === 'assistant' ? (
-          <Image src="images/img_voyager_icon.svg" h="16px" alignSelf="end" w="16px" />
+          <Image src="images/img_voyager_icon.svg" h="17px" alignSelf="end" w="16px" />
         ) : (
-          <Image src="images/img_avatar.png" h="16px" alignSelf="end" w="16px" />
+          <Image src="images/img_avatar.png" h="17px" alignSelf="end" w="16px" />
         )}
         <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'User'}</Heading>
       </Flex>

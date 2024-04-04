@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const app = express();
 
-// Enable CORS
+// Enable CORS for your front-end
 const corsOptions = {
   origin: "http://localhost:3001",
 };
@@ -20,7 +20,7 @@ const openai = new OpenAI({
   apiKey: "", // Replace with your OpenAI API key
 });
 
-const threadByUser = {}; 
+const threadByUser = {}; // Store thread IDs by user
 
 async function getOrCreateAssistant() {
   const assistantFilePath = "./voyager_assistant.json";
@@ -39,10 +39,10 @@ async function getOrCreateAssistant() {
     const assistantConfig = {
       name: "Voyager",
       instructions:
-        "You are speaking to Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
+        "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
       tools: [
-        { type: "code_interpreter" }, 
-        { type: "retrieval" }, 
+        { type: "code_interpreter" }, // Code interpreter tool
+        { type: "retrieval" }, // Retrieval tool
       ],
       model: "gpt-3.5-turbo-0125",
     };
@@ -60,7 +60,7 @@ async function getOrCreateAssistant() {
 }
 
 app.post("/chat", async (req, res) => {
-  const userId = req.body.userId; 
+  const userId = req.body.userId; // You should include the user ID in the request
 
   // Create a new thread if it's the user's first message
   if (!threadByUser[userId]) {
@@ -95,7 +95,7 @@ app.post("/chat", async (req, res) => {
       threadByUser[userId], // Use the stored thread ID for this user
       {
         assistant_id: assistantIdToUse,
-        instructions: "You are speaking to Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.", // Include the assistant name and description in the instructions
+        instructions: "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.", // Include the assistant name and description in the instructions
         tools: [
           { type: "code_interpreter" }, // Code interpreter tool
           { type: "retrieval" }, // Retrieval tool
