@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  InputLeftElement,
-  InputGroup,
-  InputRightElement,
-  Image,
-  Center,
+  Flex,
   Input,
   Button,
+  Image,
   Heading,
-  Flex,
   Text,
   Box,
   Container,
@@ -65,10 +61,7 @@ const ChatContainer = () => {
       flexDirection="column"
       alignItems="start"
     >
-      <ChatContent />
-
-     
-
+      <ChatContent messages={messages} />
       <ChatInputGroup
         prompt={prompt}
         setPrompt={setPrompt}
