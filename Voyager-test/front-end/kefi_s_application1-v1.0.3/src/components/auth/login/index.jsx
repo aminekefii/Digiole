@@ -42,16 +42,7 @@ const Login = () => {
         </Flex>
 
         <Flex alignItems="center" justifyContent="space-between" gap="50px">
-          <Text
-            color="gray.50"
-            letterSpacing="-0.08px"
-            textAlign="center"
-            fontWeight={500}
-            fontSize={{ base: 'sm', sm: 'md' }}
-            _hover={{ textDecoration: 'underline', color: 'white' }}
-          >
-            FAQ
-          </Text>
+          
           <Text
             color="gray.50"
             letterSpacing="-0.08px"
@@ -61,7 +52,7 @@ const Login = () => {
             _hover={{ textDecoration: 'underline', color: 'white' }}
             ml="20px"
           >
-            Contact
+            Home
           </Text>
           <Button
             as={Link}
@@ -78,7 +69,7 @@ const Login = () => {
             fontSize={{ base: 'xs', md: 'sm' }}
             ml="20px"
           >
-            signInWith
+            Sign up
           </Button>
         </Flex>
       </Flex>
