@@ -7,6 +7,7 @@ import Buissnessplan from "pages/BuissnessPlan";
 import { useAuth } from "components/contexts/authContext";
 import Login from "components/auth/login";
 import Register from "components/auth/register";
+import LoginPage from "pages/LoginPage";
 
 const ProjectRoutes = () => {
   const { userLoggedIn } = useAuth();
@@ -16,7 +17,7 @@ const ProjectRoutes = () => {
     { path: "landingpage", element: <LandingPage /> },
     { path: "assistants", element: userLoggedIn ? <Assistantspg /> : <Navigate to="/login" /> },
     { path: "buissnessplan", element: userLoggedIn ? <Buissnessplan /> : <Navigate to="/login" /> },
-    { path: "login", element: <Login /> },
+    { path: "login", element: <LoginPage /> },
     { path: "*", element: <NotFound /> },
     { path: "register", element: <Register /> },
 

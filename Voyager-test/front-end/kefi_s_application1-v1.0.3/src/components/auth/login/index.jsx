@@ -32,8 +32,7 @@ const Login = () => {
     };
 
     return (
-        
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ backgroundImage: "url('images/16.png')", backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
             {userLoggedIn && (<Navigate to={'/assistants'} replace={true} />)}
 
             <main style={{ width: '100%', height: '100vh', display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
