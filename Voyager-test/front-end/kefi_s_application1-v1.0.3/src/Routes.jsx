@@ -6,6 +6,7 @@ import Assistantspg from "pages/Assistantspg";
 import Buissnessplan from "pages/BuissnessPlan";
 import { useAuth } from "components/contexts/authContext";
 import Login from "components/auth/login";
+import Register from "components/auth/register";
 
 const ProjectRoutes = () => {
   const { userLoggedIn } = useAuth();
@@ -17,6 +18,8 @@ const ProjectRoutes = () => {
     { path: "buissnessplan", element: userLoggedIn ? <Buissnessplan /> : <Navigate to="/login" /> },
     { path: "login", element: <Login /> },
     { path: "*", element: <NotFound /> },
+    { path: "register", element: <Register /> },
+
   ]);
 
   return element;
