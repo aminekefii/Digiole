@@ -32,6 +32,7 @@ const Login = () => {
     };
 
     return (
+        
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {userLoggedIn && (<Navigate to={'/assistants'} replace={true} />)}
 

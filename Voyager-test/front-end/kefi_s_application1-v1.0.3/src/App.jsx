@@ -12,7 +12,6 @@ function App() {
     <ChakraProvider theme={theme}>
       <Router>
         <AuthProvider> 
-        <Header />
           <Routes />
         </AuthProvider>
       </Router>

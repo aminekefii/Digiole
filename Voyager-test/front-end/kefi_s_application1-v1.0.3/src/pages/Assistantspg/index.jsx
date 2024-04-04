@@ -4,6 +4,7 @@ import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/r
 import "../../styles/index.css";
 import "../../styles/font.css";
 import { Link } from "react-router-dom";
+import Header from "components/header";
 
 
 export default function AssistantsPage() {
@@ -12,7 +13,9 @@ export default function AssistantsPage() {
       <Helmet>
         <title>Assistants</title>
         <meta name="description" content="Web site created using create-react-app" />
+      
       </Helmet>
+      <Header />
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
 
