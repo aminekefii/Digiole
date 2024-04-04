@@ -76,8 +76,8 @@ const Login = () => {
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
                     </form>
-                    <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#4b5563', fontWeight: 'bold' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease' }}>Sign up</Link></p>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+                    <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#4b5563', fontWeight: 'bold', display: 'inline-block' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign up</Link></p>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', marginTop:'10px' }}>
                         <div style={{ borderBottom: '2px solid #cbd5e0', marginBottom: '0.625rem', marginRight: '0.5rem', flex: '1' }}></div>
                         <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>OR</div>
                         <div style={{ borderBottom: '2px solid #cbd5e0', marginBottom: '0.625rem', marginLeft: '0.5rem', flex: '1' }}></div>
@@ -85,9 +85,9 @@ const Login = () => {
                     <button
                         disabled={isSigningIn}
                         onClick={(e) => { onGoogleSignIn(e) }}
-                        style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.625rem 1rem', border: 'none', borderRadius: '0.375rem', cursor: isSigningIn ? 'not-allowed' : 'pointer', backgroundColor: '#ffffff', transition: 'background-color 0.3s ease' }}
+                        style={{ width: '90%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.625rem 1rem', border: 'none', borderRadius: '0.375rem', cursor: isSigningIn ? 'not-allowed' : 'pointer', backgroundColor: '#ffffff', transition: 'background-color 0.3s ease'}}
                     >
-                        <svg className="w-5 h-5" viewBox="0 0 48 48" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-5 h-5" viewBox="0 0 48 48" fill="#000000" xmlns="http://www.w3.org/2000/svg" width="30px">
                             <g clipPath="url(#clip0_17_40)">
                                 <path d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z" fill="#4285F4"/>
                                 <path d="M24.48 48.0016C30.9529 48.0016 36.4116 45.8764 40.3888 42.2078L32.6549 36.2111C30.5031 37.675 27.7252 38.5039 24.4888 38.5039C18.2275 38.5039 12.9187 34.2798 11.0139 28.6006H3.03296V34.7825C7.10718 42.8868 15.4056 48.0016 24.48 48.0016Z" fill="#34A853"/>
