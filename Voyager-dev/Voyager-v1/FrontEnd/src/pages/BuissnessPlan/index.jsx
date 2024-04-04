@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { doSignOut } from '../../components/firebase/auth';
 import { Link } from "react-router-dom";
+import ChatHistory from "components/ChatHistory";
 
 
 
@@ -91,38 +92,7 @@ export default function Buissnessplan() {
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
           >
-            <Flex mt="16px" gap="18px" w={{ md: "24%", base: "100%" }} flexDirection="column" alignItems="start">
-              <Box
-                ml={{ md: "4px", base: "0px" }}
-                pb={{ base: "20px", sm: "21px" }}
-                pr={{ base: "20px", sm: "21px" }}
-                borderColor="blue_gray.400_5b"
-                borderBottomWidth="1px"
-                borderStyle="solid"
-                alignSelf="stretch"
-              >
-                <Button
-                 as={Link}
-                 to="/assistants"
-                  size="2xl"
-                  variant="outline"
-                  colorScheme="indigo_900"
-                  rightIcon={<Image src="images/img_news.svg" />}
-                  gap="35px"
-                  w="100%"
-                  borderRadius="8px"
-                  px={{ base: "20px", sm: "" }}
-                >
-                  Explore other assistants
-                </Button>
-              </Box>
-              <Flex gap="9px" alignItems="center">
-                <Image src="images/img_settings_gray_700_01.svg" h="24px" w="24px" />
-                <Text color="gray.700_01" letterSpacing="-0.05px" alignSelf="start">
-                  New Business Plan(name ..
-                </Text>
-              </Flex>
-            </Flex>
+            <ChatHistory></ChatHistory>
             <Flex
               gap={{ md: "97px", base: "48px", sm: "72px" }}
               w={{ md: "69%", base: "100%" }}
@@ -140,10 +110,10 @@ export default function Buissnessplan() {
                 <Flex mt="12px" gap="23px" w={{ md: "71%", base: "100%" }} flexDirection="column">
                   <Flex gap="4px" alignItems="center">
                     <Image src="images/img_settings_black_900.svg" h="16px" alignSelf="end" w="16px" />
-                    <Heading as="h1">Wisdom</Heading>
+                    <Heading as="h1">Voyager</Heading>
                   </Flex>
                   <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%">
-                    Hi Alex! I&#39;m excited to help you create your business plan. Let&#39;s start with understanding
+                    Hi Amine! I&#39;m excited to help you create your business plan. Let&#39;s start with understanding
                     your area of expertise. Can you tell me about your strengths and what you&#39;re passionate about in
                     your business?
                   </Text>
@@ -158,7 +128,7 @@ export default function Buissnessplan() {
                   </Text>
                   <Flex gap="4px" alignItems="center">
                     <Image src="images/img_settings_black_900.svg" h="16px" alignSelf="end" w="16px" />
-                    <Heading as="h3">Wisdom</Heading>
+                    <Heading as="h3">Voyager</Heading>
                   </Flex>
                   <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%">
                     That&#39;s fantastic! Would it be okay to include this as part of your expertise in the business
@@ -169,7 +139,7 @@ export default function Buissnessplan() {
                     <Heading as="h4">Alex</Heading>
                     <Image src="images/img_television.svg" h="14px" />
                   </Flex>
-                  <Image src="images/img_group_12.svg" h="12px" />
+                 
                 </Flex>
                 <Button
                   size="xl"
