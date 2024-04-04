@@ -17,7 +17,7 @@ const ProjectRoutes = () => {
     { path: "landingpage", element: <LandingPage /> },
     { path: "assistants", element: userLoggedIn ? <Assistantspg /> : <Navigate to="/login" /> },
     { path: "buissnessplan", element: userLoggedIn ? <Buissnessplan /> : <Navigate to="/login" /> },
-    { path: "login", element: <LoginPage /> },
+    { path: "login", element: <Login /> },
     { path: "*", element: <NotFound /> },
     { path: "register", element: <Register /> },
 
