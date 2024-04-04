@@ -11,12 +11,13 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
 
   return (
     <InputGroup
-        bottom="10"
+        bottom="150"
         position="fixed"
-        width="40%"
+        width="30%"
        marginBottom="50px"
         backgroundColor="white"
         borderTop="1px solid #ccc"
+        ml="10"
       >
         <InputLeftElement width="20%">
           <VoiceRec handleNoteChange={handlePromptChange} />
