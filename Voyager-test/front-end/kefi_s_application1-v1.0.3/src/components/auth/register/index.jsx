@@ -24,7 +24,7 @@ const Register = () => {
 
     return (
         <>
-            {userLoggedIn && <Navigate to={'/home'} replace={true} />}
+            {userLoggedIn && <Navigate to={'/assistants'} replace={true} />}
 
             <main style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ width: '24rem', color: '#4b5563', marginTop: '1.25rem', padding: '1rem', backgroundColor: '#ffffff', textAlign: 'center', borderRadius: '0.75rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)' }}>
