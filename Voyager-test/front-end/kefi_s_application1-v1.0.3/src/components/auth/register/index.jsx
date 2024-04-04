@@ -1,105 +1,89 @@
-import React, { useState } from 'react'
-import { Navigate, Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext'
-import { doCreateUserWithEmailAndPassword } from '../../firebase/auth'
+import React, { useState } from 'react';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/authContext';
+import { doCreateUserWithEmailAndPassword } from '../../firebase/auth';
 
 const Register = () => {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [isRegistering, setIsRegistering] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setconfirmPassword] = useState('')
-    const [isRegistering, setIsRegistering] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
-
-    const { userLoggedIn } = useAuth()
+    const { userLoggedIn } = useAuth();
 
     const onSubmit = async (e) => {
-        e.preventDefault()
-        if(!isRegistering) {
-            setIsRegistering(true)
-            await doCreateUserWithEmailAndPassword(email, password)
+        e.preventDefault();
+        if (!isRegistering) {
+            setIsRegistering(true);
+            await doCreateUserWithEmailAndPassword(email, password);
         }
-    }
+    };
 
     return (
         <>
-            {userLoggedIn && (<Navigate to={'/home'} replace={true} />)}
+            {userLoggedIn && <Navigate to={'/home'} replace={true} />}
 
-            <main className="w-full h-screen flex self-center place-content-center place-items-center">
-                <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
-                    <div className="text-center mb-6">
-                        <div className="mt-2">
-                            <h3 className="text-gray-800 text-xl font-semibold sm:text-2xl">Create a New Account</h3>
-                        </div>
-
+            <main style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '24rem', color: '#4b5563', marginTop: '1.25rem', padding: '1rem', backgroundColor: '#ffffff', textAlign: 'center', borderRadius: '0.75rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)' }}>
+                    <div style={{ marginTop: '0.625rem' }}>
+                        <h3 style={{ color: '#4b5563', fontSize: '1.25rem', fontWeight: 'bold' }}>Create a New Account</h3>
                     </div>
-                    <form
-                        onSubmit={onSubmit}
-                        className="space-y-4"
-                    >
+                    <form onSubmit={onSubmit} style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Email
-                            </label>
+                            <label htmlFor="email" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Email</label>
                             <input
                                 type="email"
+                                id="email"
                                 autoComplete='email'
                                 required
-                                value={email} onChange={(e) => { setEmail(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', color: '#4b5563', backgroundColor: 'transparent', border: '1px solid #e2e8f0', outline: 'none', borderRadius: '0.375rem', transition: 'border-color 0.3s ease' }}
                             />
                         </div>
-
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Password
-                            </label>
+                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Password</label>
                             <input
-                                disabled={isRegistering}
                                 type="password"
+                                id="password"
                                 autoComplete='new-password'
                                 required
-                                value={password} onChange={(e) => { setPassword(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', color: '#4b5563', backgroundColor: 'transparent', border: '1px solid #e2e8f0', outline: 'none', borderRadius: '0.375rem', transition: 'border-color 0.3s ease' }}
                             />
                         </div>
-
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Confirm Password
-                            </label>
+                            <label htmlFor="confirmPassword" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Confirm Password</label>
                             <input
-                                disabled={isRegistering}
                                 type="password"
+                                id="confirmPassword"
                                 autoComplete='off'
                                 required
-                                value={confirmPassword} onChange={(e) => { setconfirmPassword(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', color: '#4b5563', backgroundColor: 'transparent', border: '1px solid #e2e8f0', outline: 'none', borderRadius: '0.375rem', transition: 'border-color 0.3s ease' }}
                             />
                         </div>
-
-                        {errorMessage && (
-                            <span className='text-red-600 font-bold'>{errorMessage}</span>
-                        )}
-
+                        {errorMessage && <span style={{ color: '#e53e3e', fontWeight: 'bold' }}>{errorMessage}</span>}
                         <button
                             type="submit"
                             disabled={isRegistering}
-                            className={`w-full px-4 py-2 text-white font-medium rounded-lg ${isRegistering ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl transition duration-300'}`}
+                            style={{ width: '100%', marginTop: '1.25rem', padding: '0.75rem 1rem', color: '#fff', fontWeight: '500', backgroundColor: isRegistering ? '#cbd5e0' : '#4f46e5', borderRadius: '0.375rem', cursor: isRegistering ? 'not-allowed' : 'pointer', transition: 'background-color 0.3s ease' }}
                         >
                             {isRegistering ? 'Signing Up...' : 'Sign Up'}
                         </button>
-                        <div className="text-sm text-center">
-                            Already have an account? {'   '}
-                            <Link to={'/login'} className="text-center text-sm hover:underline font-bold">Continue</Link>
+                        <div style={{ marginTop: '0.5rem', textAlign: 'center', fontSize: '0.875rem' }}>
+                            Already have an account? <Link to={'/login'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign in</Link>
                         </div>
                     </form>
                 </div>
             </main>
         </>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;
