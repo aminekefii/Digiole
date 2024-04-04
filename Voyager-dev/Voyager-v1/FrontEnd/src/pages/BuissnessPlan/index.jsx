@@ -16,8 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { doSignOut } from '../../components/firebase/auth';
 import { Link } from "react-router-dom";
-import ChatHistory from "components/ChatHistory";
-import ChatContainer from "components/ChatContainer";
+import ChatHistory from "components/ChatComp/ChatHistory";
+import ChatContainer from "components/ChatComp/ChatContainer";
 
 
 

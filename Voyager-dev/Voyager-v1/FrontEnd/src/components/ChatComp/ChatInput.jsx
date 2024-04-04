@@ -4,9 +4,13 @@ import { InputGroup, InputLeftElement, Input, InputRightElement, Image, Button, 
 const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit }) => {
   return (
     <InputGroup w="76%">
+
       <InputLeftElement>
         <Image src="images/img_component_19.svg" />
       </InputLeftElement>
+
+
+
       <Input
         type="text"
         value={prompt}
@@ -15,6 +19,8 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
         placeholder={`| Message Voyager...`}
         pr={{ base: "20px", sm: 0 }}
       />
+
+
       <InputRightElement>
         <Button onClick={handleMessageSubmit} padding="0" bg="transparent" border="none" outline="none" cursor="pointer">
           <Center w="20px" h="20px">
@@ -22,6 +28,8 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
           </Center>
         </Button>
       </InputRightElement>
+
+      
     </InputGroup>
   );
 };

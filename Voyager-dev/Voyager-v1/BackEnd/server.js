@@ -20,7 +20,7 @@ const openai = new OpenAI({
   apiKey: "", // Replace with your OpenAI API key
 });
 
-const threadByUser = {}; // Store thread IDs by user
+const threadByUser = {}; 
 
 async function getOrCreateAssistant() {
   const assistantFilePath = "./voyager_assistant.json";
@@ -41,8 +41,8 @@ async function getOrCreateAssistant() {
       instructions:
         "You are speaking to Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
       tools: [
-        { type: "code_interpreter" }, // Code interpreter tool
-        { type: "retrieval" }, // Retrieval tool
+        { type: "code_interpreter" }, 
+        { type: "retrieval" }, 
       ],
       model: "gpt-3.5-turbo-0125",
     };
@@ -60,7 +60,7 @@ async function getOrCreateAssistant() {
 }
 
 app.post("/chat", async (req, res) => {
-  const userId = req.body.userId; // You should include the user ID in the request
+  const userId = req.body.userId; 
 
   // Create a new thread if it's the user's first message
   if (!threadByUser[userId]) {
