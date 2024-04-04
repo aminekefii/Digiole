@@ -73,7 +73,12 @@ const ChatContainer = () => {
             >
              <ChatContent></ChatContent>
 
-            <ChatInputGroup></ChatInputGroup>
+             <ChatInputGroup
+      prompt={prompt}
+      setPrompt={setPrompt}
+      handleKeyDown={handleKeyDown}
+      handleMessageSubmit={handleMessageSubmit}
+    />
             </Flex>
   );
 };

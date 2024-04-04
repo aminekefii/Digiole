@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const app = express();
 
-// Enable CORS for your front-end
+// Enable CORS
 const corsOptions = {
   origin: "http://localhost:3001",
 };
