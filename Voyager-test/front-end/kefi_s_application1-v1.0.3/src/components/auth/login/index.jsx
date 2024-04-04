@@ -44,6 +44,8 @@ const Login = () => {
         <Flex alignItems="center" justifyContent="space-between" gap="50px">
           
           <Text
+            as={Link}
+            to="/landingpage"
             color="gray.50"
             letterSpacing="-0.08px"
             textAlign="center"
@@ -56,7 +58,7 @@ const Login = () => {
           </Text>
           <Button
             as={Link}
-            to="/login"
+            to="/register"
             size="sm"
             variant="outline"
             colorScheme="lime_100"
