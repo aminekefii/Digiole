@@ -1,6 +1,7 @@
 import React from 'react';
 import { InputGroup, InputLeftElement, Input, InputRightElement, Image, Button, Center } from '@chakra-ui/react';
 import VoiceRec from './VoiceRec';
+import FileUpload from 'services/api/FilesUpload';
 
 const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit }) => {
 
@@ -48,6 +49,7 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
             </Center>
           </Button>
         </InputRightElement>
+        <FileUpload />
       </InputGroup>
   );
 };

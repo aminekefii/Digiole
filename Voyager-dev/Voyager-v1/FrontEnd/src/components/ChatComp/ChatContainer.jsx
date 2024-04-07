@@ -12,6 +12,7 @@ import {
 import ChatInputGroup from "./ChatInput";
 import ChatContent from "./ChatContent";
 import VoiceRec from "./VoiceRec";
+import FileUpload from "services/api/FilesUpload";
 
 const ChatContainer = () => {
   const [prompt, setPrompt] = useState("");
@@ -77,6 +78,7 @@ const ChatContainer = () => {
         setPrompt={setPrompt}
         handleKeyDown={handleKeyDown}
         handleMessageSubmit={handleMessageSubmit}
+        
       />
 
 

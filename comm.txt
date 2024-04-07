@@ -22,3 +22,5 @@ $env:OPENAI_API_KEY = "API KEY"
 npm install html-react-parser
 npm install marked
 npm i openai dotenv
+npm cache clean --force
+npm install react-icons
