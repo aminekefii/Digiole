@@ -29,8 +29,8 @@ function FileUpload() {
                 style={{ display: 'none' }}
                 onChange={handleFileUpload}
             />
-            <label htmlFor="file-upload">
-                <FiUpload style={{ cursor: 'pointer', marginLeft: '10px' }} />
+            <label htmlFor="file-upload"   >
+                <FiUpload style={{ cursor: 'pointer', marginLeft: '10px', height:'50px'}} />
             </label>
             <button type="button" onClick={upload}>Upload</button>
         </>
