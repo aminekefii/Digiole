@@ -118,8 +118,8 @@ const Dropzone = ({ className }) => {
           </div>
 
           {/* Accepted files */}
-          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
-          <ul style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '1rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
+          <ul style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
             {files.map(file => (
               <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                 <div>
@@ -129,7 +129,7 @@ const Dropzone = ({ className }) => {
                 </div>
                 <button
                   type='button'
-                  style={{ marginTop: '0.5rem', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#6b7280', border: '1px solid #6b7280', backgroundColor: '#f3f4f6', borderRadius: '0.375rem', padding: '0.25rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
+                  style={{ marginTop: '0.5rem', fontSize: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#6b7280', border: '1px solid #6b7280', backgroundColor: '#f3f4f6', borderRadius: '0.375rem', padding: '0.25rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
                   onClick={() => removeFile(file.name)}
                 >
                   Remove
