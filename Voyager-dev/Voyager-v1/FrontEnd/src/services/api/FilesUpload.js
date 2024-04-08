@@ -53,15 +53,19 @@ const [modal, setModal] = useState(false);
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
+    
+             <Dropzone></Dropzone>
             <h2>Upload Files</h2>
             <p>
               Lorem ipsum 
             </p>
-            <Dropzone></Dropzone>
+           
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
             </button>
+            
           </div>
+          
         </div>
       )}
 
