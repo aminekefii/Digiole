@@ -25,13 +25,12 @@ function Dropzone({ className }) {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: ['.pdf', '.doc', '.docx', 'image/*'], // Accept PDFs, Word documents, and images
-    maxSize: 1024 * 1000,
+    accept: ['.pdf', '.doc', '.docx', 'image/*'], // Accepted files
+   // maxSize: 1024 * 1000,
     onDrop
   });
 
   useEffect(() => {
-    // Revoke the data URIs to avoid memory leaks
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
 
@@ -48,43 +47,37 @@ function Dropzone({ className }) {
     setRejected(files => files.filter(({ file }) => file.name !== name));
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    if (!files?.length) return;
-
-    const formData = new FormData();
-    files.forEach(file => formData.append('file', file));
-    formData.append('upload_preset', 'friendsbook');
-
-    const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
-    const data = await fetch(URL, {
-      method: 'POST',
-      body: formData
-    }).then(res => res.json());
-
-    console.log(data);
-  };
 
 
     const [file, setFile] = useState(null);
 
-    const handleFileUpload = (e) => {
-        setFile(e.target.files[0]);
-    };
-
-    const upload = () => {
+    const handleSubmit = async e => {
+        e.preventDefault();
+        
+        // Check if files exist
+        if (!files.length) {
+          console.log('No files to upload');
+          return;
+        }
+      
+        // Create FormData object
         const formData = new FormData();
-        formData.append('file', file);
+      
+        // Append each file to FormData object
+        files.forEach(file => {
+          formData.append('file', file);
+        });
+      
+        // Send FormData to server
         axios.post('http://localhost:3000/upload', formData)
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
-
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
+      
 
 
 const [modal, setModal] = useState(false);
@@ -180,7 +173,9 @@ const [modal, setModal] = useState(false);
                         padding: '0.5rem 1rem',
                         cursor: 'pointer',
                         transition: 'background-color 0.2s, color 0.2s'
+                       
                       }}
+                      onClick={handleSubmit}
                     >
                       Upload to Voyager
                     </button>
