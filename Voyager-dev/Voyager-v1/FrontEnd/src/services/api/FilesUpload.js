@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FiUpload } from 'react-icons/fi';
 import "../../styles/Modal.css";
+import Dropzone from "components/DropZone";
 
 
 
@@ -52,15 +53,11 @@ const [modal, setModal] = useState(false);
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <h2>Hello Modal</h2>
+            <h2>Upload Files</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-              perferendis suscipit officia recusandae, eveniet quaerat assumenda
-              id fugit, dignissimos maxime non natus placeat illo iusto!
-              Sapiente dolorum id maiores dolores? Illum pariatur possimus
-              quaerat ipsum quos molestiae rem aspernatur dicta tenetur. Sunt
-              placeat tempora vitae enim incidunt porro fuga ea.
+              Lorem ipsum 
             </p>
+            <Dropzone></Dropzone>
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
             </button>
