@@ -186,43 +186,43 @@ const [modal, setModal] = useState(false);
                     </button>
                   </div>
 
-                  {/* Accepted files */}
-                  <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '1rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
-                  <ul style={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                    {files.map(file => (
-                      <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                        <div>
-                          <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#6b7280', fontWeight: 'bold' }}>
-                            {file.name}
-                          </p>
-                        </div>
-                        <button
-                          type='button'
-                          style={{
-                            marginTop: '0.5rem',
-                            fontSize: '0.5rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                            fontWeight: 'bold',
-                            color: '#6b7280',
-                            border: '1px solid #6b7280',
-                            backgroundColor: '#f3f4f6',
-                            borderRadius: '0.375rem',
-                            padding: '0.25rem 1rem',
-                            cursor: 'pointer',
-                            transition: 'background-color 0.2s, color 0.2s'
-                          }}
-                          onClick={() => removeFile(file.name)}
-                        >
-                          Remove
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+     {/* Accepted files */}
+<h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '1rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
+<ul style={{ marginTop: '0.5rem', maxHeight: '100px', overflowY: 'auto', listStyle: 'none', padding: '0' }}>
+  {files.map(file => (
+    <li key={file.name} style={{ marginTop: '0.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+      <div style={{ flexGrow: '1' }}>
+        <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 'bold' }}>
+          {file.name}
+        </p>
+      </div>
+      <button
+        type='button'
+        style={{
+          fontSize: '0.5rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          fontWeight: 'bold',
+          color: '#6b7280',
+          border: '1px solid #6b7280',
+          backgroundColor: '#f3f4f6',
+          borderRadius: '0.375rem',
+          padding: '0.25rem 1rem',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s, color 0.2s'
+        }}
+        onClick={() => removeFile(file.name)}
+      >
+        Remove
+      </button>
+    </li>
+  ))}
+</ul>
+
 
                   {/* Rejected Files */}
                   <h3 style={{ fontSize: '0.75rem', marginTop: '1rem', fontWeight: 'bold', color: '#6b7280', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Rejected Files</h3>
-                  <ul style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <ul style={{  marginTop: '0.5rem', maxHeight: '100px', overflowY: 'auto', listStyle: 'none', padding: '0' }}>
                     {rejected.map(({ file, errors }) => (
                       <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                         <div>
