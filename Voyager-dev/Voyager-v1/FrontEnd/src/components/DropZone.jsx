@@ -67,8 +67,7 @@ const Dropzone = ({ className }) => {
     <main
       style={{
         width: '100%',
-        minHeight: '100vh',
-        display: 'flex',
+        
         justifyContent: 'center',
         alignItems: 'center',
       }}
@@ -139,7 +138,7 @@ const Dropzone = ({ className }) => {
           </ul>
 
           {/* Rejected Files */}
-          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Rejected Files</h3>
+          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Rejected Files</h3>
           <ul style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {rejected.map(({ file, errors }) => (
               <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
