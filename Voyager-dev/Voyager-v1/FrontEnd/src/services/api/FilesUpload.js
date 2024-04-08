@@ -50,7 +50,7 @@ const [modal, setModal] = useState(false);
             </label></button>
 
             {modal && (
-        <div className="modal">
+        <div className="modal" style={{  alignItems: 'center', justifyContent: 'center' , marginTop:'250px'}} >
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
     

@@ -70,23 +70,25 @@ const Dropzone = ({ className }) => {
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <form
         onSubmit={handleSubmit}
         style={{
           width: '24rem',
+          
           color: '#4b5563',
           marginTop: '1.25rem',
           padding: '1rem',
+          
           backgroundColor: '#ffffff',
           textAlign: 'center',
           borderRadius: '0.75rem',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)'
         }}
       >
-        <div {...getRootProps({ className: className })} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+        <div {...getRootProps({ className: className })} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' , height:'180px'}}>
           <input {...getInputProps()} />
           <ArrowUpTrayIcon style={{ width: '1.25rem', height: '1.25rem', fill: 'currentColor' }} />
           {isDragActive ? (
@@ -97,26 +99,26 @@ const Dropzone = ({ className }) => {
         </div>
 
         {/* Preview */}
-        <section style={{ marginTop: '2rem' }}>
+        <section style={{ marginTop: '10px' }}>
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4b5563' }}>Preview</h2>
+            <h2 style={{ fontSize: '15px', fontWeight: 'bold', color: '#4b5563' ,width:'70px' }} >Preview</h2>
             <button
               type='button'
               onClick={removeAll}
-              style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#4b5563', border: '1px solid #6b7280', backgroundColor: '#f3f4f6', borderRadius: '0.375rem', padding: '0.5rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
+              style={{ fontSize: '0.55rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#4b5563', border: '1px solid #6b7280', backgroundColor: '#f3f4f6', borderRadius: '0.375rem', padding: '0.5rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
             >
               Remove all files
             </button>
             <button
               type='submit'
-              style={{ marginLeft: 'auto', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#4b5563', border: '1px solid #8b5cf6', backgroundColor: '#8b5cf6', borderRadius: '0.375rem', padding: '0.5rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
+              style={{ marginLeft: 'auto', fontSize: '0.55rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold', color: '#4b5563', border: '1px solid #8b5cf6', backgroundColor: '#8b5cf6', borderRadius: '0.375rem', padding: '0.5rem 1rem', cursor: 'pointer', transition: 'background-color 0.2s, color 0.2s' }}
             >
-              Upload to Cloudinary
+              Upload to Voyager
             </button>
           </div>
 
           {/* Accepted files */}
-          <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
+          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Accepted Files</h3>
           <ul style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {files.map(file => (
               <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
@@ -137,7 +139,7 @@ const Dropzone = ({ className }) => {
           </ul>
 
           {/* Rejected Files */}
-          <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Rejected Files</h3>
+          <h3 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280', marginTop: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem' }}>Rejected Files</h3>
           <ul style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {rejected.map(({ file, errors }) => (
               <li key={file.name} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
