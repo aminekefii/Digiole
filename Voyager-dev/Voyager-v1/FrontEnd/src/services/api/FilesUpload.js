@@ -261,10 +261,8 @@ const [modal, setModal] = useState(false);
                 </section>
               </form>
             </main>
-            <h2>Upload Files</h2>
-            <p>
-              Lorem ipsum
-            </p>
+           
+           
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
             </button>
