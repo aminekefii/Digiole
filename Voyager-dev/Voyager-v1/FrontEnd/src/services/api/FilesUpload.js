@@ -84,9 +84,13 @@ function Dropzone({ className }) {
     setRejected(files => files.filter(({ file }) => file.name !== name));
   };
 
+
+
+
+  
   const handleSubmit = async e => {
     e.preventDefault();
-    
+  
     if (!files.length) {
       console.log('No files to upload');
       return;
@@ -94,13 +98,14 @@ function Dropzone({ className }) {
   
     const formData = new FormData();
   
-    files.forEach(file => {
+    // Iterate over files and upload one at a time
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       formData.append('file', file);
-    });
   
-    axios.post('http://localhost:3000/upload', formData)
-      .then(res => {
-        console.log(res.data);
+      try {
+        const response = await axios.post('http://localhost:3000/upload', formData);
+        console.log(response.data);
         toast.success('Uploaded successfully', {
           position: "top-right",
           autoClose: 5000,
@@ -111,12 +116,26 @@ function Dropzone({ className }) {
           progress: undefined,
           theme: "light",
         });
-      })
-      .catch(error => {
+      } catch (error) {
         console.error(error);
         toast.error(error.message);
-      });
+      }
+  
+      // Clear formData for next file
+      formData.delete('file');
+    }
   };
+  
+
+
+
+
+
+
+
+
+
+
 
   const [modal, setModal] = useState(false);
 
