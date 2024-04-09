@@ -28,12 +28,32 @@ const Register = () => {
                 // Redirect to login page after successful registration
                 navigate('/login');
             } catch (error) {
-                setErrorMessage(error.message);
+                let errorMessageToShow = error.message; // Default error message
+                const weakPasswordRegex = /Password should be at least (\d+) characters/; // Regex to match weak password error
+                const weakPasswordMatch = weakPasswordRegex.exec(error.message); // Check if error message contains weak password message
+                const emailInUseMessage = 'auth/email-already-in-use'; // Message for email already in use error
+                if (weakPasswordMatch && weakPasswordMatch.length > 1) {
+                    errorMessageToShow = weakPasswordMatch[0]; // Set error message to the matched weak password message
+                } else if (error.code === emailInUseMessage) {
+                    errorMessageToShow = 'The email address is already in use.'; // Set error message to email already in use message
+                }
+                setErrorMessage(errorMessageToShow);
+                toast.error(errorMessageToShow, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                });
             } finally {
                 setIsRegistering(false);
             }
         }
     };
+    
 
     return (
         <div style={{ backgroundImage: "url('images/16.png')", backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -119,7 +139,7 @@ const Register = () => {
                                 style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', color: '#4b5563', backgroundColor: 'transparent', border: '1px solid #e2e8f0', outline: 'none', borderRadius: '0.375rem', transition: 'border-color 0.3s ease' }}
                             />
                         </div>
-                        {errorMessage && <span style={{ color: '#e53e3e', fontWeight: 'bold' }}>{errorMessage}</span>}
+                       
                         <button
                             type="submit"
                             disabled={isRegistering}
@@ -133,7 +153,7 @@ const Register = () => {
                     </form>
                 </div>
             </main>
-           
+            <ToastContainer />
         </div>
     );
 };
