@@ -83,9 +83,9 @@ function Dropzone({ className }) {
       })
       .catch(error => {
         console.error(error);
+        toast.error(error.message); // Toast the error message
       });
   };
-
 const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
