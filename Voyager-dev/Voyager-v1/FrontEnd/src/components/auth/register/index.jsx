@@ -122,7 +122,7 @@ const Register = () => {
                     </Flex>
                 </Flex>
             </Container>
-            <main style={{ width: '100%', height: '85vh', display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+            <main style={{ paddingBottom:'30px', width: '100%', height: '84vh', display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '24rem', color: '#4b5563', marginTop: '1.25rem', padding: '1rem', backgroundColor: '#ffffff', textAlign: 'center', borderRadius: '0.75rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)' }}>
                     <div style={{ marginTop: '0.625rem' }}>
                         <h3 style={{ color: '#4b5563', fontSize: '1.25rem', fontWeight: 'bold' }}>Create a New Account</h3>
