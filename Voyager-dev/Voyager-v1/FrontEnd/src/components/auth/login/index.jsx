@@ -125,7 +125,7 @@ const Login = () => {
                         >
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
-                        <p style={{ textAlign: 'center', fontSize: '0.875rem', fontWeight: 'bold', display: 'inline-block' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign up</Link></p>
+                        <p style={{ textAlign: 'center', fontSize: '0.875rem', fontWeight: 'bold', display: 'inline-block',marginTop:'10px' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign up</Link></p>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', marginTop:'10px' }}>
                             <div style={{ borderBottom: '2px solid #cbd5e0', marginBottom: '0.625rem', marginRight: '0.5rem', flex: '1' }}></div>
                             <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>OR</div>

@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { Button, Image, Text, Heading, Flex, Container, Box } from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom';
-import Header from 'components/header';
+import React from "react";
+import { Helmet } from "react-helmet";
+import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
+import "../../styles/index.css";
+import "../../styles/font.css";
+import { Link } from "react-router-dom";
+import Header from "components/header";
 import { doSignOut } from '../../components/firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 export default function AssistantsPage() {
-  const navigate = useNavigate();
-  const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    if (!showToast) {
-      setShowToast(true);
-      toast.success('Login successful!',{ autoClose: 1000,});
-    }
-  }, []);
 
+
+
+
+  
   const handleLogout = () => {
     doSignOut().then(() => {
-      navigate('/landingpage');
+      window.location.href = '/landingpage';
     });
   };
+
+
 
 
   return (
