@@ -13,7 +13,7 @@ export default function AssistantsPage() {
   useEffect(() => {
     if (!showToast) {
       setShowToast(true);
-      toast.success('Login successful!');
+      toast.success('Login successful!',{ autoClose: 1000,});
     }
   }, []);
 
