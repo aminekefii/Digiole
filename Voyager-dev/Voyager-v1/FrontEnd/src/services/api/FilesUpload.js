@@ -2,7 +2,9 @@ import React, { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import { FiUpload } from 'react-icons/fi';
 import { useDropzone } from 'react-dropzone';
-import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../../styles/Modal.css';
 
 function Dropzone({ className }) {
@@ -26,7 +28,6 @@ function Dropzone({ className }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: ['.pdf', '.doc', '.docx', 'image/*'], // Accepted files
-   // maxSize: 1024 * 1000,
     onDrop
   });
 
@@ -47,38 +48,43 @@ function Dropzone({ className }) {
     setRejected(files => files.filter(({ file }) => file.name !== name));
   };
 
-
-
-    const [file, setFile] = useState(null);
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-        
-        // Check if files exist
-        if (!files.length) {
-          console.log('No files to upload');
-          return;
-        }
-      
-        // Create FormData object
-        const formData = new FormData();
-      
-        // Append each file to FormData object
-        files.forEach(file => {
-          formData.append('file', file);
-        });
-      
-        // Send FormData to server
-        axios.post('http://localhost:3000/upload', formData)
-          .then(res => {
-            console.log(res.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      };
-      
-
+  const handleSubmit = async e => {
+    e.preventDefault();
+    
+    // Check if files exist
+    if (!files.length) {
+      console.log('No files to upload');
+      return;
+    }
+  
+    // Create FormData object
+    const formData = new FormData();
+  
+    // Append each file to FormData object
+    files.forEach(file => {
+      formData.append('file', file);
+    });
+  
+    // Send FormData to server
+    axios.post('http://localhost:3000/upload', formData)
+      .then(res => {
+        console.log(res.data);
+        // Display a toast notification for successful upload
+        toast.success  ('Uploaded successfully', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+      });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
 const [modal, setModal] = useState(false);
 
@@ -264,6 +270,7 @@ const [modal, setModal] = useState(false);
           </div>
         </div>
       )}
+       <ToastContainer />
     </>
   );
 }
