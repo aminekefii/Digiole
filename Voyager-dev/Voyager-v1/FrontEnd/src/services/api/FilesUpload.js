@@ -88,6 +88,28 @@ function Dropzone({ className }) {
 
 
   
+
+
+  const handleSubmitWithToast = async () => {
+    // Show "Uploading in progress" toast
+    const uploadToastId = toast.info('Uploading in progress', {
+      position: "top-right",
+      autoClose: false, // Do not auto close until upload status is known
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  
+    setTimeout(async () => {
+      await handleSubmit();
+      // Hide "Uploading in progress" toast once all files are uploaded
+      toast.dismiss(uploadToastId);
+    }, 100); // Delay execution by 100 milliseconds
+  };
+  
   const handleSubmit = async e => {
     e.preventDefault();
   
@@ -96,15 +118,16 @@ function Dropzone({ className }) {
       return;
     }
   
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
   
-    // Iterate over files and upload one at a time
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      formData.append('file', file);
+      // Iterate over files and upload one at a time
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        formData.append('file', file);
   
-      try {
         const response = await axios.post('http://localhost:3000/upload', formData);
+  
         console.log(response.data);
         toast.success('Uploaded successfully', {
           position: "top-right",
@@ -116,18 +139,15 @@ function Dropzone({ className }) {
           progress: undefined,
           theme: "light",
         });
-      } catch (error) {
-        console.error(error);
-        toast.error(error.message);
-      }
   
-      // Clear formData for next file
-      formData.delete('file');
+        // Clear formData for next file
+        formData.delete('file');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
     }
   };
-  
-
-
 
 
 
@@ -226,7 +246,7 @@ function Dropzone({ className }) {
                         cursor: 'pointer',
                         transition: 'background-color 0.2s, color 0.2s'                       
                       }}
-                      onClick={handleSubmit}
+                      onClick={handleSubmitWithToast}
                     >
                       Upload to Voyager
                     </button>
