@@ -82,7 +82,7 @@ const Register = () => {
 
     return (
         <div style={{ backgroundImage: "url('images/16.png')", backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-            <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: '', base: '20px' }}>
+            <Container maxW="1268px" w="100%" px="0px" mx="auto" mb="30px" p={{ md: '', base: '20px' }}>
                 <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: 'row', base: 'column' }}>
                     <Flex gap="12px" w={{ md: '10%', base: '100%' }} justifyContent="left" alignItems="center">
                         <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
