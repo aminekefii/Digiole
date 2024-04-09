@@ -23,8 +23,8 @@ const ChatContent = ({ messages }) => {
         {filteredMessages.map((message, index) => (
           <Flex
             key={index}
-            mt="12px"
-            gap="23px"
+            mt="20px"
+            gap="10px"
             w={{ md: '71%', base: '100%' }}
             flexDirection="column"
           >
@@ -37,7 +37,7 @@ const ChatContent = ({ messages }) => {
               <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'User'}</Heading>
             </Flex>
 
-            <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%">
+            <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%" mt="8px">
               {message.text}
               {message.role === 'assistant' && <TextToSpeech text={message.text} />}
             </Text>
