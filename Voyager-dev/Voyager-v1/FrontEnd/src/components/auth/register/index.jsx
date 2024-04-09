@@ -104,7 +104,7 @@ const Register = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' , float:'left'}}>Password</label>
+                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' , float:'left', marginTop:'10px'}}>Password</label>
                             <input
                                 type="password"
                                 id="password"
@@ -116,7 +116,7 @@ const Register = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="confirmPassword" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Confirm Password</label>
+                            <label htmlFor="confirmPassword" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left', marginTop:'10px'}}>Confirm Password</label>
                             <input
                                 type="password"
                                 id="confirmPassword"

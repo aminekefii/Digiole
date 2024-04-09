@@ -95,7 +95,7 @@ const Login = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Password</label>
+                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left' , marginTop:'10px'}}>Password</label>
                             <input
                                 type="password"
                                 id="password"
