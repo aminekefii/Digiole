@@ -83,7 +83,7 @@ const Login = () => {
                     </div>
                     <form onSubmit={onSubmit} style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
                         <div>
-                            <label htmlFor="email" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Email</label>
+                            <label htmlFor="email" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Email</label>
                             <input
                                 type="email"
                                 id="email"
@@ -95,7 +95,7 @@ const Login = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Password</label>
+                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Password</label>
                             <input
                                 type="password"
                                 id="password"
@@ -117,7 +117,7 @@ const Login = () => {
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
                     </form>
-                    <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#4b5563', fontWeight: 'bold', display: 'inline-block' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign up</Link></p>
+                    <p style={{ textAlign: 'center', fontSize: '0.875rem', fontWeight: 'bold', display: 'inline-block' }}>Don't have an account? <Link to={'/register'} style={{ color: '#4b5563', fontWeight: 'bold', textDecoration: 'none', transition: 'color 0.3s ease', marginLeft: '5px' }}>Sign up</Link></p>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', marginTop:'10px' }}>
                         <div style={{ borderBottom: '2px solid #cbd5e0', marginBottom: '0.625rem', marginRight: '0.5rem', flex: '1' }}></div>
                         <div style={{ fontSize: '0.875rem', fontWeight: 'bold' }}>OR</div>
