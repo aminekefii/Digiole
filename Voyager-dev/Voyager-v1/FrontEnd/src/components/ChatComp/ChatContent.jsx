@@ -30,7 +30,7 @@ const ChatContent = ({ messages }) => {
           >
             <Flex gap="4px" alignItems="center">
               {message.role === 'assistant' ? (
-                <Image src="images/img_voyager_icon.svg" h="17px" alignSelf="end" w="16px" />
+                <Image src="images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
               ) : (
                 <Image src="images/img_avatar.png" h="17px" alignSelf="end" w="16px" />
               )}
