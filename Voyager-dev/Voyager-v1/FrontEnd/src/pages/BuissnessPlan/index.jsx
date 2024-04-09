@@ -25,7 +25,7 @@ export default function Buissnessplan() {
 
   const handleLogout = () => {
     doSignOut().then(() => {
-      window.location.href = '/landingpage';
+      window.location.href = '/login';
     });
   };
 

@@ -18,7 +18,7 @@ export default function AssistantsPage() {
   
   const handleLogout = () => {
     doSignOut().then(() => {
-      window.location.href = '/landingpage';
+      window.location.href = '/login';
     });
   };
 
