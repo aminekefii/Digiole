@@ -79,7 +79,7 @@ const Register = () => {
                     </div>
                     <form onSubmit={onSubmit} style={{ marginTop: '1.25rem', marginBottom: '1.25rem' }}>
                         <div>
-                            <label htmlFor="email" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Email</label>
+                            <label htmlFor="email" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Email</label>
                             <input
                                 type="email"
                                 id="email"
@@ -91,7 +91,7 @@ const Register = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Password</label>
+                            <label htmlFor="password" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' , float:'left'}}>Password</label>
                             <input
                                 type="password"
                                 id="password"
@@ -103,7 +103,7 @@ const Register = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="confirmPassword" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' }}>Confirm Password</label>
+                            <label htmlFor="confirmPassword" style={{ color: '#4b5563', fontSize: '0.875rem', fontWeight: 'bold' ,float:'left'}}>Confirm Password</label>
                             <input
                                 type="password"
                                 id="confirmPassword"
