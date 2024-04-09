@@ -11,25 +11,21 @@ function Dropzone({ className }) {
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
 
-
-
-
-
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     const acceptedTypes = ['.pdf', '.doc', '.docx', '.jpeg', '.jpg', '.png'];
-  
+
     // Filter accepted files
     const filteredAcceptedFiles = acceptedFiles.filter(file => {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       return acceptedTypes.includes('.' + fileExtension);
     });
-  
+
     // Filter rejected files
     const filteredRejectedFiles = rejectedFiles.filter(file => {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       return !acceptedTypes.includes('.' + fileExtension);
     });
-  
+
     // Update state for accepted files
     if (filteredAcceptedFiles.length) {
       setFiles(previousFiles => [
@@ -39,7 +35,7 @@ function Dropzone({ className }) {
         )
       ]);
     }
-  
+
     // Update state for rejected files
     if (filteredRejectedFiles.length) {
       const newRejectedFiles = filteredRejectedFiles.map(file => ({
@@ -49,16 +45,6 @@ function Dropzone({ className }) {
       setRejected(previousFiles => [...previousFiles, ...newRejectedFiles]);
     }
   }, []);
-  
-
-
-
-
-
-
-
-
-
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: ['.pdf', '.doc', '.docx', 'image/*'],
@@ -84,13 +70,9 @@ function Dropzone({ className }) {
     setRejected(files => files.filter(({ file }) => file.name !== name));
   };
 
+  const handleSubmitWithToast = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
 
-
-
-  
-
-
-  const handleSubmitWithToast = async () => {
     // Show "Uploading in progress" toast
     const uploadToastId = toast.info('Uploading in progress', {
       position: "top-right",
@@ -102,32 +84,30 @@ function Dropzone({ className }) {
       progress: undefined,
       theme: "light",
     });
-  
+
     setTimeout(async () => {
-      await handleSubmit();
+      await handleSubmit(e); // Pass the event object to handleSubmit
       // Hide "Uploading in progress" toast once all files are uploaded
       toast.dismiss(uploadToastId);
     }, 100); // Delay execution by 100 milliseconds
   };
-  
-  const handleSubmit = async e => {
-    e.preventDefault();
-  
+
+  const handleSubmit = async (e) => {
     if (!files.length) {
       console.log('No files to upload');
       return;
     }
-  
+
     try {
       const formData = new FormData();
-  
+
       // Iterate over files and upload one at a time
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         formData.append('file', file);
-  
+
         const response = await axios.post('http://localhost:3000/upload', formData);
-  
+
         console.log(response.data);
         toast.success('Uploaded successfully', {
           position: "top-right",
@@ -139,7 +119,7 @@ function Dropzone({ className }) {
           progress: undefined,
           theme: "light",
         });
-  
+
         // Clear formData for next file
         formData.delete('file');
       }
@@ -148,14 +128,6 @@ function Dropzone({ className }) {
       toast.error(error.message);
     }
   };
-
-
-
-
-
-
-
-
 
   const [modal, setModal] = useState(false);
 
@@ -246,7 +218,7 @@ function Dropzone({ className }) {
                         cursor: 'pointer',
                         transition: 'background-color 0.2s, color 0.2s'                       
                       }}
-                      onClick={handleSubmitWithToast}
+                      onClick={handleSubmitWithToast} // Call handleSubmitWithToast instead of handleSubmit
                     >
                       Upload to Voyager
                     </button>
