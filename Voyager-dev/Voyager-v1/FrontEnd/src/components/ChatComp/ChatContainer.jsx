@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Flex, Box } from "@chakra-ui/react";
 import ChatContent from "./ChatContent";
@@ -9,6 +7,7 @@ const ChatContainer = () => {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [initialMessageSent, setInitialMessageSent] = useState(false); // Track if initial message has been sent
 
   const handleMessageSubmit = async () => {
     setLoading(true);
@@ -47,9 +46,12 @@ const ChatContainer = () => {
   };
 
   useEffect(() => {
-    // Send initial message when component mounts
-    sendInitialMessage();
-  }, []);
+    // Send initial message only if it hasn't been sent before
+    if (!initialMessageSent) {
+      sendInitialMessage();
+      setInitialMessageSent(true); // Update flag to indicate initial message has been sent
+    }
+  }, [initialMessageSent]); // Only re-run effect if initialMessageSent changes
 
   const sendInitialMessage = async () => {
     setLoading(true);

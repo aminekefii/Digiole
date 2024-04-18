@@ -1,5 +1,5 @@
 {
-  "assistantId": "asst_gzrGnKKQD3O9KFyZabmBCneM",
+  "assistantId": "asst_ZNKOT3LqAcXUQGiWyCfStsfl",
   "name": "Voyager",
   "instructions": "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
   "tools": [
@@ -12,7 +12,6 @@
   ],
   "model": "gpt-3.5-turbo-0125",
   "file_ids": [
-    "file-2jyQ6a1m1HoK2h0p0C7O4VCn",
-    "file-vXre88mAJqI2oMgt0nt7GQnG"
+    "file-gRN4EcN9a2nMs0VOgLpFCiUa"
   ]
 }
