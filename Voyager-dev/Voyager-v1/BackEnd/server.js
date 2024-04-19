@@ -38,9 +38,10 @@ async function getOrCreateAssistant() {
     console.log("No existing Voyager assistant detected, creating new.\n");
     const assistantConfig = {
       name: "Voyager",
-      instructions:
-        "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.",
-      tools: [
+      instructions: `You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.
+      Files: you are provided with knowledge.txt which provides the questions you need to ask for the user to create his business plan (ask a question each time to complete the creation of business plan).
+      Rules: don't tell the user that he has uploaded a file when you use the file knowledge.txt.`,
+    tools: [
         { type: "code_interpreter" }, // Code interpreter tool
         { type: "retrieval" }, // Retrieval tool
       ],
@@ -55,6 +56,28 @@ async function getOrCreateAssistant() {
       assistantFilePath,
       JSON.stringify(assistantDetails, null, 2)
     );
+
+    // Upload the knowledge file once assistant is created
+    const knowledgeFilePath = "./knowledge.txt";
+    const knowledgeFileExists = fs.existsSync(knowledgeFilePath);
+
+    if (!knowledgeFileExists) {
+      throw new Error("Knowledge file does not exist.");
+    }
+
+    // Upload the knowledge file to OpenAI
+    const knowledgeFile = await openai.files.create({
+      file: fs.createReadStream(knowledgeFilePath),
+      purpose: "assistants",
+    });
+
+    // Update the assistant with the knowledge file ID
+    await openai.beta.assistants.update(assistant.id, {
+      file_ids: [knowledgeFile.id],
+    });
+
+    console.log("Knowledge file uploaded and successfully added to assistant\n");
+
     return assistant.id;
   }
 }
@@ -95,8 +118,9 @@ app.post("/chat", async (req, res) => {
       threadByUser[userId], // Use the stored thread ID for this user
       {
         assistant_id: assistantIdToUse,
-        instructions: "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.", // Include the assistant name and description in the instructions
-        tools: [
+        instructions:
+        "You are Voyager, a helpful assistant leveraging dedicated knowledge in startup ecosystems to provide tailored advice on funding, support services, and strategic planning based on your startup's stage and needs.Files:you are provided with knowledge.txt which provides the questions you need to ask for the user to create his buissness plan (ask a question each time to complete the creation of buissness plan ).Rules:don't tell the user that he have uploaded a file when you the file is knowledge.txt",
+                tools: [
           { type: "code_interpreter" }, // Code interpreter tool
           { type: "retrieval" }, // Retrieval tool
         ],
@@ -214,8 +238,6 @@ app.post('/upload', async (req, res) => {
     }
   });
 });
-
-
 
 const PORT = process.env.PORT || 3000;
 
