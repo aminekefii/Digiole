@@ -12,7 +12,7 @@ function Dropzone({ className }) {
   const [rejected, setRejected] = useState([]);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    const acceptedTypes = ['.pdf', '.doc', '.docx', '.jpeg', '.jpg', '.png'];
+    const acceptedTypes = ['.pdf', '.doc', '.docx', '.jpeg', '.jpg', '.png', '.txt'];
 
     // Filter accepted files
     const filteredAcceptedFiles = acceptedFiles.filter(file => {
