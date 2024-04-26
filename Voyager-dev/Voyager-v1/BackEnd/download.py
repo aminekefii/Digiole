@@ -4,7 +4,7 @@ from colorama import Fore
 
 def main(api_key,thread_id):
     api_key=""
-    output_path = './uploads'
+    output_path = './uploads/buissnessplan.txt'
 
 
     def get_response(thread_id):
