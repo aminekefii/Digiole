@@ -94,7 +94,7 @@ async function getOrCreateAssistant() {
 }
 
 // File upload functionality
-const uploadFolder = path.join(__dirname, "./");
+const uploadFolder = path.join(__dirname, "./uploads");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -228,7 +228,7 @@ app.post("/chat", upload, async (req, res) => {
       let response = assistantResponse;
       const linkMatch = assistantResponse.match(linkRegex);
       if (linkMatch) {
-        response += ` Here's the generated file: ${linkMatch[0]}`;
+        response += ` Download your file <a href="${linkMatch[0]}">here</a>`;
       }
 
       // Send the response back to the front end
@@ -246,6 +246,91 @@ app.post("/chat", upload, async (req, res) => {
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+
+
+
+
+
+
+
+});
+
+// Function to process files
+const getResponse = async (threadId) => {
+  try {
+    const response = await openai.beta.threads.messages.list(threadId);
+    return response;
+  } catch (error) {
+    console.error('Error getting response:', error);
+    throw error;
+  }
+};
+
+const getFileIdsFromThread = (thread) => {
+  return thread.reduce((fileIds, message) => {
+    if (message.file_ids && message.file_ids.length > 0) {
+      fileIds.push(...message.file_ids);
+    }
+    return fileIds;
+  }, []);
+};
+
+const writeFile = async (fileId, count, outputPath) => {
+  try {
+    const fileData = await openai.files.content(fileId);
+    const fileContent = await fsPromises.readFile(fileData.url, 'utf8');
+    const separatorStart = `\n\n\n\nFILE # ${count + 1}\n\n\n\n`;
+    const separatorEnd = `\n\n\n\n${'#'.repeat(100)}\n\n\n\n`;
+
+    await fsPromises.appendFile(
+      outputPath,
+      separatorStart + fileContent + separatorEnd
+    );
+  } catch (error) {
+    console.error(`Error writing file #${count + 1}:`, error);
+    throw error;
+  }
+};
+
+const processFiles = async (threadId, outputPath) => {
+  try {
+    const threadResponse = await getResponse(threadId);
+    const fileIds = getFileIdsFromThread(threadResponse.data);
+    console.log('\nFILE IDS:', fileIds);
+    console.log('\nNUMBER OF FILE IDS:', fileIds.length);
+
+    for (let i = 0; i < fileIds.length; i++) {
+      console.log(`\nWriting file #${i + 1}...\n`);
+      await writeFile(fileIds[i], i, outputPath);
+      console.log(`File ${i + 1} written.\n`);
+    }
+
+    console.log('Done.');
+  } catch (error) {
+    console.error('Error processing files:', error);
+  }
+};
+// Assign myThread.id to threadId
+const threadId = myThread.id;
+
+// Output path
+const outputPath = "./uploads";
+
+// Route to process files
+app.post('/process-files', async (req, res) => {
+  try {
+    // Assign myThread.id to threadId
+    const { threadId } = req.body; 
+    
+    // Output path
+    const outputPath = "./uploads";
+
+    await processFiles(threadId, outputPath);
+    res.status(200).json({ message: 'Files processed successfully' });
+  } catch (error) {
+    console.error('Error processing files:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
