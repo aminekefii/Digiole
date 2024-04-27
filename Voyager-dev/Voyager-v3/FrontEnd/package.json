@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^1.6.8",
     "dompurify": "^3.1.0",
+    "dotenv": "^16.4.5",
     "firebase": "^10.10.0",
     "framer-motion": "^10.16.5",
     "next": "^14.1.4",
@@ -53,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }

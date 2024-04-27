@@ -25,3 +25,5 @@ npm i openai dotenv
 npm cache clean --force
 npm install react-icons
 npm install dotenv
+npm install react-app-rewired --save-dev
+
