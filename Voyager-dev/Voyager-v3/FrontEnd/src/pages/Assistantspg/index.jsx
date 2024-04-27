@@ -46,8 +46,11 @@ export default function AssistantsPage() {
             p={{ base: "20px", sm: "23px" }}
           >
             <Flex ml={{ md: "20px", base: "0px" }} w="18%" justifyContent="center" alignItems="center">
-            <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-                      <Image src="images/img_voyager.svg" h="12px" ml="10px"/>
+                      
+            <Link to="/landingpage">
+  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+</Link>
+<Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
               <Box h="23px" ml="20px" bg="blue_gray.100" w="1px" />
               <Text
                 color="gray.50"
