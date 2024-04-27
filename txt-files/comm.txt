@@ -24,3 +24,4 @@ npm install marked
 npm i openai dotenv
 npm cache clean --force
 npm install react-icons
+npm install dotenv

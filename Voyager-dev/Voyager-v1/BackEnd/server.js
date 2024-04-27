@@ -7,6 +7,11 @@ const fs = require("fs");
 const multer = require("multer");
 const { spawn } = require("child_process");
 
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 const app = express();
 
 // Enable CORS for your front-end
@@ -17,8 +22,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+
+
 const openai = new OpenAI({
-  apiKey: "",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const threadByUser = {}; // Store thread IDs by user
