@@ -20,11 +20,13 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
     backgroundColor="white"
    
     ml="10">
+       <VoiceRec handleNoteChange={handlePromptChange} />
     <InputGroup
        
       >
-        <InputLeftElement width="20%">
-          <VoiceRec handleNoteChange={handlePromptChange} />
+         
+        <InputLeftElement width="10px">
+        
         </InputLeftElement>
         <Input
           type="text"
@@ -32,28 +34,31 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
           onChange={(e) => setPrompt(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={`| Message Voyager...`}
-          pr={{ base: "20px", sm: 0 }}
+          pr={{ base: "0px", sm: "5px" }}
           h="50px"
           pt="5px"
-          ml="10px"
+          ml="5px"
           fontSize="15px"
+          maxWidth="calc(700px - 80px)"
+          width="700px"
+          
         />
-        <InputRightElement>
-          <Button
+        <InputRightElement>  
+        </InputRightElement>
+      </InputGroup>
+      <Button
             onClick={handleMessageSubmit}
             padding="0"
             bg="transparent"
             border="none"
             outline="none"
             cursor="pointer"
+            pl="10px"
           >
             <Center w="20px" h="20px">
               <Image src="images/img_save.svg" />
             </Center>
           </Button>
-        </InputRightElement>
-        
-      </InputGroup>
       <FileUpload 
      
       />

@@ -57,7 +57,7 @@ function VoiceRec({ handleNoteChange }) {
       width="100px"
       cursor="pointer"
       onClick={() => setIsListening(!isListening)}
-      mr="20px"
+      mr="5px"
     />
   
 
