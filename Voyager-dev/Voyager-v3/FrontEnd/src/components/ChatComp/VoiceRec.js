@@ -52,12 +52,14 @@ function VoiceRec({ handleNoteChange }) {
   return (
 
     <Image
-      src={isListening ? "images/img_component_19.svg" : "images/img_component_19.svg"}
+      src={isListening ? "images/micOn.svg" : "images/micOff.svg"}
       alt="Microphone"
       width="100px"
       cursor="pointer"
       onClick={() => setIsListening(!isListening)}
       mr="5px"
+      height="20px"
+      mt="15px"
     />
   
 
