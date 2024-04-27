@@ -45,13 +45,17 @@ export default function Buissnessplan() {
             alignSelf="stretch"
             justifyContent="space-between"
             alignItems="center"
-            gap="20px"
+            gap="15px"
             p={{ base: "20px", sm: "23px" }}
           >
-            <Flex ml={{ md: "50px", base: "0px" }} w="50%" justifyContent="" alignItems="">
-            <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-              <Box h="23px" ml="20px" bg="blue_gray.100"  />
-              <Text size="xl" color="gray.50" ml="5px">
+            <Flex ml={{ md: "50px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
+           
+            <Link to="/landingpage">
+  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+</Link>
+           
+                 <Box h="30px" ml="20px" bg="blue_gray.100"  />
+              <Text size="xl" color="gray.50" ml="3px">
                  | Business Plan
                 </Text>
               
