@@ -48,7 +48,7 @@ export default function Buissnessplan() {
             gap="15px"
             p={{ base: "20px", sm: "23px" }}
           >
-            <Flex ml={{ md: "50px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
+            <Flex ml={{ md: "20px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
            
             <Link to="/landingpage">
   <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
