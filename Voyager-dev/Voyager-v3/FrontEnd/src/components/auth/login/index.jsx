@@ -50,8 +50,10 @@ const Login = () => {
             <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: '', base: '20px' }}>
                 <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: 'row', base: 'column' }}>
                     <Flex gap="12px" w={{ md: '10%', base: '100%' }} justifyContent="left" alignItems="center">
-                        <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-                        <Image src="images/img_voyager.svg" h="12px" />
+                    <Link to="/landingpage">
+  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+</Link>
+<Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
                     </Flex>
 
                     <Flex alignItems="center" justifyContent="space-between" gap="50px">
