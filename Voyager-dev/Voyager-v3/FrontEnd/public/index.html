@@ -12,5 +12,33 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class="" id="root"></div>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+          // Check if the error message matches the script error message
+          if (message === 'Script error.') {
+              // Return true to indicate that the error has been handled
+              return true;
+          }
+          // For other errors, let them bubble up
+          return false;
+      };
+  </script>
+
+
+
+<script>
+  window.embeddedChatbotConfig = {
+  chatbotId: "iz-X4O8UUvGPY7VpFbgGj",
+  domain: "www.chatbase.co"
+  }
+  </script>
+  <script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="iz-X4O8UUvGPY7VpFbgGj"
+  domain="www.chatbase.co"
+  defer>
+  </script>
+
+
   </body>
 </html>
