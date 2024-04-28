@@ -64,7 +64,6 @@ export default function Buissnessplan() {
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
-              <Image src="images/img_bell.svg" h="24px" w="24px" />
               <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" />
               <Button 
                     size="sm"

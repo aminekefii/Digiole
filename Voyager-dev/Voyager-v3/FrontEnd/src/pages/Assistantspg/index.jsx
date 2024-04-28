@@ -47,22 +47,22 @@ export default function AssistantsPage() {
           >
             <Flex ml={{ md: "20px", base: "0px" }} w="18%" justifyContent="center" alignItems="center">
                       
-            <Link to="/landingpage">
+            <Link to="/landingpage">  
   <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
 </Link>
-<Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
+<Link to="/landingpage">  
+ <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
               <Box h="23px" ml="20px" bg="blue_gray.100" w="1px" />
               <Text
                 color="gray.50"
                 ml="12px"
-                letterSpacing="-0.18px"
+                letterSpacing= "-0.18px"
                 fontWeight={300}
               >
               | Entrepreneurs
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
-              <Image src="images/img_bell.svg" h="24px" w="24px" />
               <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" />
               <Button 
                     size="sm"
