@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './contexts/authContext';
-import { ProfilePic } from './firebase/firebase';
+import { ProfilePic, updateUserProfile } from './firebase/firebase'; // Import updateUserProfile function
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 
 function ProfilePicUpdate() {
@@ -29,24 +29,10 @@ function ProfilePicUpdate() {
     }
   };
 
-  const handleClick = () => {
-    ProfilePic(photo, currentUser, setLoading);
-  };
-
-  const handleSubmit = async () => {
-    if (!files.length) {
-      console.log('No files to upload');
-      return;
-    }
-
+  const handleClick = async () => {
     try {
-      const formData = new FormData();
-      formData.append('file', files[0]);
-
-      const response = await axios.post('', formData);
-
-      console.log(response.data);
-      toast.success('Uploaded successfully', {
+      await ProfilePic(photo, currentUser, setLoading);
+      toast.success('Profile picture updated successfully', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -56,6 +42,10 @@ function ProfilePicUpdate() {
         progress: undefined,
         theme: 'light'
       });
+      // Update the photoURL in the currentUser object
+      currentUser.photoURL = photoURL;
+      // Update the user profile in Firebase
+      await updateUserProfile(currentUser);
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -105,7 +95,7 @@ function ProfilePicUpdate() {
                   <div style={{ display: 'flex', gap: '1rem' }}>
 
                     <button
-                      type='submit'
+                      type='button'
                       onClick={handleClick}
                       disabled={loading || !photo}
                       style={{

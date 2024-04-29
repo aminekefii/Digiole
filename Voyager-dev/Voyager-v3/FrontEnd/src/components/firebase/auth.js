@@ -1,15 +1,6 @@
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification, updatePassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "./firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  sendEmailVerification,
-  updatePassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
@@ -45,4 +36,12 @@ export const doSendEmailVerification = () => {
   });
 };
 
-
+export const updateUserProfile = async (currentUser, photoURL) => {
+  try {
+    await updateProfile(currentUser, { photoURL });
+    alert("Profile updated successfully!");
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    alert("Error updating profile. Please try again.");
+  }
+};

@@ -32,8 +32,15 @@ export async function ProfilePic(file, currentUser, setLoading) {
   const snapshot = await uploadBytes(fileRef, file);
   const photoURL = await getDownloadURL(fileRef);
 
-  updateProfile(currentUser, {photoURL});
-  
-  setLoading(false);
-  alert("Uploaded file!");
+  // Check if currentUser is authenticated
+  if (currentUser && typeof currentUser.getIdToken === 'function') {
+    // currentUser is valid, update profile
+    await updateProfile(currentUser, { photoURL });
+    setLoading(false);
+    alert("Uploaded file!");
+  } else {
+    // currentUser is not valid or not authenticated
+    setLoading(false);
+    alert("User is not authenticated. Please sign in.");
+  }
 }
