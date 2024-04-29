@@ -45,7 +45,7 @@ useEffect(() => {
               {message.role === 'assistant' ? (
                 <Image src="images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
               ) : (
-                <Image src={photoURL} borderRadius="50%" h="43px" w="43px" />
+                <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
               )}
               <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'User'}</Heading>
             </Flex>
