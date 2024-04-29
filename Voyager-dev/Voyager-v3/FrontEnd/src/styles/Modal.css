@@ -1,13 +1,7 @@
 body.active-modal {
     overflow-y: hidden;
-}
+  }
 
-.btn-modal {
-    padding: 10px 20px;
-    display: block;
-    margin: 100px auto 0;
-    font-size: 18px;
-}
 
 .modal, .overlay {
     width: 100vw;
@@ -16,14 +10,21 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
- 
+    z-index: 9998;
 }
 
 .overlay {
-    background: rgba(49,49,49,0.8);
-}
-.modal-content {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(49, 49, 49, 0.8); /* Semi-transparent black */
+    z-index: 9998; /* Ensure it's below the modal */
+  }
+  
+  .modal-content {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -33,7 +34,8 @@ body.active-modal {
     border-radius: 3px;
     max-width: 900px;
     min-width: 300px;
-}
+    z-index: 9999; /* Ensure it's above the overlay */
+  }
 
 .close-modal {
     position: relative;

@@ -199,7 +199,7 @@ function ProfilePicUpdate() {
                         transition: 'background-color 0.2s, color 0.2s'                       
                       }}
                     >
-                      Upload to Voyager
+                      Update profile picture
                     </button>
                   </div>
 
