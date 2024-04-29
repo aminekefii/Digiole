@@ -7,6 +7,7 @@ const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
 const { spawn } = require("child_process");
+const helmet = require('helmet');
 
 dotenv.config();
 
@@ -19,6 +20,23 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://accounts.google.com/gsi/client"],
+      frameSrc: ["'self'", "https://accounts.google.com/gsi/"],
+      connectSrc: ["'self'", "https://accounts.google.com/gsi/"]
+      // Add other directives as needed
+    }
+  }
+}));
+
+
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

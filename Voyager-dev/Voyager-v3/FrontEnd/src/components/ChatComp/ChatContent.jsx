@@ -1,7 +1,9 @@
 import React from 'react';
 import { Flex, Image, Heading, Text, Box } from '@chakra-ui/react';
 import TextToSpeech from 'services/api/TextToSpeech';
-
+import { useState, useEffect, useContext } from 'react';
+import { auth } from '../firebase/firebase';
+import { AuthContext } from '../contexts/authContext';
 const ChatContent = ({ messages }) => {
   // Filter out the first user message ("Hello")
   const filteredMessages = messages.filter((message, index) => {
@@ -10,6 +12,17 @@ const ChatContent = ({ messages }) => {
     }
     return true;
   });
+
+  const { currentUser } = useContext(AuthContext);
+  const [photo, setPhoto] = useState(null);
+const [loading, setLoading] = useState(false);
+const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
+
+useEffect(() => {
+  if (currentUser?.photoURL) {
+    setPhotoURL(currentUser.photoURL);
+  }
+}, [currentUser])
 
   return (
     <Flex w="100%" height="50vh" overflowY="scroll">
@@ -32,7 +45,7 @@ const ChatContent = ({ messages }) => {
               {message.role === 'assistant' ? (
                 <Image src="images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
               ) : (
-                <Image src="images/img_avatar.png" h="17px" alignSelf="end" w="16px" />
+                <Image src={photoURL} borderRadius="50%" h="43px" w="43px" />
               )}
               <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'User'}</Heading>
             </Flex>
