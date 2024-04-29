@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
@@ -32,7 +32,7 @@ export async function ProfilePic(file, currentUser, setLoading) {
   const snapshot = await uploadBytes(fileRef, file);
   const photoURL = await getDownloadURL(fileRef);
 
-  //updateProfile(currentUser, {photoURL});
+  updateProfile(currentUser, {photoURL});
   
   setLoading(false);
   alert("Uploaded file!");
