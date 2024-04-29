@@ -18,6 +18,7 @@ import { doSignOut } from '../../components/firebase/auth';
 import { Link } from "react-router-dom";
 import ChatHistory from "components/ChatComp/ChatHistory";
 import ChatContainer from "components/ChatComp/ChatContainer";
+import ProfilePictue from 'components/ProfilePicUpdate';
 
 
 
@@ -64,7 +65,9 @@ export default function Buissnessplan() {
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
-              <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" />
+
+            <ProfilePictue></ProfilePictue>
+
               <Button 
                     size="sm"
                     variant="outline"

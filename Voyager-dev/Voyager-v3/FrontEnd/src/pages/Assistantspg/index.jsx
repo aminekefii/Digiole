@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toast from rea
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../../styles/Modal.css';
 import ProfilePicUpdate from 'components/ProfilePicUpdate';
+import ProfilePictue from 'components/ProfilePicUpdate';
 
 
 
@@ -74,7 +75,7 @@ export default function AssistantsPage() {
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
 
 
-<ProfilePicUpdate></ProfilePicUpdate>
+<ProfilePictue></ProfilePictue>
 
 
 

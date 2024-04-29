@@ -36,12 +36,3 @@ export const doSendEmailVerification = () => {
   });
 };
 
-export const updateUserProfile = async (currentUser, photoURL) => {
-  try {
-    await updateProfile(currentUser, { photoURL });
-    alert("Profile updated successfully!");
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    alert("Error updating profile. Please try again.");
-  }
-};
