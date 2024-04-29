@@ -8,11 +8,33 @@ import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../styles/Modal.css';
+import { useAuth } from './contexts/authContext';
 
 function ProfilePicUpdate() {
-  
+
+
+  const currentUser = useAuth();
+  const [photo, setPhoto] = useState(null);
+  const [photoURL, setPhotoURL] = useState("data:image/png;base64,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"
+);
+
+
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+
+
+
+
+
+
+
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
+
+
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     const acceptedTypes = [ '.jpeg', '.jpg', '.png'];
@@ -79,7 +101,7 @@ function ProfilePicUpdate() {
     // Show "Uploading in progress" toast
     const uploadToastId = toast.info('Uploading in progress', {
       position: "top-right",
-      autoClose: false, // Do not auto close until upload status is known
+      autoClose: false, 
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -144,9 +166,15 @@ function ProfilePicUpdate() {
   } else {
     document.body.classList.remove('active-modal');
   }
+
+
+
+
+
+
   return (
     <>
-      <Image src="images/img_avatar.png" borderRadius="50%" h="43px" w="43px" onClick={toggleModal}/>
+      <Image src={photoURL}  borderRadius="50%" h="43px" w="43px" onClick={toggleModal}/>
       {modal && (
         <div className="modal" style={{ alignItems: 'center', justifyContent: 'center', marginTop: '250px' }}>
           <div onClick={toggleModal} className="overlay"></div>

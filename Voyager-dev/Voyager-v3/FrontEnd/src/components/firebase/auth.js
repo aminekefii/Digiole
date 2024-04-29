@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import {
   createUserWithEmailAndPassword,
@@ -7,6 +8,7 @@ import {
   updatePassword,
   signInWithPopup,
   GoogleAuthProvider,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
@@ -42,3 +44,5 @@ export const doSendEmailVerification = () => {
     url: `${window.location.origin}/landingpage`,
   });
 };
+
+
