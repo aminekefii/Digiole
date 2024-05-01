@@ -35,5 +35,4 @@ export async function ProfilePic(file, currentUser, setLoading) {
   updateProfile(currentUser, {photoURL});
   
   setLoading(false);
-  alert("Uploaded file!");
 }
