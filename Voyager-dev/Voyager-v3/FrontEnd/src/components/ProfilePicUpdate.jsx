@@ -27,26 +27,37 @@ function ProfilePicUpdate() {
 
   const handleClick = async () => {
     try {
-      setPhotoURL("path_to_default_image"); // Set default image URL immediately
-      await ProfilePic(photo, auth.currentUser, setLoading);
-      setPhotoURL(auth.currentUser.photoURL);
-      toast.success('Profile picture updated successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light'
-      });
+        toast.info('Upload in progress...', {
+            position: 'top-right',
+            autoClose: false, // Do not auto-close initially
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light'
+        });
+
+        await ProfilePic(photo, auth.currentUser, setLoading); // Call ProfilePic function here
+
+        const photoURL = await auth.currentUser.photoURL; // Retrieve the updated photo URL
+        setPhotoURL(photoURL);
+
+        toast.success('Profile picture updated successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light'
+        });
     } catch (error) {
-      console.error(error);
-      toast.error(error.message);
-      // Reset photoURL back to the default image URL on error
-      setPhotoURL("path_to_default_image");
+        console.error(error);
+        toast.error(error.message);
     }
-  };
+};
   
   useEffect(() => {
     if (currentUser?.photoURL) {
