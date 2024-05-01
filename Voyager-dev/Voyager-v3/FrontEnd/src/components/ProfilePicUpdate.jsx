@@ -24,10 +24,9 @@ function ProfilePicUpdate() {
       setFiles([e.target.files[0]]);
     }
   };
-
   const handleClick = async () => {
     try {
-        toast.info('Upload in progress...', {
+        const uploadToast = toast.info('Upload in progress...', {
             position: 'top-right',
             autoClose: false, // Do not auto-close initially
             hideProgressBar: false,
@@ -38,7 +37,14 @@ function ProfilePicUpdate() {
             theme: 'light'
         });
 
-        await ProfilePic(photo, auth.currentUser, setLoading); // Call ProfilePic function here
+        const updateProgress = (progress) => {
+            toast.update(uploadToast, {
+                render: `Upload in progress... ${Math.round(progress * 100)}%`,
+                autoClose: false // Do not auto-close while uploading
+            });
+        };
+
+        await ProfilePic(photo, auth.currentUser, setLoading, updateProgress); // Pass updateProgress function
 
         const photoURL = await auth.currentUser.photoURL; // Retrieve the updated photo URL
         setPhotoURL(photoURL);
@@ -53,11 +59,15 @@ function ProfilePicUpdate() {
             progress: undefined,
             theme: 'light'
         });
+
+       
+        toast.dismiss(uploadToast);
     } catch (error) {
         console.error(error);
         toast.error(error.message);
     }
 };
+
   
   useEffect(() => {
     if (currentUser?.photoURL) {
