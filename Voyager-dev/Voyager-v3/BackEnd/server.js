@@ -129,20 +129,28 @@ var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com"
+  storageBucket: "gs://voyager-4d279.appspot.com"
 });
 
-// Middleware to verify Firebase ID token
+const db = admin.firestore();
+
 const verifyToken = async (req, res, next) => {
-  const idToken = req.headers.authorization;
+  const authHeader = req.headers.authorization || '';
+  const match = authHeader.match(/^Bearer (.+)$/); // Regex to extract token
+
+  if (!match) {
+      return res.status(401).json({ error: "Unauthorized: No token provided" });
+  }
+
+  const idToken = match[1];
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken;
-    next();
+      const decodedToken = await admin.auth().verifyIdToken(idToken);
+      req.user = decodedToken;
+      next();
   } catch (error) {
-    console.error("Error verifying ID token:", error);
-    return res.status(403).json({ error: "Unauthorized" });
+      console.error("Error verifying ID token:", error);
+      res.status(403).json({ error: "Unauthorized: Invalid token" });
   }
 };
 
@@ -154,10 +162,10 @@ const verifyToken = async (req, res, next) => {
 
 
 
-// Enhance the existing chat endpoint to handle file retrieval and download
-app.post("/chat", async (req, res) => {
-  const userId = req.body.userId; // You should include the user ID in the request
 
+// Enhance the existing chat endpoint to handle file retrieval and download
+app.post("/chat", verifyToken, async (req, res) => {
+  const userId = req.user.uid;
   // Create a new thread if it's the user's first message
   if (!threadByUser[userId]) {
     try {
@@ -169,12 +177,44 @@ app.post("/chat", async (req, res) => {
       const threadDetails = { threadId: myThread.id };
       const threadFilePath = "./thread_details.json";
       await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
+
+/* Save the message to Firestore
+const threadRef = db.collection('threads').doc(threadId);
+await threadRef.update({
+  messages: admin.firestore.FieldValue.arrayUnion(myThreadMessage)
+});
+*/
+
+      
     } catch (error) {
       console.error("Error creating thread:", error);
       res.status(500).json({ error: "Internal server error" });
       return;
     }
   }
+
+
+
+// Function to upload thread details JSON to Firebase Storage
+const uploadThreadDetailsToStorage = async () => {
+  try {
+    const filePath = "./thread_details.json"; // Path to your thread details JSON file
+    const bucket = admin.storage().bucket();
+
+    // Upload the file to Firebase Storage
+    await bucket.upload(filePath, {
+      destination: "thread_details.json" // Destination path in Firebase Storage
+    });
+
+    console.log("Thread details JSON uploaded to Firebase Storage successfully.");
+  } catch (error) {
+    console.error("Error uploading thread details JSON:", error);
+  }
+};
+
+// Call the function to upload thread details JSON to Firebase Storage
+uploadThreadDetailsToStorage();
+
 
 
   const userMessage = req.body.message;

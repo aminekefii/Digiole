@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; // Import useContext
 import { Flex, Box } from "@chakra-ui/react";
 import ChatContent from "./ChatContent";
 import ChatInputGroup from "./ChatInput";
 import { AuthContext } from '../contexts/authContext/index';
-import { auth } from '../firebase/firebase'; // Import auth from firebase
+import { auth } from '../firebase/firebase';
 
 const ChatContainer = () => {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [initialMessageSent, setInitialMessageSent] = useState(false); // Track if initial message has been sent
+  const [initialMessageSent, setInitialMessageSent] = useState(false);
+
+  // Access currentUser using useContext
+  const { currentUser } = useContext(AuthContext);
 
   const handleMessageSubmit = async () => {
     setLoading(true);
@@ -48,43 +51,41 @@ const ChatContainer = () => {
   };
 
   useEffect(() => {
-    // Send initial message only if it hasn't been sent before
     if (!initialMessageSent) {
       sendInitialMessage();
-      setInitialMessageSent(true); // Update flag to indicate initial message has been sent
+      setInitialMessageSent(true);
     }
-  }, [initialMessageSent]); // Only re-run effect if initialMessageSent changes
+  }, [initialMessageSent]);
 
   const sendInitialMessage = async () => {
     setLoading(true);
     const initialMessage = "Hello";
-  
+
     try {
-      const user = auth.currentUser;
-      const token = user && (await user.getIdToken());
-  
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId: 'your_user_id', message: initialMessage }),
-      };
-  
-      const response = await fetch('http://localhost:3000/chat', requestOptions);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setMessages([{ text: initialMessage, role: 'user' }, { text: data.response, role: 'assistant' }]);
+        const token = currentUser && await currentUser.getIdToken(true); // Ensure token is refreshed
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, // Ensure this is correctly formatted
+            },
+            body: JSON.stringify({ userId: currentUser.uid, message: initialMessage }),
+        };
+
+        const response = await fetch('http://localhost:3000/chat', requestOptions);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMessages([{ text: initialMessage, role: 'user' }, { text: data.response, role: 'assistant' }]);
     } catch (error) {
-      console.error('Error:', error);
+        console.error('Error:', error);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
-  
+};
+
 
   return (
     <Flex
