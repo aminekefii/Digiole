@@ -95,7 +95,9 @@ async function getOrCreateAssistant() {
       What is the expected impact of your one-year goals?
       What are your one-year goals for development?
       What are your five-year goals?
-      5-ask each time a question and wait for the user response before passing the next question.`,
+      5-ask each time a question and wait for the user response before passing the next question.
+6-if the user uploaded a file before you ask all the questions try to find answers for these questions in the provided files 
+7-if you find answer for all the questions ask again the user if he have other files to add or any information.`,
       tools: [
         { type: "code_interpreter" }, // Code interpreter tool
         { type: "retrieval" }, // Retrieval tool
@@ -116,25 +118,9 @@ async function getOrCreateAssistant() {
   }
 }
 
-// File upload functionality
-const uploadFolder = path.join(__dirname, "./uploads");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadFolder); // Specify the destination folder
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 1024 * 1024 * 10 }, // 10MB limit
-}).single("file");
 
 // Enhance the existing chat endpoint to handle file retrieval and download
-app.post("/chat", upload, async (req, res) => {
+app.post("/chat", async (req, res) => {
   const userId = req.body.userId; // You should include the user ID in the request
 
   // Create a new thread if it's the user's first message
@@ -213,6 +199,8 @@ app.post("/chat", upload, async (req, res) => {
         What are your one-year goals for development?
         What are your five-year goals?
         5-ask each time a question and wait for the user response before passing the next question.
+  6-if the user uploaded a file before you ask all the questions try to find answers for these questions in the provided files 
+  7-if you find answer for all the questions ask again the user if he have other files to add or any information.
         `,
         tools: [
           { type: "code_interpreter" }, // Code interpreter tool
@@ -278,6 +266,83 @@ app.post("/chat", upload, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
+
+
+
+// File upload functionality
+const uploadFolder = path.join(__dirname, './');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, uploadFolder); 
+  },
+  filename: function(req, file, cb) {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 1024 * 1024 * 10 }, // 10MB limit
+}).single('file');
+
+
+app.post('/upload', async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      return res.status(500).json({ error: 'Failed to upload file' });
+    }
+
+    try {
+      const fileName = req.file.filename;
+      
+      // Load assistant details from file
+      const assistantFilePath = "./voyager_assistant.json";
+      const assistantData = await fsPromises.readFile(assistantFilePath, "utf8");
+      const assistantDetails = JSON.parse(assistantData);
+
+      // Upload the file to OpenAI
+      const file = await openai.files.create({
+        file: fs.createReadStream(fileName),
+        purpose: "assistants",
+      });
+
+      // Retrieve existing file IDs from assistantDetails or initialize to an empty array
+      let existingFileIds = assistantDetails.file_ids || [];
+
+      // Update the assistant with the new file ID
+      await openai.beta.assistants.update(assistantDetails.assistantId, {
+        file_ids: [...existingFileIds, file.id],
+      });
+
+      // Update local assistantDetails and save to assistant.json
+      assistantDetails.file_ids = [...existingFileIds, file.id];
+      await fsPromises.writeFile(
+        assistantFilePath,
+        JSON.stringify(assistantDetails, null, 2)
+      );
+
+      console.log("File uploaded and successfully added to assistant\n");
+
+      // Send the file ID back to the frontend
+      res.status(200).json({ fileId: file.id });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to upload file' });
+    }
+  });
+});
+
+
+
+
+
+
+
+
 
 // Route to process files using Python script
 app.post("/process-files", async (req, res) => {

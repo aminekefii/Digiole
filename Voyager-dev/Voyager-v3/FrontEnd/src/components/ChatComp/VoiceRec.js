@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@chakra-ui/react'; // Import Button from Chakra UI
 import { InputLeftElement, Image } from "@chakra-ui/react";
 
 const SpeechRecognition =
