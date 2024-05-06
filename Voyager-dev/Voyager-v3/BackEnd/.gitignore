@@ -23,3 +23,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+thread_details.json
+voyager_assistant.json
+voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json

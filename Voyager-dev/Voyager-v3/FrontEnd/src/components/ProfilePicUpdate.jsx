@@ -10,8 +10,8 @@ import { auth } from './firebase/firebase';
 import { AuthContext } from './contexts/authContext/index';
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 function ProfilePicUpdate() {
-    const { currentUser } = useContext(AuthContext);
-      const [photo, setPhoto] = useState(null);
+  const { currentUser } = useContext(AuthContext);
+  const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
 

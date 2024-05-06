@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Flex, Box } from "@chakra-ui/react";
 import ChatContent from "./ChatContent";
 import ChatInputGroup from "./ChatInput";
+import { AuthContext } from '../contexts/authContext/index';
+import { auth } from '../firebase/firebase'; // Import auth from firebase
 
 const ChatContainer = () => {
   const [prompt, setPrompt] = useState("");
@@ -56,13 +58,20 @@ const ChatContainer = () => {
   const sendInitialMessage = async () => {
     setLoading(true);
     const initialMessage = "Hello";
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: 'your_user_id', message: initialMessage }),
-    };
-
+  
     try {
+      const user = auth.currentUser;
+      const token = user && (await user.getIdToken());
+  
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId: 'your_user_id', message: initialMessage }),
+      };
+  
       const response = await fetch('http://localhost:3000/chat', requestOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -75,6 +84,7 @@ const ChatContainer = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <Flex

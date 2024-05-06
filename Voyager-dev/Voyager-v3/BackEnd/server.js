@@ -119,6 +119,41 @@ async function getOrCreateAssistant() {
 }
 
 
+
+
+// Import Firebase admin SDK to verify Firebase ID tokens
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com"
+});
+
+// Middleware to verify Firebase ID token
+const verifyToken = async (req, res, next) => {
+  const idToken = req.headers.authorization;
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    req.user = decodedToken;
+    next();
+  } catch (error) {
+    console.error("Error verifying ID token:", error);
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+};
+
+
+
+
+
+
+
+
+
 // Enhance the existing chat endpoint to handle file retrieval and download
 app.post("/chat", async (req, res) => {
   const userId = req.body.userId; // You should include the user ID in the request
