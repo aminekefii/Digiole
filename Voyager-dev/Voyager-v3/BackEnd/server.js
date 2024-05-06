@@ -216,7 +216,6 @@ const uploadThreadDetailsToStorage = async () => {
 uploadThreadDetailsToStorage();
 
 
-
   const userMessage = req.body.message;
 
   try {

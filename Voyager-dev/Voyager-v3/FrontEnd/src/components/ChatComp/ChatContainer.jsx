@@ -16,15 +16,20 @@ const ChatContainer = () => {
 
   const handleMessageSubmit = async () => {
     setLoading(true);
-
-    const userMessage = { text: prompt, role: 'user' };
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: 'your_user_id', message: prompt }),
-    };
-
+  
     try {
+      const token = await currentUser.getIdToken(true); // Ensure token is refreshed
+  
+      const userMessage = { text: prompt, role: 'user' };
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId: currentUser.uid, message: prompt }),
+      };
+  
       const response = await fetch('http://localhost:3000/chat', requestOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -38,6 +43,7 @@ const ChatContainer = () => {
       setPrompt("");
     }
   };
+  
 
   const handlePromptChange = (note) => {
     setPrompt(note);
