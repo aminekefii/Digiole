@@ -18,12 +18,13 @@ const app = express();
 var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com",
   storageBucket: "gs://voyager-4d279.appspot.com"
 });
 
 
 
-// Enable CORS for your front-end
+// Enable CORS 
 const corsOptions = {
   origin: "http://localhost:3001",
 };
@@ -40,7 +41,7 @@ app.use(helmet({
       scriptSrc: ["'self'", "https://accounts.google.com/gsi/client"],
       frameSrc: ["'self'", "https://accounts.google.com/gsi/"],
       connectSrc: ["'self'", "https://accounts.google.com/gsi/"]
-      // Add other directives as needed
+     
     }
   }
 }));
@@ -134,13 +135,13 @@ async function getOrCreateAssistant() {
 
 // Authentication and Firebase token verification middleware
 const verifyToken = async (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]; // Get token from header
+  const token = req.headers.authorization?.split(' ')[1]; // Get token 
   if (!token) {
     return res.status(401).json({ error: "Unauthorized: No token provided" });
   }
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
-    req.user = decodedToken; // Attach user information to request object
+    req.user = decodedToken; 
     next();
   } catch (error) {
     console.error("Error verifying ID token:", error);
@@ -218,7 +219,7 @@ app.post("/chat", verifyToken, async (req, res) => {
 
       // Save the new thread ID and upload details to Storage
       //await saveThreadID(myThread.id, userId); // Assumes this function correctly interacts with Firestore
-      await uploadThreadDetailsToStorage(userId, myThread.id); // Upload thread details to Firebase Storage
+     // await uploadThreadDetailsToStorage(userId, myThread.id); // Upload thread details to Firebase Storage
 
     } catch (error) {
       console.error("Error handling thread creation:", error);

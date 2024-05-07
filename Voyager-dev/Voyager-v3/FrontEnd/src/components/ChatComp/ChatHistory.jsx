@@ -29,10 +29,27 @@ const ChatHistory = () => {
           Explore other assistants
         </Button>
       </Box>
+    <Box>
+      <Button
+         as={Link}
+         to=""
+          size="2xl"
+          variant="outline"
+          colorScheme="indigo_900"
+          h="30px"
+          gap="35px"
+          w="150px"
+          borderRadius="8px"
+          px={{ base: "20px", sm: "" }}
+        >
+          New chat
+        </Button>
+      </Box>
       <Flex gap="9px" alignItems="center">
+     
         <Image src="images/img_settings_gray_700_01.svg" h="24px" w="24px" />
         <Text color="gray.700_01" letterSpacing="-0.05px" alignSelf="start">
-          New Business Plan (name..)
+          New Business Plan 
         </Text>
       </Flex>
     </Flex>
