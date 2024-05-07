@@ -76,7 +76,7 @@ const ChatContainer = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`, // Ensure this is correctly formatted
             },
-            body: JSON.stringify({ userId: currentUser.uid, message: initialMessage }),
+            body: JSON.stringify({ user: currentUser, message: initialMessage }), // Send currentUser object instead of just uid
         };
 
         const response = await fetch('http://localhost:3000/chat', requestOptions);
@@ -91,6 +91,7 @@ const ChatContainer = () => {
         setLoading(false);
     }
 };
+
 
 
   return (
