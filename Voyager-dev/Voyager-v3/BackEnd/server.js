@@ -159,6 +159,35 @@ const verifyToken = async (req, res, next) => {
 
 
 
+const threadFilePath = "./thread_details.json";
+
+const lockfile = require('proper-lockfile');
+
+async function saveThreadID(newThreadID) {
+    try {
+        await lockfile.lock(threadFilePath);
+        let threadDetails = { threadIds: [] };
+
+        try {
+            const data = await fsPromises.readFile(threadFilePath, "utf8");
+            threadDetails = JSON.parse(data);
+        } catch (error) {
+            console.error("Error reading file:", error);
+        }
+
+        threadDetails.threadIds.push(newThreadID);
+        await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
+        console.log("Thread ID saved:", newThreadID);
+    } catch (error) {
+        console.error("Failed to save thread ID:", error);
+    } finally {
+        await lockfile.unlock(threadFilePath);
+    }
+}
+
+
+
+
 
 
 
@@ -173,10 +202,18 @@ app.post("/chat", verifyToken, async (req, res) => {
       console.log("New thread created with ID: ", myThread.id, "\n");
       threadByUser[userId] = myThread.id; // Store the thread ID for this user
 
-      // Save the thread details to a JSON file
+
+
+
+      await saveThreadID(myThread.id);
+
+
+
+
+      /*// Save the thread details to a JSON file
       const threadDetails = { threadId: myThread.id };
       const threadFilePath = "./thread_details.json";
-      await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
+      await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));*/
 
 /* Save the message to Firestore
 const threadRef = db.collection('threads').doc(threadId);
