@@ -53,8 +53,38 @@ function GetAssisant() {
         <div className="modal" style={{ alignItems: 'center', justifyContent: 'center', marginTop: '250px' }}>
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <main style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-              
+            <main style={{ width: '100%', justifyContent: 'center', alignItems: 'center', marginTop:'20px' }}>
+            <Button
+                //as={Link}
+                //to="/buissnessplan"
+                  size="sm"
+                  colorScheme="lime_200"
+                  rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
+                  mb="13px"
+                  fontWeight={600}
+                  gap="8px"
+                  minW="161px"
+                  borderRadius="8px"
+                  onClick={toggleModal}
+                >
+                  New chat
+                </Button>
+                <Button
+                //as={Link}
+                //to="/buissnessplan"
+                  size="sm"
+                  colorScheme="lime_200"
+                  rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
+                  mb="13px"
+                  fontWeight={600}
+                  gap="8px"
+                  minW="161px"
+                  borderRadius="8px"
+                  onClick={toggleModal}
+                  ml="20px"
+                >
+                  Chat History
+                </Button>
             </main>
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
