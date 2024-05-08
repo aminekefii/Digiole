@@ -2,26 +2,38 @@ const dotenv = require('dotenv');
 const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
+const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
-const fs = require("fs");
 const multer = require("multer");
 const { spawn } = require("child_process");
 const helmet = require('helmet');
+const admin = require("firebase-admin");
+const { uploadThreadDetailsToStorage } = require('./firebaseUtils');
 
 dotenv.config();
-
 const app = express();
 
-// Enable CORS for your front-end
+///////////////////////////////////////////////////////////////////////////////////////
+
+// Initialize Firebase Admin SDK
+var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com",
+  storageBucket: "gs://voyager-4d279.appspot.com"
+});
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+// Enable CORS 
 const corsOptions = {
   origin: "http://localhost:3001",
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-
 
 app.use(helmet({
   contentSecurityPolicy: {
@@ -30,13 +42,13 @@ app.use(helmet({
       scriptSrc: ["'self'", "https://accounts.google.com/gsi/client"],
       frameSrc: ["'self'", "https://accounts.google.com/gsi/"],
       connectSrc: ["'self'", "https://accounts.google.com/gsi/"]
-      // Add other directives as needed
+     
     }
   }
 }));
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -44,6 +56,10 @@ const openai = new OpenAI({
 
 
 const threadByUser = {}; // Store thread IDs by user
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
 
 async function getOrCreateAssistant() {
   const assistantFilePath = "./voyager_assistant.json";
@@ -108,6 +124,8 @@ async function getOrCreateAssistant() {
     const assistant = await openai.beta.assistants.create(assistantConfig);
     const assistantDetails = { assistantId: assistant.id, ...assistantConfig };
 
+///////////////////////////////////////////////////////////////////////////////////////
+
     // Save the Voyager assistant details to voyager_assistant.json
     await fsPromises.writeFile(
       assistantFilePath,
@@ -119,63 +137,104 @@ async function getOrCreateAssistant() {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////
 
 
-// Import Firebase admin SDK to verify Firebase ID tokens
 
-var admin = require("firebase-admin");
-
-var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com"
-});
-
-// Middleware to verify Firebase ID token
+// Authentication and Firebase token verification middleware
 const verifyToken = async (req, res, next) => {
-  const idToken = req.headers.authorization;
-
+  const token = req.headers.authorization?.split(' ')[1]; // Get token 
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized: No token provided" });
+  }
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken;
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    req.user = decodedToken; 
     next();
   } catch (error) {
     console.error("Error verifying ID token:", error);
-    return res.status(403).json({ error: "Unauthorized" });
+    res.status(403).json({ error: "Unauthorized: Invalid token" });
   }
 };
 
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+const threadFilePath = "./thread_details.json";
+
+const lockfile = require('proper-lockfile');
+
+async function saveThreadID(newThreadID) {
+    try {
+        await lockfile.lock(threadFilePath);
+        let threadDetails = { threadIds: [] };
+
+        try {
+            const data = await fsPromises.readFile(threadFilePath, "utf8");
+            threadDetails = JSON.parse(data);
+        } catch (error) {
+            console.error("Error reading file:", error);
+        }
+
+        threadDetails.threadIds.push(newThreadID);
+        await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
+        console.log("Thread ID saved:", newThreadID);
+    } catch (error) {
+        console.error("Failed to save thread ID:", error);
+    } finally {
+        await lockfile.unlock(threadFilePath);
+    }
+}
+
+/*
+async function saveThreadID(newThreadID, userId) {
+  try {
+      // Create a reference to the Firestore collection where you want to save thread details
+      const userThreadsRef = db.collection('user_threads').doc(userId);
+
+      // Use Firestore transactions for atomic updates
+      await db.runTransaction(async (transaction) => {
+          const doc = await transaction.get(userThreadsRef);
+          let threadDetails = doc.exists ? doc.data() : { threads: {} };
+
+          // Save the new thread ID
+          threadDetails.threads[newThreadID] = true;
+
+          // Write the updated thread details back to Firestore
+          transaction.set(userThreadsRef, threadDetails);
+      });
+
+      console.log("Thread ID saved:", newThreadID);
+  } catch (error) {
+      console.error("Failed to save thread ID:", error);
+  }
+}*/
 
 
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////
 
 // Enhance the existing chat endpoint to handle file retrieval and download
-app.post("/chat", async (req, res) => {
-  const userId = req.body.userId; // You should include the user ID in the request
-
-  // Create a new thread if it's the user's first message
+app.post("/chat", verifyToken, async (req, res) => {
+  const userId = req.user.uid;
   if (!threadByUser[userId]) {
     try {
       const myThread = await openai.beta.threads.create();
-      console.log("New thread created with ID: ", myThread.id, "\n");
-      threadByUser[userId] = myThread.id; // Store the thread ID for this user
+      console.log("New thread created with ID:", myThread.id);
+      threadByUser[userId] = myThread.id;
 
-      // Save the thread details to a JSON file
-      const threadDetails = { threadId: myThread.id };
-      const threadFilePath = "./thread_details.json";
-      await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
+      // Save the new thread ID and upload details to Storage
+      //await saveThreadID(myThread.id); // Save the thread ID
+
+      // Save the chat to Firebase
+      const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(myThread.id);
+      await chatRef.set({ messages: [] }); // Initialize messages array
+
     } catch (error) {
-      console.error("Error creating thread:", error);
-      res.status(500).json({ error: "Internal server error" });
-      return;
+      console.error("Error handling thread creation:", error);
+      return res.status(500).json({ error: "Internal server error" });
     }
   }
-
 
   const userMessage = req.body.message;
 
@@ -294,6 +353,15 @@ app.post("/chat", async (req, res) => {
 
       console.log("User: ", myThreadMessage.content[0].text.value);
       console.log("Assistant: ", response);
+
+      // Save the user and assistant messages to Firebase
+      const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
+      await chatRef.update({
+        messages: admin.firestore.FieldValue.arrayUnion(
+          { role: "user", content: myThreadMessage.content[0].text.value },
+          { role: "assistant", content: response }
+        ),
+      });
     };
     waitForAssistantMessage();
   } catch (error) {
@@ -305,6 +373,72 @@ app.post("/chat", async (req, res) => {
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////
+
+// GET route for fetching chat history
+app.get('/chatHistory/:uid/:threadId', async (req, res) => {
+  try {
+    const { uid, threadId } = req.params;
+
+    // Retrieve the chat history for the specified user ID and thread ID from Firebase
+    const chatRef = admin.firestore().collection('chat').doc(uid).collection('threads').doc(threadId);
+    const chatData = await chatRef.get();
+
+    if (!chatData.exists) {
+      return res.status(404).json({ error: 'Chat history not found' });
+    }
+
+    const chatHistory = chatData.data().messages;
+
+    res.json({ chatHistory });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST route for updating Firebase and sending data to OpenAI
+app.post('/updateAndGenerate/:uid/:threadId', async (req, res) => {
+  try {
+    const { uid, threadId } = req.params;
+    const { messages } = req.body;
+
+    // Update Firebase with new messages for the specified user ID and thread ID
+    const chatRef = admin.firestore().collection('chat').doc(uid).collection('threads').doc(threadId);
+    await chatRef.update({
+      messages: admin.firestore.FieldValue.arrayUnion(...messages), // Assuming messages is an array
+    });
+
+    // Send chat history to OpenAI for response generation
+   /* const result = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages, // Send only the user messages to OpenAI
+      temperature: 1,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });*/
+
+    // Store the OpenAI response messages into Firebase
+    const openAIResponse = result.choices.map((choice) => choice.message);
+    await chatRef.update({
+      messages: admin.firestore.FieldValue.arrayUnion(...openAIResponse),
+    });
+
+    // Retrieve the updated chat history from Firebase
+    const updatedData = await chatRef.get();
+    const updatedChatHistory = updatedData.data().messages;
+
+    res.json({ updatedChatHistory });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 // File upload functionality
 const uploadFolder = path.join(__dirname, './');
@@ -377,7 +511,7 @@ app.post('/upload', async (req, res) => {
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////
 
 // Route to process files using Python script
 app.post("/process-files", async (req, res) => {
@@ -419,45 +553,7 @@ app.post("/process-files", async (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-app.get("/threads", verifyToken, async (req, res) => {
-  const userId = req.user.uid; // Extract user ID from decoded token
-  
-  try {
-    // Query Firestore to fetch the threads associated with the current user
-    const userThreadsSnapshot = await firestore.collection("chat").where("userId", "==", userId).get();
-    
-    const userThreads = [];
-    userThreadsSnapshot.forEach(doc => {
-      // Extract thread details from each document
-      const threadData = doc.data();
-      userThreads.push({
-        threadId: doc.id,
-        // Include any other relevant thread details
-      });
-    });
-    
-    // Return the list of threads as a response
-    res.status(200).json({ threads: userThreads });
-  } catch (error) {
-    console.error("Error fetching user threads:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////
 
 const PORT = process.env.PORT || 3000;
 
