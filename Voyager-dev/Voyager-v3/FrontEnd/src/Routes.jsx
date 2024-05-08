@@ -20,7 +20,7 @@ const ProjectRoutes = () => {
     { path: "assistants", element: userLoggedIn ? <Assistantspg /> : <Navigate to="/login" /> },
     { path: "buissnessplan", element: userLoggedIn ? <Buissnessplan /> : <Navigate to="/login" /> },
     { path: "ChatHistoryList", element: userLoggedIn ? <ChatHistoryList /> : <Navigate to="/login" /> },
-    { path: "chatpreview", element: userLoggedIn ? <ChatPreview /> : <Navigate to="/login" /> },
+    { path: "chatpreview/:threadId", element: userLoggedIn ? <ChatPreview /> : <Navigate to="/login" /> },
 
     { path: "login", element: <Login /> },
     { path: "*", element: <NotFound /> },
