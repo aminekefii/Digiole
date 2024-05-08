@@ -5,8 +5,8 @@ from openai import OpenAI
 def main():
     # API key and thread ID
     api_key = ""
-
-    thread_id = "thread_jBGYTZHT8i71Tg205Zsl7HBN"
+    
+    thread_id = ""
 
     client = OpenAI(api_key=api_key)
 

@@ -584,31 +584,34 @@ app.get('/threads', verifyToken, async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-app.get('/threadDetails', verifyToken, async (req, res) => {
-  const userId = req.user.uid; // Extract user ID from decoded token
-
+app.get('/threadDetails/:threadId', verifyToken, async (req, res) => {
   try {
-    // Query Firestore to fetch the threads associated with the current user
-    const userThreadsSnapshot = await admin.firestore().collection('chat').doc(userId).collection('threads').get();
-    
-    const userThreads = [];
-    userThreadsSnapshot.forEach(doc => {
-      // Extract thread details from each document
-      const threadData = doc.data();
-      userThreads.push({
-        threadId: doc.id,
-        // Include any other relevant thread details
-      });
+    const { threadId } = req.params; // Get the threadId from the request parameters
+    // Execute the Python script with the extracted thread ID
+    const pythonProcess = spawn("python", [
+      "./ThreadsRetrieve.py",
+      threadId,
+    ]);
+
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(`Python script output: ${data}`);
     });
-    
+
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(`Python script error: ${data}`);
+    });
+
+    pythonProcess.on('close', (code) => {
+      console.log(`Python script process exited with code ${code}`);
+    });
+
     // Return the list of threads as a response
-    res.status(200).json({ threads: userThreads });
+    res.status(200).json({ message: "Thread details sent to Python script" });
   } catch (error) {
     console.error("Error fetching user threads:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 

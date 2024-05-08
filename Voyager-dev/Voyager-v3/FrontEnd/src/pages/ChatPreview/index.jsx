@@ -5,7 +5,7 @@ import { doSignOut } from '../../components/firebase/auth';
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react';
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Link } from "react-router-dom";
-
+import { useParams } from 'react-router-dom'
 
 import {
     Text,
@@ -29,7 +29,7 @@ import { Helmet } from "react-helmet";
 
 
 export default function ChatPreview() {
-
+  const { threadId } = useParams()
   const { currentUser } = useContext(AuthContext); 
 
   const handleLogout = () => {
@@ -40,7 +40,7 @@ export default function ChatPreview() {
 
 
 
-  /*const handlePreview = async (threadId) => {
+  const handlePreview = async (threadId) => {
     try {
       const token = await currentUser.getIdToken(true);
       const requestOptions = {
@@ -53,14 +53,14 @@ export default function ChatPreview() {
       };
   
       // Make the POST request to the threadDetails endpoint with the threadId in the URL path
-      const response = await axios.post(`http://localhost:3000/threaddetails/${threadId}`, requestOptions);
+      const response = await axios.post(`http://localhost:3000/threadDetails/${threadId}`, requestOptions);
   
       // Handle the response as needed
       console.log("Thread details response:", response.data);
     } catch (error) {
       console.error("Error fetching thread details:", error);
     }
-  };*/
+  };
   
 
 
