@@ -16,9 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { doSignOut } from '../../components/firebase/auth';
 import { Link } from "react-router-dom";
-import ChatHistory from "components/ChatComp/ChatHistory";
-import ChatContainer from "components/ChatComp/ChatContainer";
 import ProfilePictue from 'components/ProfilePicUpdate';
+import Sidebar from "components/ChatHistory/Sidebar";
 
 
 
@@ -99,8 +98,8 @@ export default function ChatHistoryList() {
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
           >
-            <ChatHistory></ChatHistory>
-          <ChatContainer ></ChatContainer>
+        <Sidebar></Sidebar>
+        
           </Container>
         </Box>
       </Box>
