@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth } from './firebase/firebase';
 import { AuthContext } from './contexts/authContext/index';
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 
 function GetAssisant() {
@@ -55,8 +56,8 @@ function GetAssisant() {
           <div className="modal-content">
             <main style={{ width: '100%', justifyContent: 'center', alignItems: 'center', marginTop:'20px' }}>
             <Button
-                //as={Link}
-                //to="/buissnessplan"
+                as={Link}
+                to="/buissnessplan"
                   size="sm"
                   bg="blue.600"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
