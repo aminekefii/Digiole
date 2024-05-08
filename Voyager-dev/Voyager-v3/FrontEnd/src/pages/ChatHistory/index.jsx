@@ -171,9 +171,9 @@ export default function ChatHistoryList() {
     <Tr key={thread.threadId}>
       <Td>{thread.threadId}</Td>
       <Td>
-<Button 
+      <Button 
     as={Link}
-    to={`/chatpreview`} 
+    to={`/chatpreview/${thread.threadId}`} 
     size="sm"
     variant="outline"
     bg="blue.600"
@@ -188,6 +188,7 @@ export default function ChatHistoryList() {
 >
     Preview
 </Button>
+
                 </Td>
       {/* Render more table cells for additional thread properties */}
     </Tr>
