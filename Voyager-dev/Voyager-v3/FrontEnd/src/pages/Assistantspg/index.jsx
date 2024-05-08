@@ -13,18 +13,11 @@ import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../../styles/Modal.css';
-import ProfilePicUpdate from 'components/ProfilePicUpdate';
 import ProfilePictue from 'components/ProfilePicUpdate';
-
-
-
+import GetAssisant from 'components/GetAssistant';
 
 
 export default function AssistantsPage() {
-
-
-
-
 
   
   const handleLogout = () => {
@@ -171,21 +164,12 @@ export default function AssistantsPage() {
                     Get expert guidance with our AI Business Plan Assistant
                   </Text>
                 </Flex>
-                <Button
-                as={Link}
-                to="/buissnessplan"
-                  size="sm"
-                  colorScheme="lime_200"
-                  rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
-                  mb="13px"
-                  fontWeight={600}
-                  gap="8px"
-                  minW="161px"
-                  borderRadius="8px"
-                 
-                >
-                  Get Assistant
-                </Button>
+
+
+               <GetAssisant></GetAssisant>
+
+
+
               </Flex>
               <Flex
                 gap="28px"
