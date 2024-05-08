@@ -58,7 +58,7 @@ function GetAssisant() {
                 //as={Link}
                 //to="/buissnessplan"
                   size="sm"
-                  colorScheme="lime_200"
+                  bg="blue.600"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
                   mb="13px"
                   fontWeight={600}
