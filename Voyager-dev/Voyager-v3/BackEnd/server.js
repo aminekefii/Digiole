@@ -212,17 +212,38 @@ async function saveThreadID(newThreadID, userId) {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////
 let myThread;
-// Enhance the existing chat endpoint to handle file retrieval and download
+///////////////////////////////////////////////////////////////////////////////////////
+const getThreadMessages = async (threadId) => {
+  try {
+      const response = await openai.beta.threads.messages.list(threadId);
+      return response.data; // Returns all messages from the thread
+  } catch (error) {
+      console.error("Failed to retrieve messages:", error);
+      throw error;
+  }
+};
+
+
+
+
+
 app.post("/chat", verifyToken, async (req, res) => {
   const userId = req.user.uid;
+
   if (!threadByUser[userId]) {
     try {
       const myThread = await openai.beta.threads.create();
       console.log("New thread created with ID:", myThread.id);
       threadByUser[userId] = myThread.id;
 
+
+
+
+      // Save the thread details to a JSON file
+        const threadDetails = { threadId: myThread.id };
+        const threadFilePath = "./thread_details.json";
+        await fsPromises.writeFile(threadFilePath, JSON.stringify(threadDetails, null, 2));
       // Save the new thread ID and upload details to Storage
       //await saveThreadID(myThread.id); // Save the thread ID
 
@@ -304,6 +325,8 @@ app.post("/chat", verifyToken, async (req, res) => {
     );
     console.log("This is the run object: ", myRun, "\n");
 
+
+
     // Periodically retrieve the Run to check its status
     const retrieveRun = async () => {
       let keepRetrievingRun;
@@ -324,6 +347,9 @@ app.post("/chat", verifyToken, async (req, res) => {
     };
     retrieveRun();
 
+
+
+
     // Retrieve the messages added by the Assistant to the Thread
     const waitForAssistantMessage = async () => {
       await retrieveRun();
@@ -331,6 +357,10 @@ app.post("/chat", verifyToken, async (req, res) => {
       const allMessages = await openai.beta.threads.messages.list(
         threadByUser[userId] // Use the stored thread ID for this user
       );
+
+
+
+
 
       // Check if the assistant provided a link
       const assistantResponse = allMessages.data[0].content[0].text.value;
@@ -343,6 +373,8 @@ app.post("/chat", verifyToken, async (req, res) => {
         response += ` Download your file <a href="${linkMatch[0]}">here</a>`;
       }
 
+
+
       // Send the response back to the front end
       res.status(200).json({
         response,
@@ -354,6 +386,11 @@ app.post("/chat", verifyToken, async (req, res) => {
       console.log("User: ", myThreadMessage.content[0].text.value);
       console.log("Assistant: ", response);
 
+
+
+
+
+
       // Save the user and assistant messages to Firebase
       const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
       await chatRef.update({
@@ -362,10 +399,6 @@ app.post("/chat", verifyToken, async (req, res) => {
           { role: "assistant", content: response }
         ),
       });
-
-
-
-
 
     };
 
