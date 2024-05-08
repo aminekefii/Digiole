@@ -213,7 +213,7 @@ async function saveThreadID(newThreadID, userId) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
-
+let myThread;
 // Enhance the existing chat endpoint to handle file retrieval and download
 app.post("/chat", verifyToken, async (req, res) => {
   const userId = req.user.uid;
@@ -362,8 +362,18 @@ app.post("/chat", verifyToken, async (req, res) => {
           { role: "assistant", content: response }
         ),
       });
+
+
+
+
+
     };
+
     waitForAssistantMessage();
+
+
+
+
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -381,7 +391,7 @@ app.get('/chatHistory/:uid/:threadId', async (req, res) => {
     const { uid, threadId } = req.params;
 
     // Retrieve the chat history for the specified user ID and thread ID from Firebase
-    const chatRef = admin.firestore().collection('chat').doc(uid).collection('threads').doc(threadId);
+    const chatRef =admin.firestore().collection('chat').doc(userId).collection('threads').doc(myThread.id);
     const chatData = await chatRef.get();
 
     if (!chatData.exists) {
