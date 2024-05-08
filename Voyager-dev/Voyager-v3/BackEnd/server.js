@@ -555,12 +555,12 @@ app.post("/process-files", async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-app.get("/threads", verifyToken, async (req, res) => {
+app.get('/threads', verifyToken, async (req, res) => {
   const userId = req.user.uid; // Extract user ID from decoded token
-  
+
   try {
     // Query Firestore to fetch the threads associated with the current user
-    const userThreadsSnapshot = await firestore.collection("chat").where("userId", "==", userId).get();
+    const userThreadsSnapshot = await admin.firestore().collection('chat').doc(userId).collection('threads').get();
     
     const userThreads = [];
     userThreadsSnapshot.forEach(doc => {

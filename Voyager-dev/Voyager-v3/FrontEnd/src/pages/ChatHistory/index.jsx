@@ -134,7 +134,6 @@ export default function ChatHistoryList() {
 
        <TableContainer w="100%">
       <Table variant="simple">
-        <TableCaption>Chat History</TableCaption>
         <Thead>
           <Tr>
             <Th>Chat ID</Th>
@@ -143,14 +142,14 @@ export default function ChatHistoryList() {
           </Tr>
         </Thead>
         <Tbody>
-          {threads.map((thread) => (
-            <Tr key={thread.threadId}>
-              <Td></Td>
-              <Td></Td>
-              {/* Render more table cells for additional thread properties */}
-            </Tr>
-          ))}
-        </Tbody>
+  {threads.map((thread) => (
+    <Tr key={thread.threadId}>
+      <Td>{thread.threadId}</Td>
+      <Td>{thread.createdAt}</Td>
+      {/* Render more table cells for additional thread properties */}
+    </Tr>
+  ))}
+</Tbody>
       </Table>
     </TableContainer>
 
