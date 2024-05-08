@@ -583,6 +583,35 @@ app.get('/threads', verifyToken, async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+
+app.get('/threadDetails', verifyToken, async (req, res) => {
+  const userId = req.user.uid; // Extract user ID from decoded token
+
+  try {
+    // Query Firestore to fetch the threads associated with the current user
+    const userThreadsSnapshot = await admin.firestore().collection('chat').doc(userId).collection('threads').get();
+    
+    const userThreads = [];
+    userThreadsSnapshot.forEach(doc => {
+      // Extract thread details from each document
+      const threadData = doc.data();
+      userThreads.push({
+        threadId: doc.id,
+        // Include any other relevant thread details
+      });
+    });
+    
+    // Return the list of threads as a response
+    res.status(200).json({ threads: userThreads });
+  } catch (error) {
+    console.error("Error fetching user threads:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

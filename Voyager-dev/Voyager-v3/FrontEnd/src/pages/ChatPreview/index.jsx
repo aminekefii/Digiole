@@ -13,7 +13,10 @@ import {
     Box,
     Flex,
     Button,
-   
+    Input,
+    UnorderedList,
+    ListItem,
+    Heading,
     Container,
   } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
@@ -25,7 +28,7 @@ import { Helmet } from "react-helmet";
 
 
 
-export default function ChatHistoryList() {
+export default function ChatPreview() {
 
   const { currentUser } = useContext(AuthContext); 
 
@@ -34,31 +37,6 @@ export default function ChatHistoryList() {
       window.location.href = '/login';
     });
   };
-
-  const [threads, setThreads] = useState([]);
-
-  useEffect(() => {
-    const fetchThreads = async () => {
-      try {
-        const token = await currentUser.getIdToken(true);
-        const requestOptions = {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ userId: currentUser.uid }),
-        };
-        const response = await axios.get("http://localhost:3000/threads",requestOptions );
-         
-        const threadsData = response.data.threads;
-        setThreads(threadsData);
-      } catch (error) {
-        console.error("Error fetching threads:", error);
-      }
-    };
-
-    fetchThreads();
-  }, [currentUser]);
 
 
 
@@ -157,45 +135,7 @@ export default function ChatHistoryList() {
        
 
 
-       <TableContainer w="80%">
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>Chat ID</Th>
-            <Th>preview</Th>
-            {/* Add more table headers as needed */}
-          </Tr>
-        </Thead>
-        <Tbody>
-  {threads.map((thread) => (
-    <Tr key={thread.threadId}>
-      <Td>{thread.threadId}</Td>
-      <Td>
-<Button 
-    as={Link}
-    to={`/chatpreview`} 
-    size="sm"
-    variant="outline"
-    bg="blue.600"
-    color="white.A700_01"
-    letterSpacing="-0.08px"
-    fontWeight={500}
-    minW={{ base: '50px', md: '70px' }}
-    borderRadius="20px"
-    _hover={{ bg: '#EAF2BB', color: 'black' }}
-    fontSize={{ base: 'xs', md: 'sm' }}
-    mr="50px"
->
-    Preview
-</Button>
-                </Td>
-      {/* Render more table cells for additional thread properties */}
-    </Tr>
-  ))}
-</Tbody>
-      </Table>
-    </TableContainer>
-
+   
 
 
         
