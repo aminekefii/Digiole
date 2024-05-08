@@ -71,8 +71,8 @@ function GetAssisant() {
                   New chat
                 </Button>
                 <Button
-                //as={Link}
-                //to="/buissnessplan"
+                as={Link}
+                to="/ChatHistoryList"
                   size="sm"
                   colorScheme="lime_200"
                   rightIcon={<Image src="images/img_arrowright_indigo_900.svg" />}
