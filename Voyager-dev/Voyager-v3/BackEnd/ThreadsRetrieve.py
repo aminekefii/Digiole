@@ -27,7 +27,7 @@ def main(thread_id):
         thread_details_json = json.dumps(thread_details_dict)
 
         # Print the JSON string
-        print("Thread Details:")
+        print("py: Thread Details:")
         print(thread_details_json)
 
         # Retrieve the list of messages in the thread
@@ -55,7 +55,7 @@ def main(thread_id):
 
         # Prepare the data to send to the server
         data_to_send = {
-            "thread_id": thread_id,
+            "threadId": thread_id,
             "thread_details": thread_details_json,  # Send thread details as JSON string
             "messages": all_messages
         }
@@ -65,12 +65,12 @@ def main(thread_id):
 
         # Check if the request was successful
         if response.status_code == 200:
-            print("Messages sent to the server successfully.")
+            print("py: Messages sent to the server successfully.")
         else:
-            print(f"Error sending messages to the server. Status code: {response.status_code}")
+            print(f"py: Error sending messages to the server. Status code: {response.status_code}")
 
     except Exception as e:
-        print(f"Error retrieving thread details: {e}")
+        print(f"py: Error retrieving thread details: {e}")
 
 if __name__ == "__main__":
     # Check if the thread ID is provided as a command-line argument

@@ -598,13 +598,13 @@ app.post('/threadDetails/:threadId', async (req, res) => {
       threadId,
     ]);
 
-    pythonProcess.stdout.on('data', (data) => {
+   /* pythonProcess.stdout.on('data', (data) => {
       console.log(`Python script output: ${data}`);
     });
 
     pythonProcess.stderr.on('data', (data) => {
       console.error(`Python script error: ${data}`);
-    });
+    });*/
 
     pythonProcess.on('close', (code) => {
       console.log(`Python script process exited with code ${code}`);
@@ -621,14 +621,14 @@ app.post('/threadDetails/:threadId', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-// Endpoint to receive messages
+/// Endpoint to receive messages
 app.post('/receive_messages', (req, res) => {
   try {
     const { threadId, thread_details, messages } = req.body;
 
-    console.log("Received messages for thread:", threadId);
-    console.log("Thread details:", thread_details);
-    console.log("Messages:", messages);
+    console.log("server: thread id:", threadId);
+    console.log("server: Thread details:", thread_details);
+    console.log("server: Messages:", messages);
 
     // Handle the received messages here
     
@@ -638,6 +638,8 @@ app.post('/receive_messages', (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 

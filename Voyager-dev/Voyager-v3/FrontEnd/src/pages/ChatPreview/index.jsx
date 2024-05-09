@@ -19,12 +19,15 @@ import { Helmet } from "react-helmet";
 export default function ChatPreview() {
   const { threadId } = useParams();
   const { currentUser } = useContext(AuthContext); 
+  const [threadDetails, setThreadDetails] = useState(null); // State to store thread details
+  const [messages, setMessages] = useState([]); // State to store messages
 
   const handleLogout = () => {
     doSignOut().then(() => {
       window.location.href = '/login';
     });
   };
+  
   useEffect(() => {
     handlePreview(threadId);
   }, []);
@@ -43,12 +46,25 @@ export default function ChatPreview() {
     }
   };
 
- // Run once when component mounts
 
+  
+  const getData = async () => {
+    try {
+      const receiveMessagesResponse = await axios.post("http://localhost:3000/receive_messages", {
+        threadId: threadId,
+        thread_details: threadDetails,
+        messages: messages
+      });
+      console.log("Receive messages response:", receiveMessagesResponse.data);
+    } catch (error) {
+      console.error("Error receiving messages:", error);
+    }
+  };
+  
   return (
     <>
       <Helmet>
-        <title>Buissness Plan</title>
+        <title>Business Plan</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
       <Box pb={{ md: "83px", base: "20px" }} bg="white.A700_01" w="100%">
@@ -68,14 +84,14 @@ export default function ChatPreview() {
             </Link>
             <Box h="30px" ml="20px" bg="blue_gray.100"  />
             <Text size="xl" color="gray.50" ml="3px">
-               | Business Plan
+              | Business Plan
             </Text>
             <Text size="xl" color="gray.400" ml={{ base: "0px", sm: "13px" }} fontWeight={300}>
               | Create/Edit with AI Wisdom
             </Text>
           </Flex>
           <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
-          <ProfilePictue></ProfilePictue>
+            <ProfilePictue></ProfilePictue>
             <Button 
               size="sm"
               variant="outline"
@@ -107,7 +123,37 @@ export default function ChatPreview() {
           flexDirection={{ md: "row", base: "column" }}
           p={{ md: "", base: "20px" }}
         >
-          {/* Your UI elements here */}
+          {/* Display thread details */}
+          <div>
+            {threadDetails && (
+              <div>
+                <h2>Thread Details</h2>
+                <p>Thread ID: {threadDetails.id}</p>
+                <p>Created At: {new Date(threadDetails.created_at).toString()}</p>
+              </div>
+            )}
+          </div>
+          {/* Display messages */}
+          <div>
+  <h2>Messages</h2>
+  <ul>
+  {messages && messages.map((message, index) => (
+  <li key={index}>
+    <p>Role: {message.role}</p>
+    <p>Timestamp: {new Date(message.timestamp).toString()}</p>
+    <p>Content:</p>
+    {message.content && (
+      <ul>
+        {message.content.map((content, index) => (
+          <li key={index}>{content}</li>
+        ))}
+      </ul>
+    )}
+  </li>
+))}
+  
+  </ul>
+</div>
         </Container>
       </Box>
     </>
