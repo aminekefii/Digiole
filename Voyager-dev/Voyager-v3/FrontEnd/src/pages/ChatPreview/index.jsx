@@ -19,35 +19,36 @@ import { Helmet } from "react-helmet";
 export default function ChatPreview() {
   const { threadId } = useParams();
   const { currentUser } = useContext(AuthContext); 
-  const [threadDetails, setThreadDetails] = useState(null); // State to store thread details
-  const [messages, setMessages] = useState([]); // State to store messages
+  const [threadDetails, setThreadDetails] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   const handleLogout = () => {
     doSignOut().then(() => {
       window.location.href = '/login';
     });
   };
-  
+
   useEffect(() => {
     handlePreview(threadId);
   }, []);
 
   const handlePreview = async (threadId) => {
     try {
-     
       // Make the POST request to the threadDetails endpoint with the threadId in the URL path
       const response = await axios.post(`http://localhost:3000/threadDetails/${threadId}`);
 
       // Handle the response as needed
-      console.log("Thread details response:", response.data);
-      // You can set the response data to state or perform any other action with it here
+      console.log("Thread details retrieved");
+      setThreadDetails(response.data.thread_details);
     } catch (error) {
       console.error("Error fetching thread details:", error);
     }
   };
-
-
-  
+  useEffect(() => {
+    if (threadDetails) {
+      getData();
+    }
+  }, [threadDetails]);
   const getData = async () => {
     try {
       const receiveMessagesResponse = await axios.post("http://localhost:3000/receive_messages", {
@@ -60,7 +61,7 @@ export default function ChatPreview() {
       console.error("Error receiving messages:", error);
     }
   };
-  
+
   return (
     <>
       <Helmet>
@@ -135,25 +136,22 @@ export default function ChatPreview() {
           </div>
           {/* Display messages */}
           <div>
-  <h2>Messages</h2>
-  <ul>
-  {messages && messages.map((message, index) => (
-  <li key={index}>
-    <p>Role: {message.role}</p>
-    <p>Timestamp: {new Date(message.timestamp).toString()}</p>
-    <p>Content:</p>
-    {message.content && (
-      <ul>
-        {message.content.map((content, index) => (
-          <li key={index}>{content}</li>
-        ))}
-      </ul>
-    )}
-  </li>
-))}
-  
-  </ul>
-</div>
+            <h2>Messages</h2>
+            <ul>
+              {messages && messages.map((message, index) => (
+                <li key={index}>
+                  <p>Role: {message.role}</p>
+                  <p>Timestamp: {new Date(message.timestamp).toString()}</p>
+                  <p>Content:</p>
+                  <ul>
+                    {message.content.map((content, index) => (
+                      <li key={index}>{content}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </Box>
     </>
