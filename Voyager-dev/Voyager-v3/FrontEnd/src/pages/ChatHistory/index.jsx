@@ -62,27 +62,8 @@ export default function ChatHistoryList() {
 
 
 
-  /*const handlePreview = async (threadId) => {
-    try {
-      const token = await currentUser.getIdToken(true);
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ threadId: threadId }), // Send threadId in the request body
-      };
   
-      // Make the POST request to the threadDetails endpoint with the threadId in the URL path
-      const response = await axios.post(`http://localhost:3000/threaddetails/${threadId}`, requestOptions);
   
-      // Handle the response as needed
-      console.log("Thread details response:", response.data);
-    } catch (error) {
-      console.error("Error fetching thread details:", error);
-    }
-  };*/
   
 
 
@@ -172,22 +153,23 @@ export default function ChatHistoryList() {
       <Td>{thread.threadId}</Td>
       <Td>
       <Button 
-    as={Link}
-    to={`/chatpreview/${thread.threadId}`} 
-    size="sm"
-    variant="outline"
-    bg="blue.600"
-    color="white.A700_01"
-    letterSpacing="-0.08px"
-    fontWeight={500}
-    minW={{ base: '50px', md: '70px' }}
-    borderRadius="20px"
-    _hover={{ bg: '#EAF2BB', color: 'black' }}
-    fontSize={{ base: 'xs', md: 'sm' }}
-    mr="50px"
+  as={Link}
+  to={`/chatpreview/${thread.threadId}`} 
+  size="sm"
+  variant="outline"
+  bg="blue.600"
+  color="white.A700_01"
+  letterSpacing="-0.08px"
+  fontWeight={500}
+  minW={{ base: '50px', md: '70px' }}
+  borderRadius="20px"
+  _hover={{ bg: '#EAF2BB', color: 'black' }}
+  fontSize={{ base: 'xs', md: 'sm' }}
+  mr="50px"
 >
-    Preview
+  Preview
 </Button>
+
 
                 </Td>
       {/* Render more table cells for additional thread properties */}

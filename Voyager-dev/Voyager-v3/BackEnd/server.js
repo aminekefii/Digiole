@@ -584,10 +584,15 @@ app.get('/threads', verifyToken, async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-app.get('/threadDetails/:threadId', verifyToken, async (req, res) => {
+app.post('/threadDetails/:threadId', async (req, res) => {
   try {
     const { threadId } = req.params; // Get the threadId from the request parameters
+
+
+    console.log("Threadid retrieved",threadId);
+
     // Execute the Python script with the extracted thread ID
+
     const pythonProcess = spawn("python", [
       "./ThreadsRetrieve.py",
       threadId,
@@ -608,7 +613,7 @@ app.get('/threadDetails/:threadId', verifyToken, async (req, res) => {
     // Return the list of threads as a response
     res.status(200).json({ message: "Thread details sent to Python script" });
   } catch (error) {
-    console.error("Error fetching user threads:", error);
+    console.error("Error fetching user thread:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
