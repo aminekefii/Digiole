@@ -620,6 +620,28 @@ app.post('/threadDetails/:threadId', async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+
+// Endpoint to receive messages
+app.post('/receive_messages', (req, res) => {
+  try {
+    const { threadId, thread_details, messages } = req.body;
+
+    console.log("Received messages for thread:", threadId);
+    console.log("Thread details:", thread_details);
+    console.log("Messages:", messages);
+
+    // Handle the received messages here
+    
+    res.status(200).json({ message: "Messages received successfully" });
+  } catch (error) {
+    console.error("Error receiving messages:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
