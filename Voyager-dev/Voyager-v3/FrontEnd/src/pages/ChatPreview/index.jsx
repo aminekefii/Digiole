@@ -4,12 +4,10 @@ import { AuthContext } from '../../components/contexts/authContext/index';
 import { doSignOut } from '../../components/firebase/auth';
 import { Link, useParams } from "react-router-dom";
 import ProfilePictue from 'components/ProfilePicUpdate';
+import { Image, Flex, Box, Heading, Text, List, ListItem, ListIcon } from "@chakra-ui/react";
+import { CheckCircleIcon } from '@chakra-ui/icons'; // Assuming you want to use icons for content
 
 import {
-  Text,
-  Image,
-  Box,
-  Flex,
   Button,
   Container,
 } from "@chakra-ui/react";
@@ -108,40 +106,69 @@ export default function ChatPreview() {
           justifyContent="space-between"
           alignItems="start"
           maxW="1341px"
-          w="100%"
+          w="80%"
           gap="20px"
           px="0px"
           mx="auto"
           flexDirection={{ md: "row", base: "column" }}
           p={{ md: "", base: "20px" }}
+          ml=""
         >
-          {/* Display thread details */}
-          <div>
-            <p>Thread ID: {threadId}</p>
-          </div>
-          {/* Display messages */}
-          <div>
-  <h2>Messages</h2>
-  <ul>
-    {chatHistory.map((message, index) => (
-      <li key={index}>
-        <p>Role: {message.role}</p>
-        <p>Content:</p>
-        <ul>
-          {Array.isArray(message.content) ? (
-            message.content.map((content, index) => (
-              <li key={index}>{content}</li>
-            ))
-          ) : (
-            <li>{message.content}</li>
-          )}
-        </ul>
-      </li>
-    ))}
-  </ul>
-</div>
+        
+     
+        <Flex
+      flexDirection="column"
+      height="50vh"
+      width="50%"
+      mr="300px"
+      justifyContent="center"
+      position="relative"
+    >
+      <Box flex="1" w="100%" padding="10px">
+        <Flex w="100%" height="50vh" overflowY="scroll">
+          <Box
+            ml={{ md: '34px', base: '0px' }}
+            justifyContent="space-between"
+            alignItems="center"
+            gap="20px"
+            flexDirection="column"
+          >
+            <Text color="black">Thread ID: {threadId}</Text>
+            <Heading as="h2" fontSize="xl">Messages</Heading>
+            <List spacing={3} mt={4} >
+              {chatHistory.map((message, index) => (
+                <ListItem key={index}>
+                  <Text color="black">Role: {message.role}</Text>
+                  <Text color="black">Content:</Text>
+                  <List spacing={1} ml={4}>
+                    {Array.isArray(message.content) ? (
+                      message.content.map((content, index) => (
+                        <ListItem key={index}>
+                          <ListIcon as={CheckCircleIcon} color="green.500" />
+                          {content}
+                        </ListItem>
+                      ))
+                    ) : (
+                      <ListItem>{message.content}</ListItem>
+                    )}
+                  </List>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Flex>
+      </Box>
+    </Flex>
+
+
+
 
         </Container>
+
+
+      
+
+
       </Box>
     </>
   );
