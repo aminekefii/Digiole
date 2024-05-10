@@ -17,6 +17,7 @@ export default function ChatPreview() {
   const { threadId } = useParams();
   const { currentUser } = useContext(AuthContext); 
   const [chatHistory, setChatHistory] = useState([]);
+  const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
 
   const handleLogout = () => {
     doSignOut().then(() => {
@@ -51,6 +52,14 @@ export default function ChatPreview() {
     fetchChatHistory();
   }, [threadId, currentUser]);
 
+
+
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+  
   return (
     <>
       <Helmet>
@@ -68,6 +77,8 @@ export default function ChatPreview() {
           gap="15px"
           p={{ base: "20px", sm: "23px" }}
         >
+
+
           <Flex ml={{ md: "20px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
             <Link to="/landingpage">
               <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
@@ -115,7 +126,9 @@ export default function ChatPreview() {
           ml=""
         >
         
-     
+
+
+
         <Flex
       flexDirection="column"
       height="50vh"
@@ -138,6 +151,11 @@ export default function ChatPreview() {
             <List spacing={3} mt={4} >
               {chatHistory.map((message, index) => (
                 <ListItem key={index}>
+                  {message.role === 'assistant' ? (
+                <Image src="images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
+              ) : (
+                <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
+              )}
                   <Text color="black">Role: {message.role}</Text>
                   <Text color="black">Content:</Text>
                   <List spacing={1} ml={4}>
@@ -159,9 +177,6 @@ export default function ChatPreview() {
         </Flex>
       </Box>
     </Flex>
-
-
-
 
         </Container>
 
