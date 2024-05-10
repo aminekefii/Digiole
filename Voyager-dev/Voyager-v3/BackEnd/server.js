@@ -584,28 +584,51 @@ app.get('/threads', verifyToken, async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-app.post('/threadDetails/:threadId', async (req, res) => {
+
+// GET route for fetching chat history
+app.get('/chatHistory/:threadId', verifyToken, async (req, res) => {
   try {
+    const uid = req.user.uid; // Extract user ID from decoded token
+    const { threadId } = req.params; // Get the threadId from the request parameters
+    // Retrieve the chat history for the specified user ID and thread ID from Firebase
+    const chatRef = admin.firestore().collection('chat').doc(uid).collection('threads').doc(threadId);
+    const chatData = await chatRef.get();
+
+    if (!chatData.exists) {
+      return res.status(404).json({ error: 'Chat history not found' });
+    }
+
+    const chatHistory = chatData.data().messages;
+
+    res.json({ chatHistory });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+app.post('/threadDetails/:threadId', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.uid; // Extract user ID from decoded token
     const { threadId } = req.params; // Get the threadId from the request parameters
 
-
-    console.log("Threadid retrieved",threadId);
+    console.log("Threadid retrieved", threadId);
+    console.log("User ID:", userId); // Log the user ID
 
     // Execute the Python script with the extracted thread ID
-
     const pythonProcess = spawn("python", [
       "./ThreadsRetrieve.py",
       threadId,
+      userId, 
     ]);
 
-   /* pythonProcess.stdout.on('data', (data) => {
-      console.log(`Python script output: ${data}`);
-    });
-
-    pythonProcess.stderr.on('data', (data) => {
-      console.error(`Python script error: ${data}`);
-    });*/
-
+    // Handle Python script events
     pythonProcess.on('close', (code) => {
       console.log(`Python script process exited with code ${code}`);
     });
@@ -619,20 +642,26 @@ app.post('/threadDetails/:threadId', async (req, res) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
-
-
-/// Endpoint to receive messages
 app.post('/receive_messages', (req, res) => {
   try {
-    const { threadId, thread_details, messages } = req.body;
+    const { threadId, userId, thread_details, messages } = req.body;
 
-    console.log("server: thread id:", threadId);
+    console.log("server: Thread ID:", threadId);
+    console.log("server: User ID:", userId); // Log user ID
     console.log("server: Thread details:", thread_details);
     console.log("server: Messages:", messages);
 
     // Handle the received messages here
-    
-    res.status(200).json({ message: "Messages received successfully" });
+
+    // Prepare the response object
+    const responseData = {
+      message: "Data to frontend",
+      thread_details: thread_details,
+      messages: messages
+    };
+
+    // Send the response back to the client
+    res.status(200).json(responseData);
   } catch (error) {
     console.error("Error receiving messages:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -640,8 +669,33 @@ app.post('/receive_messages', (req, res) => {
 });
 
 
+// Endpoint to send messages to the frontend
+app.get('/send_messages', (req, res) => {
+  try {
+    // Extract threadId, thread_details, and messages from query parameters
+    const { threadId, thread_details, messages } = req.query;
+
+    // Prepare the data to send to the frontend
+    const dataToSendToFrontend = {
+      threadId: threadId,
+      threadDetails: JSON.parse(thread_details), // Convert string to object
+      messages: JSON.parse(messages), // Convert string to object
+      
+    };
+    console.log("send_messages: Thread details:", thread_details);
+
+    // Send data to the frontend
+    res.status(200).json(dataToSendToFrontend);
+  } catch (error) {
+    console.error("Error sending messages to frontend:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 const PORT = process.env.PORT || 3000;

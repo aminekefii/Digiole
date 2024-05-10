@@ -2,25 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from '../../components/contexts/authContext/index'; 
 import { doSignOut } from '../../components/firebase/auth';
-import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from "react-router-dom";
 import ProfilePictue from 'components/ProfilePicUpdate';
 
 import {
-    Text,
-    Image,
-    Box,
-    Flex,
-    Button,
-    Container,
-  } from "@chakra-ui/react";
+  Text,
+  Image,
+  Box,
+  Flex,
+  Button,
+  Container,
+} from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 
 export default function ChatPreview() {
   const { threadId } = useParams();
   const { currentUser } = useContext(AuthContext); 
-  const [threadDetails, setThreadDetails] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [chatHistory, setChatHistory] = useState([]);
 
   const handleLogout = () => {
     doSignOut().then(() => {
@@ -29,38 +27,31 @@ export default function ChatPreview() {
   };
 
   useEffect(() => {
-    handlePreview(threadId);
-  }, []);
+    const fetchChatHistory = async () => {
+      try {
+        // Get the token
+        const token = await currentUser.getIdToken(true);
 
-  const handlePreview = async (threadId) => {
-    try {
-      // Make the POST request to the threadDetails endpoint with the threadId in the URL path
-      const response = await axios.post(`http://localhost:3000/threadDetails/${threadId}`);
+        // Prepare the request options with the token
+        const requestOptions = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
 
-      // Handle the response as needed
-      console.log("Thread details retrieved");
-      setThreadDetails(response.data.thread_details);
-    } catch (error) {
-      console.error("Error fetching thread details:", error);
-    }
-  };
-  useEffect(() => {
-    if (threadDetails) {
-      getData();
-    }
-  }, [threadDetails]);
-  const getData = async () => {
-    try {
-      const receiveMessagesResponse = await axios.post("http://localhost:3000/receive_messages", {
-        threadId: threadId,
-        thread_details: threadDetails,
-        messages: messages
-      });
-      console.log("Receive messages response:", receiveMessagesResponse.data);
-    } catch (error) {
-      console.error("Error receiving messages:", error);
-    }
-  };
+        // Make the GET request to fetch chat history
+        const response = await axios.get(`http://localhost:3000/chatHistory/${threadId}`, requestOptions);
+
+        // Update chat history state
+        setChatHistory(response.data.chatHistory);
+      } catch (error) {
+        console.error("Error fetching chat history:", error);
+      }
+    };
+
+    // Call the fetchChatHistory function when threadId changes
+    fetchChatHistory();
+  }, [threadId, currentUser]);
 
   return (
     <>
@@ -126,32 +117,30 @@ export default function ChatPreview() {
         >
           {/* Display thread details */}
           <div>
-            {threadDetails && (
-              <div>
-                <h2>Thread Details</h2>
-                <p>Thread ID: {threadDetails.id}</p>
-                <p>Created At: {new Date(threadDetails.created_at).toString()}</p>
-              </div>
-            )}
+            <p>Thread ID: {threadId}</p>
           </div>
           {/* Display messages */}
           <div>
-            <h2>Messages</h2>
-            <ul>
-              {messages && messages.map((message, index) => (
-                <li key={index}>
-                  <p>Role: {message.role}</p>
-                  <p>Timestamp: {new Date(message.timestamp).toString()}</p>
-                  <p>Content:</p>
-                  <ul>
-                    {message.content.map((content, index) => (
-                      <li key={index}>{content}</li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <h2>Messages</h2>
+  <ul>
+    {chatHistory.map((message, index) => (
+      <li key={index}>
+        <p>Role: {message.role}</p>
+        <p>Content:</p>
+        <ul>
+          {Array.isArray(message.content) ? (
+            message.content.map((content, index) => (
+              <li key={index}>{content}</li>
+            ))
+          ) : (
+            <li>{message.content}</li>
+          )}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</div>
+
         </Container>
       </Box>
     </>

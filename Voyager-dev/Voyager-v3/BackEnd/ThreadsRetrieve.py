@@ -1,11 +1,10 @@
 import textwrap
-from datetime import datetime, timezone
 from openai import OpenAI
 import sys
 import json
 import requests
 
-def main(thread_id):
+def main(thread_id, user_id):
     # API key
     api_key = ""
 
@@ -22,13 +21,6 @@ def main(thread_id):
             "metadata": thread_details.metadata,
             "object": thread_details.object
         }
-
-        # Convert the dictionary to JSON format
-        thread_details_json = json.dumps(thread_details_dict)
-
-        # Print the JSON string
-        print("py: Thread Details:")
-        print(thread_details_json)
 
         # Retrieve the list of messages in the thread
         thread_messages = client.beta.threads.messages.list(thread_id=thread_id)
@@ -56,7 +48,8 @@ def main(thread_id):
         # Prepare the data to send to the server
         data_to_send = {
             "threadId": thread_id,
-            "thread_details": thread_details_json,  # Send thread details as JSON string
+            "userId": user_id,  # Pass user ID to the server
+            "thread_details": thread_details_dict,  # Send thread details as a dictionary object
             "messages": all_messages
         }
 
@@ -73,13 +66,14 @@ def main(thread_id):
         print(f"py: Error retrieving thread details: {e}")
 
 if __name__ == "__main__":
-    # Check if the thread ID is provided as a command-line argument
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <thread_id>")
+    # Check if the thread ID and user ID are provided as command-line arguments
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <thread_id> <user_id>")
         sys.exit(1)
 
-    # Extract the thread ID from the command-line argument
+    # Extract the thread ID and user ID from the command-line arguments
     thread_id = sys.argv[1]
+    user_id = sys.argv[2]
 
-    # Call the main function with the provided thread ID
-    main(thread_id)
+    # Call the main function with the provided thread ID and user ID
+    main(thread_id, user_id)
