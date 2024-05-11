@@ -138,7 +138,7 @@ export default function ChatHistoryList() {
        
 
 
-       <TableContainer w="80%">
+       <TableContainer w="60%" float="left">
       <Table variant="simple">
         <Thead>
           <Tr>

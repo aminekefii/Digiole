@@ -374,7 +374,7 @@ app.post("/chat", verifyToken, async (req, res) => {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
-
+/*
 // GET route for fetching chat history
 app.get('/chatHistory/:uid/:threadId', async (req, res) => {
   try {
@@ -417,7 +417,7 @@ app.post('/updateAndGenerate/:uid/:threadId', async (req, res) => {
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
-    });*/
+    });
 
     // Store the OpenAI response messages into Firebase
     const openAIResponse = result.choices.map((choice) => choice.message);
@@ -436,11 +436,11 @@ app.post('/updateAndGenerate/:uid/:threadId', async (req, res) => {
 });
 
 
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-// File upload functionality
+/*// File upload functionality
 const uploadFolder = path.join(__dirname, './');
 
 const storage = multer.diskStorage({
@@ -458,7 +458,8 @@ const upload = multer({
 }).single('file');
 
 
-app.post('/upload', async (req, res) => {
+app.post('/upload',verifyToken, async (req, res) => {
+  const userId = req.user.uid; // Extract user ID from decoded token
   upload(req, res, async (err) => {
     if (err) {
       console.error('Error uploading file:', err);
@@ -503,9 +504,45 @@ app.post('/upload', async (req, res) => {
       res.status(500).json({ error: 'Failed to upload file' });
     }
   });
+});*/
+
+
+const upload = multer({
+  storage: multer.memoryStorage(), // Use memory storage for multer
+  limits: { fileSize: 1024 * 1024 * 10 }, // 10MB limit
+}).single('file');
+
+app.post('/upload', verifyToken, async (req, res) => {
+  const userId = req.user.uid; // Extract user ID from decoded token
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      return res.status(500).json({ error: 'Failed to upload file' });
+    }
+
+    try {
+      const fileBuffer = req.file.buffer;
+      const fileName = req.file.originalname;
+
+      // Save the buffer as a file to Firebase Storage
+      const bucket = admin.storage().bucket();
+      const file = bucket.file(`users/${userId}/uploadedFiles/${Date.now()}_${fileName}`);
+      await file.save(fileBuffer, {
+        metadata: {
+          contentType: req.file.mimetype,
+        },
+      });
+
+      console.log('File uploaded to Firebase Storage');
+
+      // Send success response
+      res.status(200).json({ message: 'File uploaded successfully' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to upload file' });
+    }
+  });
 });
-
-
 
 
 
@@ -612,7 +649,7 @@ app.get('/chatHistory/:threadId', verifyToken, async (req, res) => {
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-
+/*
 app.post('/threadDetails/:threadId', verifyToken, async (req, res) => {
   try {
     const userId = req.user.uid; // Extract user ID from decoded token
@@ -692,7 +729,7 @@ app.get('/send_messages', (req, res) => {
   }
 });
 
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////
 
 

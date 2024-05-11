@@ -47,7 +47,7 @@ useEffect(() => {
               ) : (
                 <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
               )}
-              <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'User'}</Heading>
+              <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
             </Flex>
 
             <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%" mt="8px">

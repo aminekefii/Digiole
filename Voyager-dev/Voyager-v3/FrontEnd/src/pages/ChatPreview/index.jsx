@@ -81,7 +81,7 @@ export default function ChatPreview() {
 
           <Flex ml={{ md: "20px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
             <Link to="/landingpage">
-              <Image src="/images/img_voyager_icon2.svg" h="32px" w="32px" />
+              <Image src="/images/img_voyager_icon.svg" h="32px" w="32px" />
             </Link>
             <Box h="30px" ml="20px" bg="blue_gray.100"  />
             <Text size="xl" color="gray.50" ml="3px">

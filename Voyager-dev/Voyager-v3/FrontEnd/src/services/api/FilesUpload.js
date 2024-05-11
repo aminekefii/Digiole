@@ -6,8 +6,16 @@ import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../../styles/Modal.css';
+import  {  useContext } from "react";
+import { AuthContext } from '../../components/contexts/authContext/index'; 
 
 function Dropzone({ className }) {
+
+
+  const { currentUser } = useContext(AuthContext); 
+  const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
+
+
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
 
@@ -99,6 +107,14 @@ function Dropzone({ className }) {
     }
 
     try {
+      const token = await currentUser.getIdToken(true);
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId: currentUser.uid }),
+      };
       const formData = new FormData();
 
       // Iterate over files and upload one at a time
@@ -106,7 +122,7 @@ function Dropzone({ className }) {
         const file = files[i];
         formData.append('file', file);
 
-        const response = await axios.post('http://localhost:3000/upload', formData);
+        const response = await axios.post('http://localhost:3000/upload', formData,requestOptions);
 
         console.log(response.data);
         toast.success('Uploaded successfully', {
@@ -140,6 +156,15 @@ function Dropzone({ className }) {
   } else {
     document.body.classList.remove('active-modal');
   }
+
+
+
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+
 
   return (
     <>
