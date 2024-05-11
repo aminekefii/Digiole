@@ -131,14 +131,15 @@ export default function ChatPreview() {
 
         <Flex
       flexDirection="column"
-      height="50vh"
       width="50%"
       mr="300px"
       justifyContent="center"
       position="relative"
+      h="100%"
+
     >
       <Box flex="1" w="100%" padding="10px">
-        <Flex w="100%" height="50vh" overflowY="scroll">
+        <Flex w="100%" height="60vh" overflowY="scroll">
           <Box
             ml={{ md: '34px', base: '0px' }}
             justifyContent="space-between"
@@ -151,12 +152,15 @@ export default function ChatPreview() {
             <List spacing={3} mt={4} >
               {chatHistory.map((message, index) => (
                 <ListItem key={index}>
+                  <Flex mb="15px">
                   {message.role === 'assistant' ? (
                 <Image src="/images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
+                
               ) : (
                 <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
               )}
-                  
+             <Heading as="h1" ml="10px" >{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
+             </Flex>
                   <List spacing={1} ml={4}>
                     {Array.isArray(message.content) ? (
                       message.content.map((content, index) => (
