@@ -406,7 +406,7 @@ app.post('/updateAndGenerate/:uid/:threadId', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // File upload functionality
-const uploadFolder = path.join(__dirname, './');
+const uploadFolder = path.join(__dirname, './uploads');
 const storage = admin.storage().bucket();
 const multerStorage = multer.diskStorage({
   destination: function(req, file, cb) {
