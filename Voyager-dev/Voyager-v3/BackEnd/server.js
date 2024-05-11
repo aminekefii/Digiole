@@ -572,6 +572,8 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
+const assistantFilePath = './voyager_assistant.json';
+
 app.delete('/delete-files', (req, res) => {
   // Get the list of files in the uploads folder
   fs.readdir(uploadFolder, (err, files) => {
@@ -580,7 +582,7 @@ app.delete('/delete-files', (req, res) => {
       return res.status(500).send('Internal Server Error');
     }
     
-    // Iterate through the files and delete them
+    // Iterate through the files in the uploads folder and delete them
     files.forEach(file => {
       fs.unlink(path.join(uploadFolder, file), err => {
         if (err) {
@@ -589,10 +591,23 @@ app.delete('/delete-files', (req, res) => {
       });
     });
     
-    // Respond with a success message
+    // Respond with a success message for the files in the uploads folder
+    console.log('Files in the uploads folder deleted successfully');
+  });
+
+  // Delete the voyager_assistant.json file
+  fs.unlink(assistantFilePath, err => {
+    if (err) {
+      console.error('Error deleting voyager_assistant.json:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+    
+    // Respond with a success message for the voyager_assistant.json file
+    console.log('voyager_assistant.json file deleted successfully');
     res.status(200).send('Files deleted successfully');
   });
 });
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // Route to process files using Python script
