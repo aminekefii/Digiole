@@ -21,25 +21,34 @@ import { Link } from "react-router-dom";
 import ChatHistory from "components/ChatComp/ChatHistory";
 import ChatContainer from "components/ChatComp/ChatContainer";
 import ProfilePictue from 'components/ProfilePicUpdate';
+import axios from "axios";
 
 
 
 export default function Buissnessplan() {
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = ''; // This line is necessary for Chrome
-      return ''; // This line is necessary for Firefox
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
+  
+    useEffect(() => {
+      const handleBeforeUnload = (event) => {
+        // Send a request to the backend
+        axios.delete('http://localhost:3000/delete-files')
+    
+          .catch(error => {
+            console.error('Error:', error);
+          });
+  
+        // Prevent the default behavior of the beforeunload event
+        event.preventDefault();
+        event.returnValue = ''; // This line is necessary for Chrome
+        return ''; // This line is necessary for Firefox
+      };
+  
+      window.addEventListener('beforeunload', handleBeforeUnload);
+  
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }, []);
 
 
 

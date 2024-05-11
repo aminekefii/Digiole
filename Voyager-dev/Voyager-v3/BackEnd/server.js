@@ -571,8 +571,28 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
 });
 
 
-
-
+///////////////////////////////////////////////////////////////////////////////////////
+app.delete('/delete-files', (req, res) => {
+  // Get the list of files in the uploads folder
+  fs.readdir(uploadFolder, (err, files) => {
+    if (err) {
+      console.error('Error reading directory:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+    
+    // Iterate through the files and delete them
+    files.forEach(file => {
+      fs.unlink(path.join(uploadFolder, file), err => {
+        if (err) {
+          console.error('Error deleting file:', err);
+        }
+      });
+    });
+    
+    // Respond with a success message
+    res.status(200).send('Files deleted successfully');
+  });
+});
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // Route to process files using Python script
