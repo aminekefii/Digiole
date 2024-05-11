@@ -585,7 +585,7 @@ app.post('/upload', verifyToken, async (req, res) => {
 
 app.get('/uploadedFiles', verifyToken, async (req, res) => {
   try {
-    const userId = req.params.userId; // Extract user ID from URL parameter
+    const userId = req.user.uid; // Extract user ID from decoded token
     const bucket = admin.storage().bucket();
     const [files] = await bucket.getFiles({ prefix: `users/${userId}/uploadedFiles/` });
 
@@ -593,7 +593,7 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
     const fileNames = files.map(file => {
       return {
         name: file.name.split('/').pop(), // Extract only the file name from the full path
-        url: file.metadata.mediaLink // Get the download URL for the file
+        url: `https://storage.googleapis.com/${bucket.name}/${file.name}` // Get the download URL for the file
       };
     });
 
@@ -604,6 +604,7 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve files' });
   }
 });
+
 
 
 
