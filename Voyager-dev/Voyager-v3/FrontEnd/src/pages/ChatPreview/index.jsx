@@ -117,7 +117,7 @@ export default function ChatPreview() {
           justifyContent="space-between"
           alignItems="start"
           maxW="1341px"
-          w="80%"
+          w="100%"
           gap="20px"
           px="0px"
           mx="auto"
@@ -131,7 +131,7 @@ export default function ChatPreview() {
 
         <Flex
       flexDirection="column"
-      width="50%"
+      width="100%"
       mr="300px"
       justifyContent="center"
       position="relative"
