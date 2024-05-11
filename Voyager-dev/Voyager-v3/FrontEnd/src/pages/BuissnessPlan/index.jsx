@@ -1,4 +1,6 @@
 import React from "react";
+import{ useState, useEffect, useContext } from "react";
+
 import { Helmet } from "react-helmet";
 import {
   InputLeftElement,
@@ -23,6 +25,23 @@ import ProfilePictue from 'components/ProfilePicUpdate';
 
 
 export default function Buissnessplan() {
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ''; // This line is necessary for Chrome
+      return ''; // This line is necessary for Firefox
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+
+
 
   const handleLogout = () => {
     doSignOut().then(() => {
