@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from '../../components/contexts/authContext/index'; 
 import { doSignOut } from '../../components/firebase/auth';
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Link } from "react-router-dom";
 
@@ -60,6 +60,29 @@ export default function ChatHistoryList() {
     fetchThreads();
   }, [currentUser]);
 
+
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const token = await currentUser.getIdToken(true);
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        };
+        const response = await axios.get(`http://localhost:3000/uploadedFiles`, requestOptions);
+        const filesData = response.data.files;
+        setFiles(filesData);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      }
+    };
+
+    fetchFiles();
+  }, [currentUser]);
 
 
   
@@ -136,9 +159,9 @@ export default function ChatHistoryList() {
             p={{ md: "", base: "20px" }}
           >
        
+<Flex w="60%" float="left">
 
-
-       <TableContainer w="60%" float="left">
+       <TableContainer >
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -178,8 +201,34 @@ export default function ChatHistoryList() {
 </Tbody>
       </Table>
     </TableContainer>
+    </Flex>
 
 
+
+
+    
+<Flex w="40%" float="right">
+              <TableContainer >
+                <Table variant="simple">
+              
+
+                  <Thead>
+                    <Tr>
+                      <Th>File Name</Th>
+                      <Th>Download URL</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {files.map((file, index) => (
+                      <Tr key={index}>
+                        <Td>{file.name}</Td>
+                        <Td>{file.url}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </Flex>
 
         
           </Container>

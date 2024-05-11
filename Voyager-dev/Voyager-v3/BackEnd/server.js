@@ -440,10 +440,10 @@ app.post('/updateAndGenerate/:uid/:threadId', async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-/*// File upload functionality
+// File upload functionality
 const uploadFolder = path.join(__dirname, './');
-
-const storage = multer.diskStorage({
+const storage = admin.storage().bucket();
+const multerStorage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, uploadFolder); 
   },
@@ -453,12 +453,11 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({
-  storage,
+  storage: multerStorage,
   limits: { fileSize: 1024 * 1024 * 10 }, // 10MB limit
 }).single('file');
 
-
-app.post('/upload',verifyToken, async (req, res) => {
+app.post('/upload', verifyToken, async (req, res) => {
   const userId = req.user.uid; // Extract user ID from decoded token
   upload(req, res, async (err) => {
     if (err) {
@@ -468,7 +467,14 @@ app.post('/upload',verifyToken, async (req, res) => {
 
     try {
       const fileName = req.file.filename;
-      
+      const filePath = path.join(uploadFolder, fileName);
+
+      // Save the file to Firebase Storage
+      const firebaseStoragePath = `users/${userId}/uploadedFiles/${fileName}`;
+      await storage.upload(filePath, {
+        destination: firebaseStoragePath
+      });
+
       // Load assistant details from file
       const assistantFilePath = "./voyager_assistant.json";
       const assistantData = await fsPromises.readFile(assistantFilePath, "utf8");
@@ -476,7 +482,7 @@ app.post('/upload',verifyToken, async (req, res) => {
 
       // Upload the file to OpenAI
       const file = await openai.files.create({
-        file: fs.createReadStream(fileName),
+        file: fs.createReadStream(filePath),
         purpose: "assistants",
       });
 
@@ -498,19 +504,22 @@ app.post('/upload',verifyToken, async (req, res) => {
       console.log("File uploaded and successfully added to assistant\n");
 
       // Send the file ID back to the frontend
-      res.status(200).json({ fileId: file.id });
+      res.status(200).json({ fileId: file.id, firebasePath: firebaseStoragePath });
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Failed to upload file' });
     }
   });
-});*/
+});
 
-
+/*
 const upload = multer({
   storage: multer.memoryStorage(), // Use memory storage for multer
   limits: { fileSize: 1024 * 1024 * 10 }, // 10MB limit
 }).single('file');
+
+
+// Assuming `upload` middleware is defined elsewhere
 
 app.post('/upload', verifyToken, async (req, res) => {
   const userId = req.user.uid; // Extract user ID from decoded token
@@ -526,7 +535,8 @@ app.post('/upload', verifyToken, async (req, res) => {
 
       // Save the buffer as a file to Firebase Storage
       const bucket = admin.storage().bucket();
-      const file = bucket.file(`users/${userId}/uploadedFiles/${Date.now()}_${fileName}`);
+      const fileDestination = `users/${userId}/uploadedFiles/${Date.now()}_${fileName}`;
+      const file = bucket.file(fileDestination);
       await file.save(fileBuffer, {
         metadata: {
           contentType: req.file.mimetype,
@@ -535,6 +545,34 @@ app.post('/upload', verifyToken, async (req, res) => {
 
       console.log('File uploaded to Firebase Storage');
 
+      // Load assistant details from file
+      const assistantFilePath = "./voyager_assistant.json";
+      const assistantData = await fsPromises.readFile(assistantFilePath, "utf8");
+      const assistantDetails = JSON.parse(assistantData);
+
+      // Upload the file to OpenAI
+      const openaiFile = await openai.files.create({
+        file: fileBuffer, // Pass the buffer directly
+        purpose: "assistants",
+      });
+
+      // Retrieve existing file IDs from assistantDetails or initialize to an empty array
+      let existingFileIds = assistantDetails.file_ids || [];
+
+      // Update the assistant with the new file ID
+      await openai.beta.assistants.update(assistantDetails.assistantId, {
+        file_ids: [...existingFileIds, openaiFile.id],
+      });
+
+      // Update local assistantDetails and save to assistant.json
+      assistantDetails.file_ids = [...existingFileIds, openaiFile.id];
+      await fsPromises.writeFile(
+        assistantFilePath,
+        JSON.stringify(assistantDetails, null, 2)
+      );
+
+      console.log("File uploaded and successfully added to assistant\n");
+
       // Send success response
       res.status(200).json({ message: 'File uploaded successfully' });
     } catch (error) {
@@ -542,9 +580,30 @@ app.post('/upload', verifyToken, async (req, res) => {
       res.status(500).json({ error: 'Failed to upload file' });
     }
   });
+});*/
+///////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/uploadedFiles', verifyToken, async (req, res) => {
+  try {
+    const userId = req.params.userId; // Extract user ID from URL parameter
+    const bucket = admin.storage().bucket();
+    const [files] = await bucket.getFiles({ prefix: `users/${userId}/uploadedFiles/` });
+
+    // Extract file names from the files array
+    const fileNames = files.map(file => {
+      return {
+        name: file.name.split('/').pop(), // Extract only the file name from the full path
+        url: file.metadata.mediaLink // Get the download URL for the file
+      };
+    });
+
+    // Send the list of file names and download URLs as response
+    res.status(200).json({ files: fileNames });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to retrieve files' });
+  }
 });
-
-
 
 
 
