@@ -221,9 +221,8 @@ export default function ChatHistoryList() {
                   <Tbody>
                     {files.map((file, index) => (
                       <Tr key={index}>
-                     <Td>
-  <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name}</a>
-</Td>
+                        <Td>{file.name}</Td>
+                        
 <Td>
   <a href={file.url} target="_blank" rel="noopener noreferrer">{file.url}</a>
 </Td>

@@ -45,13 +45,7 @@ const ChatHistory = () => {
           New chat
         </Button>
       </Box>
-      <Flex gap="9px" alignItems="center">
-     
-        <Image src="images/img_settings_gray_700_01.svg" h="24px" w="24px" />
-        <Text color="gray.700_01" letterSpacing="-0.05px" alignSelf="start">
-          New Business Plan 
-        </Text>
-      </Flex>
+   
     </Flex>
   );
 };
