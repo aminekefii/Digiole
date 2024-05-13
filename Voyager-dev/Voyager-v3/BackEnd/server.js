@@ -299,14 +299,23 @@ app.post("/chat", verifyToken, async (req, res) => {
 
       // Check if the assistant provided a link
       const assistantResponse = allMessages.data[0].content[0].text.value;
-      const linkRegex = /(https?:\/\/[^\s]+)/;
+
+
+      //const linkRegex = /(https?:\/\/[^\s]+)/;
 
       // If a link is found, include it in the response
       let response = assistantResponse;
-      const linkMatch = assistantResponse.match(linkRegex);
+
+
+     /* const linkMatch = assistantResponse.match(linkRegex);
       if (linkMatch) {
         response += ` Download your file <a href="${linkMatch[0]}">here</a>`;
-      }
+      }*/
+
+
+
+
+
 
       // Send the response back to the front end
       res.status(200).json({
