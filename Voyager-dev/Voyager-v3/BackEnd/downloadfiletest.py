@@ -2,25 +2,17 @@ import sys
 from openai import OpenAI
 from colorama import Fore
 
-def main(file_id):
-    api_key = ""
+def main(file_ids):
     output_path = './uploads/buissnessplan.txt'
 
-    def write_file(file_id, output_path=output_path):
-    file_data = client.files.content(file_id)
-    file_content = file_data.read().decode('utf-8')
-
-    # Find the index of the delimiter line
-    delimiter_index = file_content.find('#' * 100)
-
-    if delimiter_index != -1:
-        # Write only the content before the delimiter to the file
-        file_content_to_write = file_content[:delimiter_index]
-    else:
-        file_content_to_write = file_content
-
-    with open(output_path, "ab") as file:
-        file.write(file_content_to_write.encode())
+    def write_file(file_id, count, output_path=output_path):
+        file_data = client.files.content(file_id)
+        file_content = file_data.read()
+        separator_start = f'\n\n\n\nFILE # {count + 1}\n\n\n\n'
+       
+        with open(output_path, "ab") as file:
+            file.write(separator_start.encode())
+            file.write(file_content.rstrip(b'# \n').rstrip(b'#').rstrip(b' \n'))
 
     try:
         client = OpenAI(api_key=api_key)
@@ -29,16 +21,15 @@ def main(file_id):
 
     print(Fore.GREEN + f'API KEY: {api_key}')
 
-    print('\nFILE ID: ', file_id)
-    print('\nWriting file...\n')
-    write_file(file_id, 0)
-    print(Fore.GREEN + 'File written.\n')
+    print('\nFILE IDS: ', file_ids)
+    print('\nNUMBER OF FILE IDS: ', len(file_ids))
+    for count, file_id in enumerate(file_ids):
+        print(Fore.GREEN + f'\nWriting file #{count + 1}...\n')
+        write_file(file_id, count)
+        print(Fore.GREEN + f'File {count + 1} written.\n')
 
     print('Done.')
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <file_id>")
-        sys.exit(1)
-    file_id = sys.argv[1]
-    main(file_id)
+    file_ids = sys.argv[1:]
+    main(file_ids)
