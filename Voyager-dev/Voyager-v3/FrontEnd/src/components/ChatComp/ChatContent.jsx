@@ -4,6 +4,9 @@ import TextToSpeech from 'services/api/TextToSpeech';
 import { useState, useEffect, useContext } from 'react';
 import { auth } from '../firebase/firebase';
 import { AuthContext } from '../contexts/authContext';
+import "../../styles/linebreak.css"; 
+
+
 const ChatContent = ({ messages }) => {
   // Filter out the first user message ("Hello")
   const filteredMessages = messages.filter((message, index) => {
@@ -50,10 +53,11 @@ useEffect(() => {
               <Heading as="h1">{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
             </Flex>
 
-            <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%" mt="8px">
-              {message.text}
-              {message.role === 'assistant' && <TextToSpeech text={message.text} />}
-            </Text>
+            <Text color="blue_gray.900_01" letterSpacing="-0.05px" lineHeight="140%" mt="8px" className='display-linebreak'>
+  {message.text}
+  {message.role === 'assistant' && <TextToSpeech text={message.text} />}
+</Text>
+
           </Flex>
         ))}
       </Box>
