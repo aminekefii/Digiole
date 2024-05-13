@@ -30,20 +30,22 @@ const ChatHistory = () => {
         </Button>
       </Box>
     <Box>
-      <Button
-         as={Link}
-         to=""
-          size="2xl"
-          variant="outline"
-          colorScheme="indigo_900"
-          h="30px"
-          gap="35px"
-          w="150px"
-          borderRadius="8px"
-          px={{ base: "20px", sm: "" }}
-        >
-          New chat
-        </Button>
+    <Button
+  as={Link}
+  to=""
+  size="2xl"
+  variant="outline"
+  colorScheme="indigo_900"
+  h="30px"
+  gap="35px"
+  w="150px"
+  borderRadius="8px"
+  px={{ base: "20px", sm: "" }}
+  onClick={() => window.location.reload()}
+>
+  New chat
+</Button>
+
       </Box>
    
     </Flex>

@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Image, Flex, Box, Heading, Text, List, ListItem, ListIcon } from "@chakra-ui/react";
 import { CheckCircleIcon } from '@chakra-ui/icons'; // Assuming you want to use icons for content
+import "../../styles/linebreak.css"; 
 
 import {
   Button,
@@ -165,8 +166,14 @@ export default function ChatPreview() {
                     {Array.isArray(message.content) ? (
                       message.content.map((content, index) => (
                         <ListItem key={index}>
-                          <ListIcon as={CheckCircleIcon} color="green.500" />
-                          {content}
+                          <ListIcon as={CheckCircleIcon} color="green.500" className='display-linebreak'/>
+                          <Text className='display-linebreak'>
+                          {message.role === 'assistant' ? (
+           content.replace(/\./g, '.<br>')
+          ) : (
+            content
+          )}
+                          </Text>
                         </ListItem>
                       ))
                     ) : (
