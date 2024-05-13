@@ -3,18 +3,19 @@ import json
 import subprocess
 
 def process_message_content(assistant_response, annotations):
-    # Initialize a variable to store the first file ID
     file_id = None
-    file_txt= None
-    # Collect the first file ID from annotations
+    file_txt = None
+    
+    # Collect the first file ID and file text from annotations if available
     if annotations:
         file_id = annotations[0]['file_path']['file_id']
-        file_txt= annotations[0]['text']
-    # Append file ID to the response if there is any
-    if file_id:
-        assistant_response += f"\nFile ID: {file_id}"
+        file_txt = annotations[0]['text']
     
-    return assistant_response, file_id
+    # Check if file text exists in assistant_response and replace it with file ID
+    if file_id and file_txt and file_txt in assistant_response:
+        assistant_response = assistant_response.replace(file_txt, f"File ID: {file_id}")
+    
+    return assistant_response
 
 def main():
     # Assuming the JSON string is passed as the first command-line argument
@@ -25,11 +26,12 @@ def main():
     annotations = args['annotations']
 
     # Process the message content
-    processed_message_content, file_id = process_message_content(assistant_response, annotations)
+    processed_message_content = process_message_content(assistant_response, annotations)
     print(processed_message_content)
 
     # Call the second script to download the file if file ID is available
-    if file_id:
+    if annotations and 'file_path' in annotations[0]:
+        file_id = annotations[0]['file_path']['file_id']
         subprocess.run(['python', 'DownloadFile.py', file_id])
 
 if __name__ == "__main__":

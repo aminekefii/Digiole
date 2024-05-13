@@ -3,7 +3,6 @@ from openai import OpenAI
 from colorama import Fore
 
 def main(file_ids):
-    api_key = ""
     output_path = './uploads/buissnessplan.txt'
 
     def write_file(file_id, count, output_path=output_path):
