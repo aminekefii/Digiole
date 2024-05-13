@@ -594,40 +594,56 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const assistantFilePath = './voyager_assistant.json';
+const downloadFolder = './downloads';
 
 app.delete('/delete-files', (req, res) => {
   // Get the list of files in the uploads folder
-  fs.readdir(uploadFolder, (err, files) => {
+  fs.readdir(uploadFolder, (err, uploadFiles) => {
     if (err) {
-      console.error('Error reading directory:', err);
+      console.error('Error reading uploads directory:', err);
       return res.status(500).send('Internal Server Error');
     }
     
     // Iterate through the files in the uploads folder and delete them
-    files.forEach(file => {
-      fs.unlink(path.join(uploadFolder, file), err => {
+    uploadFiles.forEach(uploadFile => {
+      fs.unlink(path.join(uploadFolder, uploadFile), err => {
         if (err) {
-          console.error('Error deleting file:', err);
+          console.error('Error deleting upload file:', err);
         }
       });
     });
-    
-    // Respond with a success message for the files in the uploads folder
-    console.log('Files in the uploads folder deleted successfully');
-  });
 
-  // Delete the voyager_assistant.json file
-  fs.unlink(assistantFilePath, err => {
-    if (err) {
-      console.error('Error deleting voyager_assistant.json:', err);
-      return res.status(500).send('Internal Server Error');
-    }
-    
-    // Respond with a success message for the voyager_assistant.json file
-    console.log('voyager_assistant.json file deleted successfully');
-    res.status(200).send('Files deleted successfully');
+    // Get the list of files in the downloads folder
+    fs.readdir(downloadFolder, (err, downloadFiles) => {
+      if (err) {
+        console.error('Error reading downloads directory:', err);
+        return res.status(500).send('Internal Server Error');
+      }
+      
+      // Iterate through the files in the downloads folder and delete them
+      downloadFiles.forEach(downloadFile => {
+        fs.unlink(path.join(downloadFolder, downloadFile), err => {
+          if (err) {
+            console.error('Error deleting download file:', err);
+          }
+        });
+      });
+
+      // Delete the voyager_assistant.json file
+      fs.unlink(assistantFilePath, err => {
+        if (err) {
+          console.error('Error deleting voyager_assistant.json:', err);
+          return res.status(500).send('Internal Server Error');
+        }
+        
+        // Respond with a success message for the voyager_assistant.json file
+        console.log('voyager_assistant.json file deleted successfully');
+        res.status(200).send('Files deleted successfully');
+      });
+    });
   });
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
