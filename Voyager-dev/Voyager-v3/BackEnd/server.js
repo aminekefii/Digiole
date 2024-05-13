@@ -222,165 +222,140 @@ async function saveThreadID(newThreadID, userId) {
 app.post("/chat", verifyToken, async (req, res) => {
   const userId = req.user.uid;
   if (!threadByUser[userId]) {
-    try {
-      const myThread = await openai.beta.threads.create();
-      console.log("New thread created with ID:", myThread.id);
-      threadByUser[userId] = myThread.id;
+      try {
+          const myThread = await openai.beta.threads.create();
+          console.log("New thread created with ID:", myThread.id);
+          threadByUser[userId] = myThread.id;
 
-      // Save the new thread ID and upload details to Storage
-      //await saveThreadID(myThread.id); // Save the thread ID
+          // Save the new thread ID and upload details to Storage
+          //await saveThreadID(myThread.id); // Save the thread ID
 
-      // Save the chat to Firebase
-      const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(myThread.id);
-      await chatRef.set({ messages: [] }); // Initialize messages array
+          // Save the chat to Firebase
+          const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(myThread.id);
+          await chatRef.set({ messages: [] }); // Initialize messages array
 
-    } catch (error) {
-      console.error("Error handling thread creation:", error);
-      return res.status(500).json({ error: "Internal server error" });
-    }
+      } catch (error) {
+          console.error("Error handling thread creation:", error);
+          return res.status(500).json({ error: "Internal server error" });
+      }
   }
 
   const userMessage = req.body.message;
 
   try {
-    const assistantDetails = await getOrCreateAssistant();
+      const assistantDetails = await getOrCreateAssistant();
 
-    // Add a Message to the Thread
-    const myThreadMessage = await openai.beta.threads.messages.create(
-      threadByUser[userId], // Use the stored thread ID for this user
-      {
-        role: "user",
-        content: userMessage,
-      }
-    );
-    console.log("This is the message object: ", myThreadMessage, "\n");
-
-    // Run the Assistant
-    const myRun = await openai.beta.threads.runs.create(
-      threadByUser[userId], // Use the stored thread ID for this user
-      {
-        assistant_id: assistantDetails.assistantId,
-        instructions: assistantDetails.instructions,
-        tools: [
-          { type: "code_interpreter" }, // Code interpreter tool
-          { type: "retrieval" }, // Retrieval tool
-        ],
-      }
-    );
-    console.log("This is the run object: ", myRun, "\n");
-
-    // Periodically retrieve the Run to check its status
-    const retrieveRun = async () => {
-      let keepRetrievingRun;
-
-      while (myRun.status !== "completed") {
-        keepRetrievingRun = await openai.beta.threads.runs.retrieve(
+      // Add a Message to the Thread
+      const myThreadMessage = await openai.beta.threads.messages.create(
           threadByUser[userId], // Use the stored thread ID for this user
-          myRun.id
-        );
-
-        console.log(`Run status: ${keepRetrievingRun.status}`);
-
-        if (keepRetrievingRun.status === "completed") {
-          console.log("\n");
-          break;
-        }
-      }
-    };
-    retrieveRun();
-
-    // Retrieve the messages added by the Assistant to the Thread
-    const waitForAssistantMessage = async () => {
-      await retrieveRun();
-
-      const allMessages = await openai.beta.threads.messages.list(
-        threadByUser[userId] // Use the stored thread ID for this user
+          {
+              role: "user",
+              content: userMessage,
+          }
       );
+      console.log("This is the message object: ", myThreadMessage, "\n");
 
-      // Check if the assistant provided a link
-      const assistantResponse = allMessages.data[0].content[0].text.value;
+      // Run the Assistant
+      const myRun = await openai.beta.threads.runs.create(
+          threadByUser[userId], // Use the stored thread ID for this user
+          {
+              assistant_id: assistantDetails.assistantId,
+              instructions: assistantDetails.instructions,
+              tools: [
+                  { type: "code_interpreter" }, // Code interpreter tool
+                  { type: "retrieval" }, // Retrieval tool
+              ],
+          }
+      );
+      console.log("This is the run object: ", myRun, "\n");
 
+      // Periodically retrieve the Run to check its status
+      const retrieveRun = async () => {
+          let keepRetrievingRun;
 
+          while (myRun.status !== "completed") {
+              keepRetrievingRun = await openai.beta.threads.runs.retrieve(
+                  threadByUser[userId], // Use the stored thread ID for this user
+                  myRun.id
+              );
 
+              console.log(`Run status: ${keepRetrievingRun.status}`);
 
+              if (keepRetrievingRun.status === "completed") {
+                  console.log("\n");
+                  break;
+              }
+          }
+      };
+      retrieveRun();
 
-      const pythonProcess = spawn("python", [
-        "./MessageContent.py",
-        assistantResponse,
-      ]);
-  
-      //const linkRegex = /(https?:\/\/[^\s]+)/;
-
-      // If a link is found, include it in the response
-      //let response = assistantResponse;
-
-
-     /* const linkMatch = assistantResponse.match(linkRegex);
-      if (linkMatch) {
-        response += ` Download your file <a href="${linkMatch[0]}">here</a>`;
-      }*/
-
-
-
-
+      // Retrieve the messages added by the Assistant to the Thread
       const waitForAssistantMessage = async () => {
-        await retrieveRun();
-    
-        const allMessages = await openai.beta.threads.messages.list(
-            threadByUser[userId] // Use the stored thread ID for this user
-        );
-    
-        // Check if the assistant provided a link
-        const assistantResponse = allMessages.data[0].content[0].text.value;
-    
-        const pythonProcess = spawn("python", [
+          await retrieveRun();
+
+          const allMessages = await openai.beta.threads.messages.list(
+              threadByUser[userId] // Use the stored thread ID for this user
+          );
+
+          // Check if the assistant provided a link
+          const assistantResponse = allMessages.data[0].content[0].text.value;
+          const annotations = allMessages.data[0].content[0].text.annotations
+          console.log("annotations: ", annotations);
+
+          const pythonProcess = spawn("python", [
             "./MessageContent.py",
-            assistantResponse,
+            JSON.stringify({ assistantResponse, annotations }), // Pass both response and annotations as JSON string
         ]);
-    
-        let processedResponse = "";
-        pythonProcess.stdout.on('data', (data) => {
-            processedResponse += data.toString();
-        });
-    
-        pythonProcess.stderr.on('data', (data) => {
-            console.error(`Error: ${data}`);
-        });
-    
-        pythonProcess.on('close', (code) => {
-            if (code === 0) {
-                // Send the processed response back to the front end
-                res.status(200).json({
-                    response: processedResponse,
-                });
-    
-                console.log(
-                    "------------------------------------------------------------ \n"
-                );
-    
-                console.log("User: ", myThreadMessage.content[0].text.value);
-                console.log("Assistant: ", processedResponse);
-    
-                // Save the user and assistant messages to Firebase
-                const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
-                await chatRef.update({
-                    messages: admin.firestore.FieldValue.arrayUnion(
-                        { role: "user", content: myThreadMessage.content[0].text.value },
-                        { role: "assistant", content: processedResponse }
-                    ),
-                });
-            } else {
-                console.error(`Python process exited with code ${code}`);
-                res.status(500).json({ error: "Internal server error" });
-            }
-        });
-    };
-    
-    waitForAssistantMessage().catch((error) => {
-        console.error("Error:", error);
-        res.status(500).json({ error: "Internal server error" });
-    });
-    
+
+          let processedResponse = "";
+          pythonProcess.stdout.on('data', (data) => {
+              processedResponse += data.toString();
+          });
+
+          pythonProcess.stderr.on('data', (data) => {
+              console.error(`Error: ${data}`);
+          });
+
+          pythonProcess.on('close', async (code) => {
+              if (code === 0) {
+                  // Send the processed response back to the front end
+                  res.status(200).json({
+                      response: processedResponse,
+                  });
+
+                  console.log(
+                      "------------------------------------------------------------ \n"
+                  );
+
+                  console.log("User: ", myThreadMessage.content[0].text.value);
+                  console.log("Assistant: ", processedResponse);
+
+                  // Save the user and assistant messages to Firebase
+                  const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
+                  await chatRef.update({
+                      messages: admin.firestore.FieldValue.arrayUnion(
+                          { role: "user", content: myThreadMessage.content[0].text.value },
+                          { role: "assistant", content: processedResponse }
+                      ),
+                  });
+              } else {
+                  console.error(`Python process exited with code ${code}`);
+                  res.status(500).json({ error: "Internal server error" });
+              }
+          });
+      };
+
+      waitForAssistantMessage().catch((error) => {
+          console.error("Error:", error);
+          res.status(500).json({ error: "Internal server error" });
+      });
+
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 
 

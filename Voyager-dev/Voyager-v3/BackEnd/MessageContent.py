@@ -1,41 +1,32 @@
-from openai import OpenAI
 import sys
+import json
 
-def process_message_content(assistantResponse):
-    annotations = assistantResponse.annotations
-    citations = []
+def process_message_content(assistant_response, annotations):
+    # Initialize a list to store file IDs
+    file_ids = []
+    
+    # Collect file IDs from annotations
+    for annotation in annotations:
+        file_id = annotation['file_path']['file_id']
+        file_ids.append(f"File ID: {file_id}")
+    
+    # Append file IDs to the response if there are any
+    if file_ids:
+        assistant_response += '\n' + '\n'.join(file_ids)
+    
+    return assistant_response
 
-    # Iterate over the annotations and add footnotes
-    for index, annotation in enumerate(annotations):
-        # Replace the text with a footnote
-        assistantResponse = assistantResponse.replace(annotation.text, f' [{index}]')
-        # Gather citations based on annotation attributes
-        if (file_citation := getattr(annotation, 'file_citation', None)):
-            citations.append(f'[{index}] {file_citation.quote} from {file_citation.filename}')
-        elif (file_path := getattr(annotation, 'file_path', None)):
-            citations.append(f'[{index}] Click <here> to download {file_path.filename}')
-            # Note: File download functionality not implemented above for brevity
+def main():
+    # Assuming the JSON string is passed as the first command-line argument
+    args_json = sys.argv[1]
+    args = json.loads(args_json)
+    
+    assistant_response = args['assistantResponse']
+    annotations = args['annotations']
 
-    # Add footnotes to the end of the message before displaying to user
-    assistantResponse += '\n' + '\n'.join(citations)
-    return assistantResponse
-
-def main(assistantResponse):
-    api_key = "YOUR_API_KEY"
-    try:
-        client = OpenAI(api_key=api_key)
-        if not client.api_key:
-            raise ValueError("API key is missing.")
-    except ValueError as e:
-        raise ValueError(f"Error Occurred: {e}")
-
-    processed_message_content = process_message_content(assistantResponse)
+    # Process the message content
+    processed_message_content = process_message_content(assistant_response, annotations)
     print(processed_message_content)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python script.py ASSISTANT_RESPONSE")
-        sys.exit(1)
-
-    assistantResponse = sys.argv[1]
-    main(assistantResponse)
+    main()
