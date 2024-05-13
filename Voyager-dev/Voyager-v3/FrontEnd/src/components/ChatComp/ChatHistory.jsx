@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const ChatHistory = () => {
   const handleDownload = async () => {
-    const filename = "EcoClean_Solutions_Business_Plan.txt"; 
+    const filename = "businessplan.txt"; // Assuming the file name is "businessplan.csv"
     try {
       const response = await axios.get(`http://localhost:3000/downloads/${filename}`, { responseType: "blob" });
       const url = URL.createObjectURL(response.data);
@@ -71,21 +71,7 @@ const ChatHistory = () => {
           New chat
         </Button>
       </Box>
-      <Box>
-      <Button
-          onClick={handleDownload}
-          size="2xl"
-          variant="outline"
-          colorScheme="indigo_900"
-          h="30px"
-          gap="35px"
-          w="200px"
-          borderRadius="8px"
-          px={{ base: "20px", sm: "" }}
-        >
-          Download Business Plan
-        </Button>
-      </Box>
+      
     </Flex>
   );
 };
