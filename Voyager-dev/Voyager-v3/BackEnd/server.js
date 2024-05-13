@@ -301,10 +301,18 @@ app.post("/chat", verifyToken, async (req, res) => {
       const assistantResponse = allMessages.data[0].content[0].text.value;
 
 
+
+
+
+      const pythonProcess = spawn("python", [
+        "./MessageContent.py",
+        assistantResponse,
+      ]);
+  
       //const linkRegex = /(https?:\/\/[^\s]+)/;
 
       // If a link is found, include it in the response
-      let response = assistantResponse;
+      //let response = assistantResponse;
 
 
      /* const linkMatch = assistantResponse.match(linkRegex);
@@ -315,35 +323,64 @@ app.post("/chat", verifyToken, async (req, res) => {
 
 
 
-
-
-      // Send the response back to the front end
-      res.status(200).json({
-        response,
-      });
-      console.log(
-        "------------------------------------------------------------ \n"
-      );
-
-      console.log("User: ", myThreadMessage.content[0].text.value);
-      console.log("Assistant: ", response);
-
-      // Save the user and assistant messages to Firebase
-      const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
-      await chatRef.update({
-        messages: admin.firestore.FieldValue.arrayUnion(
-          { role: "user", content: myThreadMessage.content[0].text.value },
-          { role: "assistant", content: response }
-        ),
-      });
+      const waitForAssistantMessage = async () => {
+        await retrieveRun();
+    
+        const allMessages = await openai.beta.threads.messages.list(
+            threadByUser[userId] // Use the stored thread ID for this user
+        );
+    
+        // Check if the assistant provided a link
+        const assistantResponse = allMessages.data[0].content[0].text.value;
+    
+        const pythonProcess = spawn("python", [
+            "./MessageContent.py",
+            assistantResponse,
+        ]);
+    
+        let processedResponse = "";
+        pythonProcess.stdout.on('data', (data) => {
+            processedResponse += data.toString();
+        });
+    
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Error: ${data}`);
+        });
+    
+        pythonProcess.on('close', (code) => {
+            if (code === 0) {
+                // Send the processed response back to the front end
+                res.status(200).json({
+                    response: processedResponse,
+                });
+    
+                console.log(
+                    "------------------------------------------------------------ \n"
+                );
+    
+                console.log("User: ", myThreadMessage.content[0].text.value);
+                console.log("Assistant: ", processedResponse);
+    
+                // Save the user and assistant messages to Firebase
+                const chatRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadByUser[userId]);
+                await chatRef.update({
+                    messages: admin.firestore.FieldValue.arrayUnion(
+                        { role: "user", content: myThreadMessage.content[0].text.value },
+                        { role: "assistant", content: processedResponse }
+                    ),
+                });
+            } else {
+                console.error(`Python process exited with code ${code}`);
+                res.status(500).json({ error: "Internal server error" });
+            }
+        });
     };
-    waitForAssistantMessage();
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
+    
+    waitForAssistantMessage().catch((error) => {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    });
+    
 
 
 
