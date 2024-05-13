@@ -673,6 +673,25 @@ app.post("/process-files", async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+// Serve files from the "downloads" folder
+app.get('/downloads/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, '/downloads', filename);
+
+  res.download(filePath, (err) => {
+    if (err) {
+      console.error('Error downloading file:', err);
+      res.status(500).send('Error downloading file');
+    }
+  });
+});
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 app.get('/threads', verifyToken, async (req, res) => {
   const userId = req.user.uid; // Extract user ID from decoded token
 

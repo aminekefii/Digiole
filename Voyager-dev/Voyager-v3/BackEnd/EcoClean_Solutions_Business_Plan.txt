@@ -1,12 +1,4 @@
 
-
-
-
-FILE # 1
-
-
-
-
 Name of Business: EcoClean Solutions
 Location: Headquarters in San Francisco, California
 Legal Structure: Limited Liability Company (LLC)
