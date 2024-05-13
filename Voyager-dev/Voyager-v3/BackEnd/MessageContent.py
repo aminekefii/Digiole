@@ -1,3 +1,4 @@
+import re
 import sys
 import json
 import subprocess
@@ -13,8 +14,16 @@ def process_message_content(assistant_response, annotations):
     
     # Check if file text exists in assistant_response and replace it with file ID
     if file_id and file_txt and file_txt in assistant_response:
-        assistant_response = assistant_response.replace(file_txt, f"File ID: {file_id}")
-    
+        assistant_response = assistant_response.replace(file_txt, "done!")
+
+    # Use regex to identify and remove any line containing a pattern similar to the specific line
+    pattern = r"You can download it (from|using) the link below:"
+    # Replace any line matching the pattern with an empty string
+    assistant_response = re.sub(pattern, '', assistant_response, flags=re.IGNORECASE)
+
+    # Optionally, remove any excess blank lines that might remain
+    assistant_response = '\n'.join([line for line in assistant_response.split('\n') if line.strip()])
+
     return assistant_response
 
 def main():

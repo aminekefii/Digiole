@@ -19,14 +19,9 @@ def main(file_ids):
     except ValueError as e:
         raise ValueError(f"Error Occurred: {e}")
 
-    print(Fore.GREEN + f'API KEY: {api_key}')
 
-    print('\nFILE IDS: ', file_ids)
-    print('\nNUMBER OF FILE IDS: ', len(file_ids))
     for count, file_id in enumerate(file_ids):
-        print(Fore.GREEN + f'\nWriting file #{count + 1}...\n')
         write_file(file_id, count)
-        print(Fore.GREEN + f'File {count + 1} written.\n')
 
     print('Done.')
 

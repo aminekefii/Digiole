@@ -702,7 +702,19 @@ app.get('/downloads/:filename', (req, res) => {
   });
 });
 
+app.get('/file-ready/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, '/downloads', filename);
 
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error('File not available:', err);
+      res.json({ ready: false, error: 'File not available' });
+    } else {
+      res.json({ ready: true });
+    }
+  });
+});
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
