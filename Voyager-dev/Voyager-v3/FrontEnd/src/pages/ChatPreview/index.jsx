@@ -162,24 +162,23 @@ export default function ChatPreview() {
               )}
              <Heading as="h1" ml="10px" >{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
              </Flex>
-                  <List spacing={1} ml={4}>
-                    {Array.isArray(message.content) ? (
-                      message.content.map((content, index) => (
-                        <ListItem key={index}>
-                          <ListIcon as={CheckCircleIcon} color="green.500" className='display-linebreak'/>
-                          <Text className='display-linebreak'>
-                          {message.role === 'assistant' ? (
-           content.replace(/\./g, '.<br>')
-          ) : (
-            content
-          )}
-                          </Text>
-                        </ListItem>
-                      ))
-                    ) : (
-                      <ListItem>{message.content}</ListItem>
-                    )}
-                  </List>
+             <List spacing={1} ml={4}>
+  {Array.isArray(message.content) ? (
+    message.content.map((content, index) => (
+      <ListItem key={index}>
+        <ListIcon as={CheckCircleIcon} color="green.500" />
+        <Flex direction="column">
+          {content.split('\n').map((line, idx) => (
+            <Text key={idx}>{line}</Text>
+          ))}
+        </Flex>
+      </ListItem>
+    ))
+  ) : (
+    <ListItem className='display-linebreak'>{message.content}</ListItem>
+  )}
+</List>
+
                 </ListItem>
               ))}
             </List>
