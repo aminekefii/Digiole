@@ -11,7 +11,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSigningIn, setIsSigningIn] = useState(false);
-
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!isSigningIn) {

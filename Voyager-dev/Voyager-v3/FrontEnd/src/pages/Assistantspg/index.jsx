@@ -1,15 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import { Helmet } from "react-helmet";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 import "../../styles/index.css";
 import "../../styles/font.css";
 import { Link } from "react-router-dom";
-import Header from "components/header";
 import { doSignOut } from '../../components/firebase/auth';
-import axios from 'axios';
-import { FiUpload } from 'react-icons/fi';
-import { useDropzone } from 'react-dropzone';
-import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import '../../styles/Modal.css';
@@ -26,8 +21,6 @@ export default function AssistantsPage() {
     });
   };
 
-
-
   return (
     <>
       <Helmet>
@@ -37,7 +30,6 @@ export default function AssistantsPage() {
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
-
           <Flex
             mt="-1px"
             position="relative"
@@ -50,7 +42,6 @@ export default function AssistantsPage() {
             flexDirection={{ md: 'row', base: 'row' }}
           >
             <Flex ml={{ md: "20px", base: "0px" }} w="100%" alignItems="center" >
-
               <Flex gap="12px" w={{ md: '80%', base: '100%' }} justifyContent="left" alignItems="center">
                 <Link to="/landingpage">
                   <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
@@ -68,13 +59,7 @@ export default function AssistantsPage() {
             </Flex>
 
             <Flex gap="21px" w={{ md: "6%", base: "6%" }} justifyContent="center" alignItems="center">
-
-
               <ProfilePictue></ProfilePictue>
-
-
-
-
               <Button
                 size="sm"
                 variant="outline"
@@ -87,8 +72,6 @@ export default function AssistantsPage() {
                 _hover={{ bg: '#EAF2BB', color: 'black' }}
                 fontSize={{ base: 'xs', md: 'sm' }}
                 mr="50px"
-
-
                 onClick={handleLogout}>Logout</Button>
             </Flex>
           </Flex>
@@ -96,16 +79,14 @@ export default function AssistantsPage() {
             mt="57px"
             gap="17px"
             display="flex"
-            w="100%"
+            w={{ md: "100%", base: "100%" }}
             alignItems="start"
             justifyContent="flex-start"
             maxW="90%"
             px="0px"
-
-            flexDirection={{ md: "row", base: "column" }}
-            p={{ md: "", base: "20px" }}
-            pr="270px"
-
+            flexDirection={{ md: "row", base: "row" }}
+            p={{ md: "", base: "10px" }}
+            pr={{ md: "270px", base: "100px" }}
           >
             <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "10%" }} />
             <Text
@@ -126,7 +107,7 @@ export default function AssistantsPage() {
             color="gray.600"
             mt="58px"
             fontWeight={800}
-            ml={{ md: "100px", base: "0px" }}
+            ml={{ md: "100px", base: "40px" }}
             letterSpacing="-0.29px"
             fontSize="26px"
             lineHeight="39px"
@@ -166,12 +147,7 @@ export default function AssistantsPage() {
                     Get expert guidance with our AI Business Plan Assistant
                   </Text>
                 </Flex>
-
-
                 <GetAssisant></GetAssisant>
-
-
-
               </Flex>
               <Flex
                 gap="28px"
@@ -215,7 +191,7 @@ export default function AssistantsPage() {
               size="md"
               as="h4"
               color="gray.600"
-              ml={{ md: "20px", base: "0px" }}
+              ml={{ md: "20px", base: "20px" }}
               letterSpacing="-0.29px"
               fontSize="26px"
             >
