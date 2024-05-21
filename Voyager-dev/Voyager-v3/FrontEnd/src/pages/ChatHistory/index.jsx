@@ -96,7 +96,6 @@ export default function ChatHistoryList() {
               <Link to="/landingpage">
                 <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
               </Link>
-
               <Box h="30px" ml="20px" bg="blue_gray.100" />
               <Text size="xl" color="gray.50" ml="3px">
                 | Business Plan
@@ -131,12 +130,11 @@ export default function ChatHistoryList() {
             gap="20px"
             px="0px"
             mx="auto"
-            flexDirection={{ md: "row", base: "column" }}
+            flexDirection={{ md: "row", base: "row" }}
             p={{ md: "", base: "20px" }}
           >
 
-            <Flex w="60%" float="left">
-
+            <Flex float="left" w={{ md: "60%", base: "60%" }}>
               <TableContainer >
                 <Table variant="simple">
                   <Thead>
