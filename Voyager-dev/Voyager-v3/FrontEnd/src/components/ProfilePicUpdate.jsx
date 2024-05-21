@@ -28,7 +28,7 @@ function ProfilePicUpdate() {
     try {
         const uploadToast = toast.info('Upload in progress...', {
             position: 'top-right',
-            autoClose: false, // Do not auto-close initially
+            autoClose: false, 
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

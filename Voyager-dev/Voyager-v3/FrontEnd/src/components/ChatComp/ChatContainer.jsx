@@ -68,15 +68,15 @@ const ChatContainer = () => {
     const initialMessage = "Hello";
 
     try {
-        const token = currentUser && await currentUser.getIdToken(true); // Ensure token is refreshed
+        const token = currentUser && await currentUser.getIdToken(true); 
 
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Ensure this is correctly formatted
+                'Authorization': `Bearer ${token}`, 
             },
-            body: JSON.stringify({ user: currentUser, message: initialMessage }), // Send currentUser object instead of just uid
+            body: JSON.stringify({ user: currentUser, message: initialMessage }), 
         };
 
         const response = await fetch('http://localhost:3000/chat', requestOptions);

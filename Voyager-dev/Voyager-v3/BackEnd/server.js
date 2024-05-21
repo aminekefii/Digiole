@@ -121,7 +121,7 @@ async function getOrCreateAssistant() {
         { type: "code_interpreter" }, // Code interpreter tool
         { type: "retrieval" }, // Retrieval tool
       ],
-      model: "gpt-4-turbo",
+      model: "gpt-3.5-turbo-0125",
     };
 
     const assistant = await openai.beta.assistants.create(assistantConfig);
@@ -145,9 +145,9 @@ async function getOrCreateAssistant() {
 
 
 
-// Authentication and Firebase token verification middleware
+// Authentication and Firebase token verification 
 const verifyToken = async (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]; // Get token 
+  const token = req.headers.authorization?.split(' ')[1]; 
   if (!token) {
     return res.status(401).json({ error: "Unauthorized: No token provided" });
   }
@@ -294,10 +294,10 @@ app.post("/chat", verifyToken, async (req, res) => {
           await retrieveRun();
 
           const allMessages = await openai.beta.threads.messages.list(
-              threadByUser[userId] // Use the stored thread ID for this user
+              threadByUser[userId] 
           );
 
-          // Check if the assistant provided a link
+          // Check if the assistant a file
           const assistantResponse = allMessages.data[0].content[0].text.value;
           const annotations = allMessages.data[0].content[0].text.annotations
           console.log("annotations: ", annotations);
