@@ -1,4 +1,4 @@
-import React,{ useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
 import "../../styles/index.css";
@@ -19,7 +19,7 @@ import GetAssisant from 'components/GetAssistant';
 
 export default function AssistantsPage() {
 
-  
+
   const handleLogout = () => {
     doSignOut().then(() => {
       window.location.href = '/login';
@@ -33,7 +33,7 @@ export default function AssistantsPage() {
       <Helmet>
         <title>Assistants</title>
         <meta name="description" content="Web site created using create-react-app" />
-      
+
       </Helmet>
       <Box pb={{ md: "107px", base: "20px" }} bg="white.A700_01" w="100%">
         <Flex flexDirection="column" alignItems="start">
@@ -47,47 +47,49 @@ export default function AssistantsPage() {
             alignItems="center"
             gap="20px"
             p={{ base: "20px", sm: "23px" }}
+            flexDirection={{ md: 'row', base: 'row' }}
           >
-            <Flex ml={{ md: "20px", base: "0px" }} w="18%" justifyContent="center" alignItems="center">
-                      
-            <Link to="/landingpage">  
-  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-</Link>
-<Link to="/landingpage">  
- <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
-              <Box h="23px" ml="20px" bg="blue_gray.100" w="1px" />
-              <Text
-                color="gray.50"
-                ml="12px"
-                letterSpacing= "-0.18px"
-                fontWeight={300}
-              >
-              | Entrepreneurs
-              </Text>
+            <Flex ml={{ md: "20px", base: "0px" }} w="100%" alignItems="center" >
+
+              <Flex gap="12px" w={{ md: '80%', base: '100%' }} justifyContent="left" alignItems="center">
+                <Link to="/landingpage">
+                  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+                </Link>
+                <Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px" /></Link>
+                <Text
+                  color="gray.50"
+                  ml="12px"
+                  letterSpacing="-0.18px"
+                  fontWeight={300}
+                >
+                  | Entrepreneurs
+                </Text>
+              </Flex>
             </Flex>
-            <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
+
+            <Flex gap="21px" w={{ md: "6%", base: "6%" }} justifyContent="center" alignItems="center">
 
 
-<ProfilePictue></ProfilePictue>
+              <ProfilePictue></ProfilePictue>
 
 
 
 
-              <Button 
-                    size="sm"
-                    variant="outline"
-                    colorScheme="lime_100"
-                    color="white.A700_01"
-                    letterSpacing="-0.08px"
-                    fontWeight={500}
-                    minW={{ base: '50px', md: '70px' }}
-                    borderRadius="20px"
-                    _hover={{ bg: '#EAF2BB', color: 'black' }}
-                    fontSize={{ base: 'xs', md: 'sm' }}
-                    mr="50px"
-              
-              
-              onClick={handleLogout}>Logout</Button>
+              <Button
+                size="sm"
+                variant="outline"
+                colorScheme="lime_100"
+                color="white.A700_01"
+                letterSpacing="-0.08px"
+                fontWeight={500}
+                minW={{ base: '50px', md: '70px' }}
+                borderRadius="20px"
+                _hover={{ bg: '#EAF2BB', color: 'black' }}
+                fontSize={{ base: 'xs', md: 'sm' }}
+                mr="50px"
+
+
+                onClick={handleLogout}>Logout</Button>
             </Flex>
           </Flex>
           <Container
@@ -99,16 +101,16 @@ export default function AssistantsPage() {
             justifyContent="flex-start"
             maxW="90%"
             px="0px"
-           
+
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
             pr="270px"
-            
+
           >
             <Image src="images/img_info.svg" h="24px" mt="10px" w={{ md: "24px", base: "10%" }} />
             <Text
               color="gray.900_01"
-              
+
               fontWeight={300}
               w={{ md: "97%", base: "100%" }}
               lineHeight="23px"
@@ -166,7 +168,7 @@ export default function AssistantsPage() {
                 </Flex>
 
 
-               <GetAssisant></GetAssisant>
+                <GetAssisant></GetAssisant>
 
 
 
@@ -203,7 +205,7 @@ export default function AssistantsPage() {
                   gap="8px"
                   minW="161px"
                   borderRadius="8px"
-                  zIndex={1} 
+                  zIndex={1}
                 >
                   Get Assistant
                 </Button>

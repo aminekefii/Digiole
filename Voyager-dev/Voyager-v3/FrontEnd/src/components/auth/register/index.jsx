@@ -33,9 +33,9 @@ const Register = () => {
                     progress: undefined,
                     theme: "light"
                 });
-                return; // Exit function if passwords don't match
+                return; 
             }
-    
+
             setIsRegistering(true);
             try {
                 await doCreateUserWithEmailAndPassword(email, password);
@@ -50,17 +50,17 @@ const Register = () => {
                     progress: undefined,
                     theme: "light",
                 });
-                // Redirect to login page after successful registration
+               
                 navigate('/login');
             } catch (error) {
-                let errorMessageToShow = error.message; // Default error message
-                const weakPasswordRegex = /Password should be at least (\d+) characters/; // Regex to match weak password error
-                const weakPasswordMatch = weakPasswordRegex.exec(error.message); // Check if error message contains weak password message
-                const emailInUseMessage = 'auth/email-already-in-use'; // Message for email already in use error
+                let errorMessageToShow = error.message; 
+                const weakPasswordRegex = /Password should be at least (\d+) characters/; 
+                const weakPasswordMatch = weakPasswordRegex.exec(error.message); 
+                const emailInUseMessage = 'auth/email-already-in-use'; 
                 if (weakPasswordMatch && weakPasswordMatch.length > 1) {
-                    errorMessageToShow = weakPasswordMatch[0]; // Set error message to the matched weak password message
+                    errorMessageToShow = weakPasswordMatch[0]; 
                 } else if (error.code === emailInUseMessage) {
-                    errorMessageToShow = 'The email address is already in use.'; // Set error message to email already in use message
+                    errorMessageToShow = 'The email address is already in use.'; 
                 }
                 setErrorMessage(errorMessageToShow);
                 toast.error(errorMessageToShow, {
@@ -78,17 +78,17 @@ const Register = () => {
             }
         }
     };
-    
+
 
     return (
         <div style={{ backgroundImage: "url('images/16.png')", backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
             <Container maxW="1268px" w="100%" px="0px" mx="auto" mb="30px" p={{ md: '', base: '20px' }}>
                 <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: 'row', base: 'row' }}>
                     <Flex gap="12px" w={{ md: '10%', base: '100%' }} justifyContent="left" alignItems="center">
-                    <Link to="/landingpage">
-  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-</Link>
-<Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px"/></Link>
+                        <Link to="/landingpage">
+                            <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+                        </Link>
+                        <Link to="/landingpage">   <Image src="images/img_voyager.svg" h="12px" ml="10px" /></Link>
                     </Flex>
                     <Flex alignItems="center" justifyContent="space-between" gap="50px">
                         <Text
@@ -124,7 +124,7 @@ const Register = () => {
                     </Flex>
                 </Flex>
             </Container>
-            <main style={{ paddingBottom:'30px', width: '100%', height: '84vh', display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+            <main style={{ paddingBottom: '30px', width: '100%', height: '84vh', display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '24rem', color: '#4b5563', marginTop: '1.25rem', padding: '1rem', backgroundColor: '#ffffff', textAlign: 'center', borderRadius: '0.75rem', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)' }}>
                     <div style={{ marginTop: '0.625rem' }}>
                         <h3 style={{ color: '#4b5563', fontSize: '1.25rem', fontWeight: 'bold' }}>Create a New Account</h3>
@@ -166,7 +166,7 @@ const Register = () => {
                                 style={{ width: '100%', marginTop: '0.5rem', padding: '0.75rem', color: '#4b5563', backgroundColor: 'transparent', border: '1px solid #e2e8f0', outline: 'none', borderRadius: '0.375rem', transition: 'border-color 0.3s ease' }}
                             />
                         </div>
-                       
+
                         <button
                             type="submit"
                             disabled={isRegistering}
