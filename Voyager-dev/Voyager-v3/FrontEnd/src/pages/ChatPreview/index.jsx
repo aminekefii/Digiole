@@ -5,7 +5,7 @@ import { doSignOut } from '../../components/firebase/auth';
 import { Link, useParams } from "react-router-dom";
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Image, Flex, Box, Heading, Text, List, ListItem, ListIcon } from "@chakra-ui/react";
-import { CheckCircleIcon } from '@chakra-ui/icons'; // Assuming you want to use icons for content
+import { CheckCircleIcon } from '@chakra-ui/icons'; 
 import "../../styles/linebreak.css"; 
 
 import {

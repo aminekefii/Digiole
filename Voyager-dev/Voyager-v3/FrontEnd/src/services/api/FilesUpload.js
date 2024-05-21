@@ -14,11 +14,8 @@ function Dropzone({ className }) {
 
   const { currentUser } = useContext(AuthContext); 
   const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
-
-
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
-
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     const acceptedTypes = ['.pdf', '.doc', '.docx', '.jpeg', '.jpg', '.png', '.txt','.csv'];
 
@@ -79,12 +76,12 @@ function Dropzone({ className }) {
   };
 
   const handleSubmitWithToast = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault(); 
 
     // Show "Uploading in progress" toast
     const uploadToastId = toast.info('Uploading in progress', {
       position: "top-right",
-      autoClose: false, // Do not auto close until upload status is known
+      autoClose: false, // Do not auto close 
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -94,10 +91,10 @@ function Dropzone({ className }) {
     });
 
     setTimeout(async () => {
-      await handleSubmit(e); // Pass the event object to handleSubmit
+      await handleSubmit(e); 
       // Hide "Uploading in progress" toast once all files are uploaded
       toast.dismiss(uploadToastId);
-    }, 100); // Delay execution by 100 milliseconds
+    }, 100); 
   };
 
   const handleSubmit = async (e) => {
@@ -117,7 +114,6 @@ function Dropzone({ className }) {
       };
       const formData = new FormData();
 
-      // Iterate over files and upload one at a time
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         formData.append('file', file);
@@ -136,7 +132,6 @@ function Dropzone({ className }) {
           theme: "light",
         });
 
-        // Clear formData for next file
         formData.delete('file');
       }
     } catch (error) {
@@ -156,8 +151,6 @@ function Dropzone({ className }) {
   } else {
     document.body.classList.remove('active-modal');
   }
-
-
 
   useEffect(() => {
     if (currentUser?.photoURL) {

@@ -8,7 +8,6 @@ const openai = new OpenAI({
   });
 const TextToSpeech = ({ text }) => {
   const [audioUrl, setAudioUrl] = useState("");
-
   const handleTextToSpeech = async () => {
     const response = await openai.audio.speech.create({
       model: "tts-1",
