@@ -48,7 +48,7 @@ const Login = () => {
         <div style={{ backgroundImage: "url('images/16.png')", backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', Height: '100%' }}>
             {userLoggedIn && (<Navigate to={'/assistants'} replace={true} />)}
             <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: '', base: '20px' }}>
-                <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: 'row', base: 'column' }}>
+                <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: 'row', base: 'row' }}>
                     <Flex gap="12px" w={{ md: '10%', base: '100%' }} justifyContent="left" alignItems="center">
                     <Link to="/landingpage">
   <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
