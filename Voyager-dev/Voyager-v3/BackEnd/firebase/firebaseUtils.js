@@ -1,4 +1,3 @@
-// firebaseUtils.js
 
 const admin = require('firebase-admin');
 
@@ -12,7 +11,6 @@ async function uploadThreadDetailsToStorage(userId, threadId) {
     const bucket = admin.storage().bucket();
     const file = bucket.file(`users/${userId}/thread_details.json`);
 
-    // Upload the buffer as a file to Firebase Storage
     await file.save(buffer, {
       metadata: {
         contentType: 'application/json',

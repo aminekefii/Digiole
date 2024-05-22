@@ -14,11 +14,11 @@ const ChatContainer = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleMessageSubmit = async () => {
-    if (!prompt.trim()) return;  // Avoid sending empty messages
+    if (!prompt.trim()) return;  
     setLoading(true);
 
     try {
-      const token = await currentUser.getIdToken(true); // Ensure token is refreshed
+      const token = await currentUser.getIdToken(true); 
 
       const userMessage = { text: prompt, role: 'user' };
       const requestOptions = {

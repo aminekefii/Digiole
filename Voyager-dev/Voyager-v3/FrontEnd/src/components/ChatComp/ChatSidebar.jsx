@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Flex, Box, Button, Image, IconButton } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import axios from 'axios';
@@ -9,6 +9,7 @@ const Chatsidebar = () => {
   const [fileReady, setFileReady] = useState(false);
   const [downloadCompleted, setDownloadCompleted] = useState(false);
   const filename = "buissnessplan.txt";
+  const navigate = useNavigate();
 
   const handleDownload = async () => {
     try {
@@ -56,6 +57,18 @@ const Chatsidebar = () => {
     }
   }, [fileReady, downloadCompleted]);
 
+  const handleExitChat = async () => {
+    const confirmExit = window.confirm("Are you sure you want to exit the chat?");
+    if (confirmExit) {
+      try {
+        await axios.delete('http://localhost:3000/delete-files');
+        navigate('/assistants');
+      } catch (error) {
+        console.error('Error deleting files:', error);
+      }
+    }
+  };
+
   return (
     <Flex
       direction="column"
@@ -82,8 +95,6 @@ const Chatsidebar = () => {
       {isOpen && (
         <Box flex="1" w="100%">
           <Button
-            as={Link}
-            to="/assistants"
             variant="outline"
             colorScheme="whiteAlpha"
             color="black"
@@ -92,6 +103,9 @@ const Chatsidebar = () => {
             mb="4"
             w="100%"
             justifyContent="flex-start"
+            onClick={handleExitChat}
+            as={Link}
+            to="/assistants"
           >
             Exit Chat
           </Button>

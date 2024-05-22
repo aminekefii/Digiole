@@ -9,7 +9,7 @@ const multer = require("multer");
 const { spawn } = require("child_process");
 const helmet = require('helmet');
 const admin = require("firebase-admin");
-const { uploadThreadDetailsToStorage } = require('./firebaseUtils');
+const { uploadThreadDetailsToStorage } = require('./firebase/firebaseUtils');
 
 dotenv.config();
 const app = express();
