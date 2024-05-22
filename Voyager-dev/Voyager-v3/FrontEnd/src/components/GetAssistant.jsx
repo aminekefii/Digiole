@@ -58,6 +58,7 @@ function GetAssisant() {
                   minW="161px"
                   borderRadius="8px"
                   onClick={toggleModal}
+                  ml="20px"
                 >
                   New chat
                 </Button>
