@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from '../../components/contexts/authContext/index'; 
+import { AuthContext } from '../../components/contexts/authContext/index';
 import { doSignOut } from '../../components/firebase/auth';
 import { Link, useParams } from "react-router-dom";
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Image, Flex, Box, Heading, Text, List, ListItem, ListIcon } from "@chakra-ui/react";
-import { CheckCircleIcon } from '@chakra-ui/icons'; 
-import "../../styles/linebreak.css"; 
+import { CheckCircleIcon } from '@chakra-ui/icons';
+import "../../styles/linebreak.css";
 
 import {
   Button,
@@ -16,7 +16,7 @@ import { Helmet } from "react-helmet";
 
 export default function ChatPreview() {
   const { threadId } = useParams();
-  const { currentUser } = useContext(AuthContext); 
+  const { currentUser } = useContext(AuthContext);
   const [chatHistory, setChatHistory] = useState([]);
   const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
 
@@ -31,25 +31,20 @@ export default function ChatPreview() {
       try {
         // Get the token
         const token = await currentUser.getIdToken(true);
-
-        // Prepare the request options with the token
         const requestOptions = {
           headers: {
             Authorization: `Bearer ${token}`
           }
         };
 
-        // Make the GET request to fetch chat history
+        //fetch chat history
         const response = await axios.get(`http://localhost:3000/chatHistory/${threadId}`, requestOptions);
 
-        // Update chat history state
         setChatHistory(response.data.chatHistory);
       } catch (error) {
         console.error("Error fetching chat history:", error);
       }
     };
-
-    // Call the fetchChatHistory function when threadId changes
     fetchChatHistory();
   }, [threadId, currentUser]);
 
@@ -60,7 +55,7 @@ export default function ChatPreview() {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser])
-  
+
   return (
     <>
       <Helmet>
@@ -79,22 +74,18 @@ export default function ChatPreview() {
           p={{ base: "20px", sm: "23px" }}
         >
 
-
-          <Flex ml={{ md: "20px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
-            <Link to="/landingpage">
-              <Image src="/images/img_voyager_icon.svg" h="32px" w="32px" />
-            </Link>
-            <Box h="30px" ml="20px" bg="blue_gray.100"  />
-            <Text size="xl" color="gray.50" ml="3px">
-              | Business Plan
-            </Text>
-            <Text size="xl" color="gray.400" ml={{ base: "0px", sm: "13px" }} fontWeight={300}>
-              | Create/Edit with AI Wisdom
-            </Text>
-          </Flex>
+<Flex ml={{ md: "20px", base: "0px" }} w="50%" mt="10px">
+        <Link to="/landingpage">
+          <Image src="/images/img_voyager_icon.svg" h="32px" w="32px" />
+        </Link>
+        <Box h="30px" ml="20px" bg="blue_gray.100" />
+        <Text size="xl" color="gray.50" ml="3px">
+          | Business Plan
+        </Text>
+      </Flex>
           <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
             <ProfilePictue></ProfilePictue>
-            <Button 
+            <Button
               size="sm"
               variant="outline"
               colorScheme="lime_100"
@@ -126,73 +117,67 @@ export default function ChatPreview() {
           p={{ md: "", base: "20px" }}
           ml=""
         >
-        
 
 
 
-        <Flex
-      flexDirection="column"
-      width="100%"
-      mr="300px"
-      justifyContent="center"
-      position="relative"
-      h="100%"
 
-    >
-      <Box flex="1" w="100%" padding="10px">
-        <Flex w="100%" height="60vh" overflowY="scroll">
-          <Box
-            ml={{ md: '34px', base: '0px' }}
-            justifyContent="space-between"
-            alignItems="center"
-            gap="20px"
+          <Flex
             flexDirection="column"
+            width="100%"
+            mr="300px"
+            justifyContent="center"
+            position="relative"
+            h="100%"
+
           >
-            <Text color="black">Thread ID: {threadId}</Text>
-            <Heading as="h2" fontSize="xl">Messages</Heading>
-            <List spacing={3} mt={4} >
-              {chatHistory.map((message, index) => (
-                <ListItem key={index}>
-                  <Flex mb="15px">
-                  {message.role === 'assistant' ? (
-                <Image src="/images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
-                
-              ) : (
-                <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
-              )}
-             <Heading as="h1" ml="10px" >{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
-             </Flex>
-             <List spacing={1} ml={4}>
-  {Array.isArray(message.content) ? (
-    message.content.map((content, index) => (
-      <ListItem key={index}>
-        <ListIcon as={CheckCircleIcon} color="green.500" />
-        <Flex direction="column">
-          {content.split('\n').map((line, idx) => (
-            <Text key={idx}>{line}</Text>
-          ))}
-        </Flex>
-      </ListItem>
-    ))
-  ) : (
-    <ListItem className='display-linebreak'>{message.content}</ListItem>
-  )}
-</List>
+            <Box flex="1" w="100%" padding="10px">
+              <Flex w="100%" height="60vh" overflowY="scroll">
+                <Box
+                  ml={{ md: '34px', base: '0px' }}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  gap="20px"
+                  flexDirection="column"
+                >
+                  <Text color="black">Thread ID: {threadId}</Text>
+                  <Heading as="h2" fontSize="xl">Messages</Heading>
+                  <List spacing={3} mt={4} >
+                    {chatHistory.map((message, index) => (
+                      <ListItem key={index}>
+                        <Flex mb="15px">
+                          {message.role === 'assistant' ? (
+                            <Image src="/images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
 
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Flex>
-      </Box>
-    </Flex>
+                          ) : (
+                            <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
+                          )}
+                          <Heading as="h1" ml="10px" >{message.role === 'assistant' ? 'Voyager' : 'You'}</Heading>
+                        </Flex>
+                        <List spacing={1} ml={4}>
+                          {Array.isArray(message.content) ? (
+                            message.content.map((content, index) => (
+                              <ListItem key={index}>
+                                <ListIcon as={CheckCircleIcon} color="green.500" />
+                                <Flex direction="column">
+                                  {content.split('\n').map((line, idx) => (
+                                    <Text key={idx}>{line}</Text>
+                                  ))}
+                                </Flex>
+                              </ListItem>
+                            ))
+                          ) : (
+                            <ListItem className='display-linebreak'>{message.content}</ListItem>
+                          )}
+                        </List>
 
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              </Flex>
+            </Box>
+          </Flex>
         </Container>
-
-
-      
-
-
       </Box>
     </>
   );
