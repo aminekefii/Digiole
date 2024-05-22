@@ -1,5 +1,5 @@
 import React from "react";
-import{ useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
 import {
   InputLeftElement,
@@ -26,28 +26,28 @@ import axios from "axios";
 
 export default function Buissnessplan() {
 
-  
-    useEffect(() => {
-      const handleBeforeUnload = (event) => {
-        // Send a request to the backend
-        axios.delete('http://localhost:3000/delete-files')
-    
-          .catch(error => {
-            console.error('Error:', error);
-          });
-  
-        // Prevent the default behavior of the beforeunload event
-        event.preventDefault();
-        event.returnValue = ''; // This line is necessary for Chrome
-        return ''; // This line is necessary for Firefox
-      };
-  
-      window.addEventListener('beforeunload', handleBeforeUnload);
-  
-      return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-    }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      // Send a request to the backend
+      axios.delete('http://localhost:3000/delete-files')
+
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+
+      event.preventDefault();
+      event.returnValue = '';
+      return '';
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
 
 
@@ -66,7 +66,7 @@ export default function Buissnessplan() {
       </Helmet>
       <Box pb={{ md: "83px", base: "20px" }} bg="white.A700_01" w="100%">
         <Box>
-        <Flex
+          <Flex
             mt="-1px"
             position="relative"
             bg="indigo.A700_01"
@@ -76,43 +76,35 @@ export default function Buissnessplan() {
             gap="15px"
             p={{ base: "20px", sm: "23px" }}
           >
-            <Flex ml={{ md: "20px", base: "0px" }} w="50%" justifyContent="" alignItems="" mt="10px">
-           
-            <Link to="/landingpage">
-  <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-</Link>
-           
-                 <Box h="30px" ml="20px" bg="blue_gray.100"  />
+            <Flex ml={{ md: "20px", base: "0px" }} w="50%" mt="10px">
+              <Link to="/landingpage">
+                <Image src="/images/img_voyager_icon.svg" h="32px" w="32px" />
+              </Link>
+              <Box h="30px" ml="20px" bg="blue_gray.100" />
               <Text size="xl" color="gray.50" ml="3px">
-                 | Business Plan
-                </Text>
-              
-              <Text size="xl" color="gray.400" ml={{ base: "0px", sm: "13px" }} fontWeight={300}>
-                | Create/Edit with AI Wisdom
+                | Business Plan
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
 
-            <ProfilePictue></ProfilePictue>
+              <ProfilePictue></ProfilePictue>
 
-              <Button 
-                    size="sm"
-                    variant="outline"
-                    colorScheme="lime_100"
-                    color="white.A700_01"
-                    letterSpacing="-0.08px"
-                    fontWeight={500}
-                    minW={{ base: '50px', md: '70px' }}
-                    borderRadius="20px"
-                    _hover={{ bg: '#EAF2BB', color: 'black' }}
-                    fontSize={{ base: 'xs', md: 'sm' }}
-                    mr="50px"
-              
-              
-              onClick={handleLogout}>Logout</Button>
+              <Button
+                size="sm"
+                variant="outline"
+                colorScheme="lime_100"
+                color="white.A700_01"
+                letterSpacing="-0.08px"
+                fontWeight={500}
+                minW={{ base: '50px', md: '70px' }}
+                borderRadius="20px"
+                _hover={{ bg: '#EAF2BB', color: 'black' }}
+                fontSize={{ base: 'xs', md: 'sm' }}
+                mr="50px"
+                onClick={handleLogout}>Logout</Button>
             </Flex>
           </Flex>
-         
+
           <Container
             mt="45px"
             display="flex"
@@ -127,7 +119,7 @@ export default function Buissnessplan() {
             p={{ md: "", base: "20px" }}
           >
             <ChatHistory></ChatHistory>
-          <ChatContainer ></ChatContainer>
+            <ChatContainer ></ChatContainer>
           </Container>
         </Box>
       </Box>

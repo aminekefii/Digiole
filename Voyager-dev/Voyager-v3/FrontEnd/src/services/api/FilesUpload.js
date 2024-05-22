@@ -3,8 +3,8 @@ import axios from 'axios';
 import { FiUpload } from 'react-icons/fi';
 import { useDropzone } from 'react-dropzone';
 import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
-import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import '../../styles/Modal.css';
 import  {  useContext } from "react";
 import { AuthContext } from '../../components/contexts/authContext/index'; 
@@ -31,7 +31,6 @@ function Dropzone({ className }) {
       return !acceptedTypes.includes('.' + fileExtension);
     });
 
-    // Update state for accepted files
     if (filteredAcceptedFiles.length) {
       setFiles(previousFiles => [
         ...previousFiles,
@@ -41,7 +40,6 @@ function Dropzone({ className }) {
       ]);
     }
 
-    // Update state for rejected files
     if (filteredRejectedFiles.length) {
       const newRejectedFiles = filteredRejectedFiles.map(file => ({
         file,
@@ -81,7 +79,7 @@ function Dropzone({ className }) {
     // Show "Uploading in progress" toast
     const uploadToastId = toast.info('Uploading in progress', {
       position: "top-right",
-      autoClose: false, // Do not auto close 
+      autoClose: false, 
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -236,7 +234,7 @@ function Dropzone({ className }) {
                         cursor: 'pointer',
                         transition: 'background-color 0.2s, color 0.2s'                       
                       }}
-                      onClick={handleSubmitWithToast} // Call handleSubmitWithToast instead of handleSubmit
+                      onClick={handleSubmitWithToast} 
                     >
                       Upload to Voyager
                     </button>

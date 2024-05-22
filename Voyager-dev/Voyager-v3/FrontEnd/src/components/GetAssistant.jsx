@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from './firebase/firebase';
 import { AuthContext } from './contexts/authContext/index';
@@ -13,13 +10,7 @@ function GetAssisant() {
 
 
   const { currentUser } = useContext(AuthContext);
-
-
- 
   const [files, setFiles] = useState([]);
-
-
-
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {

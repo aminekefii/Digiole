@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from './contexts/authContext';
-import { ProfilePic} from './firebase/firebase'; // Import updateUserProfile function
-import {  updateUserProfile } from './firebase/auth'; // Import updateUserProfile function
+import { ProfilePic} from './firebase/firebase'; 
 import { auth } from './firebase/firebase';
 import { AuthContext } from './contexts/authContext/index';
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
@@ -40,12 +36,11 @@ function ProfilePicUpdate() {
         const updateProgress = (progress) => {
             toast.update(uploadToast, {
                 render: `Upload in progress... ${Math.round(progress * 100)}%`,
-                autoClose: false // Do not auto-close while uploading
+                autoClose: false 
             });
         };
 
-        await ProfilePic(photo, auth.currentUser, setLoading, updateProgress); // Pass updateProgress function
-
+        await ProfilePic(photo, auth.currentUser, setLoading, updateProgress); 
         const photoURL = await auth.currentUser.photoURL; // Retrieve the updated photo URL
         setPhotoURL(photoURL);
 

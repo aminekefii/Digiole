@@ -22,13 +22,12 @@ const Dropzone = ({ className }) => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: ['.pdf', '.doc', '.docx', 'image/*'], // Accept PDFs, Word documents, and images
+    accept: ['.pdf', '.doc', '.docx', 'image/*'], // Accept PDFs,documents, and images
     maxSize: 1024 * 1000,
     onDrop
   });
 
   useEffect(() => {
-    // Revoke the data URIs to avoid memory leaks
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
 
