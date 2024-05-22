@@ -93,7 +93,7 @@ const ChatContainer = () => {
 
   return (
     <Flex
-      flexDirection="column"
+      flexDirection="row"
       height="70vh"
       width={{ base: "100%", md: "95%" }}
       mx="auto"

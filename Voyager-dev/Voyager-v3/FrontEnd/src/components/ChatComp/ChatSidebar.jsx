@@ -60,12 +60,11 @@ const Chatsidebar = () => {
     <Flex
       direction="column"
       mt="0px"
-      w={{ base: '60px', md: isOpen ? '260px' : '70px' }}
+      w={{ base: isOpen ? '60px' : '60px', md: isOpen ? '260px' : '70px' }}
       p="4"
       bg="gray.100"
       color="white"
-      minH="80vh"
-      mr="10px"
+      minH="87vh"
       transition="all 0.3s ease-in-out"
       position="relative"
     >

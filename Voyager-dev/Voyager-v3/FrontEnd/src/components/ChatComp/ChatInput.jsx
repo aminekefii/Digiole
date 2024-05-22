@@ -13,13 +13,14 @@ const ChatInputGroup = ({ prompt, setPrompt, handleKeyDown, handleMessageSubmit 
     <Flex
       position="fixed"
       bottom="0"
-      left="0"
+      left={{ base: "0", md: "260px" }} // Adjust the left position to account for the sidebar width
       right="0"
       p="4"
       bg="white"
       alignItems="center"
       justifyContent="center"
       boxShadow="0 -2px 5px rgba(0,0,0,0.1)"
+      zIndex="10" // Ensure it's above other elements
     >
       <VoiceRec handleNoteChange={handlePromptChange} />
       <InputGroup maxW="800px" flex="1" mx="4">
