@@ -1,41 +1,28 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import {
-  InputLeftElement,
-  InputGroup,
-  InputRightElement,
   Image,
-  Center,
-  Input,
-  Button,
-  Heading,
   Flex,
   Text,
   Box,
   Container,
+  Button,
+  Heading,
+  Link
 } from "@chakra-ui/react";
 import { doSignOut } from '../../components/firebase/auth';
-import { Link } from "react-router-dom";
-import ChatHistory from "components/ChatComp/ChatHistory";
+import Chatsidebar from "components/ChatComp/ChatSidebar";
 import ChatContainer from "components/ChatComp/ChatContainer";
 import ProfilePictue from 'components/ProfilePicUpdate';
 import axios from "axios";
 
-
-
 export default function Buissnessplan() {
-
-
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      // Send a request to the backend
       axios.delete('http://localhost:3000/delete-files')
-
         .catch(error => {
           console.error('Error:', error);
         });
-
 
       event.preventDefault();
       event.returnValue = '';
@@ -49,14 +36,11 @@ export default function Buissnessplan() {
     };
   }, []);
 
-
-
   const handleLogout = () => {
     doSignOut().then(() => {
       window.location.href = '/login';
     });
   };
-
 
   return (
     <>
@@ -64,13 +48,12 @@ export default function Buissnessplan() {
         <title>Buissness Plan</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
-      <Box pb={{ md: "83px", base: "20px" }} bg="white.A700_01" w="100%">
+      <Box pb={{ md: "00px", base: "20px" }} bg="white.A700_01" w="100%">
         <Box>
           <Flex
             mt="-1px"
             position="relative"
             bg="indigo.A700_01"
-            alignSelf="stretch"
             justifyContent="space-between"
             alignItems="center"
             gap="15px"
@@ -86,9 +69,7 @@ export default function Buissnessplan() {
               </Text>
             </Flex>
             <Flex gap="21px" w="6%" justifyContent="center" alignItems="center">
-
-              <ProfilePictue></ProfilePictue>
-
+              <ProfilePictue />
               <Button
                 size="sm"
                 variant="outline"
@@ -101,25 +82,29 @@ export default function Buissnessplan() {
                 _hover={{ bg: '#EAF2BB', color: 'black' }}
                 fontSize={{ base: 'xs', md: 'sm' }}
                 mr="50px"
-                onClick={handleLogout}>Logout</Button>
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
             </Flex>
           </Flex>
-
           <Container
-            mt="45px"
+           
             display="flex"
             justifyContent="space-between"
             alignItems="start"
-            maxW="1341px"
+            maxW="1600px"
             w="100%"
             gap="20px"
             px="0px"
             mx="auto"
             flexDirection={{ md: "row", base: "column" }}
-            p={{ md: "", base: "20px" }}
           >
-            <ChatHistory></ChatHistory>
-            <ChatContainer ></ChatContainer>
+            <Chatsidebar float="left"  />
+            <Box w={{ md: "100%", base: "100%" }}  ml={{ md: "100px", base: "0" }} mt="10px">
+           
+              <ChatContainer />
+            </Box>
           </Container>
         </Box>
       </Box>

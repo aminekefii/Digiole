@@ -60,10 +60,6 @@ function VoiceRec({ handleNoteChange }) {
       height="20px"
       mt="15px"
     />
-  
-
-
-
 
   );
 }

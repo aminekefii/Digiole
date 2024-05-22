@@ -1,5 +1,4 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification, updatePassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
@@ -15,7 +14,6 @@ export const doSignInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
 
-  // add user to firestore
 };
 
 export const doSignOut = () => {
