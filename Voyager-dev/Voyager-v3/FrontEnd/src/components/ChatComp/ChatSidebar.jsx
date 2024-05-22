@@ -60,7 +60,7 @@ const Chatsidebar = () => {
     <Flex
       direction="column"
       mt="0px"
-      w={{ base: isOpen ? '60px' : '60px', md: isOpen ? '260px' : '70px' }}
+      w={{ base: isOpen ? '170px' : '60px', md: isOpen ? '260px' : '50px' }}
       p="4"
       bg="gray.100"
       color="white"
@@ -77,6 +77,7 @@ const Chatsidebar = () => {
         bg="transparent"
         _hover={{ bg: 'transparent' }}
         color="black"
+        pl="20px"
       />
       {isOpen && (
         <Box flex="1" w="100%">

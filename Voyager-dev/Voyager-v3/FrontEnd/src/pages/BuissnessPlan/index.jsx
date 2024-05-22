@@ -98,7 +98,7 @@ export default function Buissnessplan() {
             gap="20px"
             px="0px"
             mx="auto"
-            flexDirection={{ md: "row", base: "column" }}
+            flexDirection={{ md: "row", base: "row" }}
           >
             <Chatsidebar float="left"  />
             <Box w={{ md: "100%", base: "100%" }}  ml={{ md: "100px", base: "0" }} mt="10px">
