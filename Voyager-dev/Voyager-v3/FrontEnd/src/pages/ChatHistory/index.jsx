@@ -45,7 +45,7 @@ export default function ChatHistoryList() {
           'Authorization': `Bearer ${token}`,
         },
       });
-      // Remove the deleted thread from the state
+      
       setThreads(threads.filter(thread => thread.threadId !== threadId));
     } catch (error) {
       console.error("Error deleting thread:", error);
@@ -81,13 +81,12 @@ export default function ChatHistoryList() {
           'Authorization': `Bearer ${token}`,
         },
       });
-      // Remove the deleted file from the state
+      
       setFiles(files.filter(file => file.name !== fileName));
     } catch (error) {
       console.error("Error deleting file:", error);
     }
   };
-  
 
 
 
@@ -138,6 +137,28 @@ export default function ChatHistoryList() {
               </Button>
             </Flex>
           </Flex>
+          <Box>
+            <Button
+
+              as={Link}
+              to="/buissnessplan"
+              size="sm"
+              variant="outline"
+              bg="blue.600"
+              color="white.A700_01"
+              letterSpacing="-0.08px"
+              fontWeight={500}
+              minW={{ base: "50px", md: "70px" }}
+              borderRadius="20px"
+              _hover={{ bg: "#EAF2BB", color: "black" }}
+              fontSize={{ base: "xs", md: "sm" }}
+              mr="20px"
+              mt="20px"
+              float="right"
+            >
+              New Chat
+            </Button>
+          </Box>
           <Container
             mt="45px"
             display="flex"
@@ -220,52 +241,50 @@ export default function ChatHistoryList() {
                     </Tr>
                   </Thead>
 
-
-
-<Tbody>
-  {files.map((file, index) => (
-    <Tr key={index}>
-      <Td>{file.name.split('_').slice(1).join('_')}</Td>
-      <Td>
-        <Button
-          as="a"
-          href={file.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          size="sm"
-          variant="outline"
-          bg="green.600"
-          color="white.A700_01"
-          letterSpacing="-0.08px"
-          fontWeight={500}
-          minW={{ base: "50px", md: "70px" }}
-          borderRadius="20px"
-          _hover={{ bg: "#EAF2BB", color: "black" }}
-          fontSize={{ base: "xs", md: "sm" }}
-        >
-          Download
-        </Button>
-      </Td>
-      <Td>
-        <Button
-          size="sm"
-          variant="outline"
-          bg="red.600"
-          color="white.A700_01"
-          letterSpacing="-0.08px"
-          fontWeight={500}
-          minW={{ base: "50px", md: "70px" }}
-          borderRadius="20px"
-          _hover={{ bg: "#EAF2BB", color: "black" }}
-          fontSize={{ base: "xs", md: "sm" }}
-          onClick={() => deleteFile(file.name)}
-        >
-          Delete
-        </Button>
-      </Td>
-    </Tr>
-  ))}
-</Tbody>
+                  <Tbody>
+                    {files.map((file, index) => (
+                      <Tr key={index}>
+                        <Td>{file.name.split('_').slice(1).join('_')}</Td>
+                        <Td>
+                          <Button
+                            as="a"
+                            href={file.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            size="sm"
+                            variant="outline"
+                            bg="green.600"
+                            color="white.A700_01"
+                            letterSpacing="-0.08px"
+                            fontWeight={500}
+                            minW={{ base: "50px", md: "70px" }}
+                            borderRadius="20px"
+                            _hover={{ bg: "#EAF2BB", color: "black" }}
+                            fontSize={{ base: "xs", md: "sm" }}
+                          >
+                            Download
+                          </Button>
+                        </Td>
+                        <Td>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            bg="red.600"
+                            color="white.A700_01"
+                            letterSpacing="-0.08px"
+                            fontWeight={500}
+                            minW={{ base: "50px", md: "70px" }}
+                            borderRadius="20px"
+                            _hover={{ bg: "#EAF2BB", color: "black" }}
+                            fontSize={{ base: "xs", md: "sm" }}
+                            onClick={() => deleteFile(file.name)}
+                          >
+                            Delete
+                          </Button>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
 
 
                 </Table>
