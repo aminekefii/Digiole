@@ -17,7 +17,7 @@ const app = express();
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // Initialize Firebase Admin SDK
-var serviceAccount = require("./voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
+var serviceAccount = require("./firebase/voyager-4d279-firebase-adminsdk-q9dfx-2145fe62b7.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://voyager-4d279-default-rtdb.firebaseio.com",

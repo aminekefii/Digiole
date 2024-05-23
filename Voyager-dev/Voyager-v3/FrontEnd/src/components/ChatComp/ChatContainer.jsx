@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Flex, Box, Spinner } from "@chakra-ui/react";
+import { Flex, Box, Spinner, useToast } from "@chakra-ui/react";
 import ChatContent from "./ChatContent";
 import ChatInputGroup from "./ChatInput";
 import { AuthContext } from '../contexts/authContext/index';
@@ -12,6 +12,9 @@ const ChatContainer = () => {
 
   // Access currentUser user
   const { currentUser } = useContext(AuthContext);
+
+  // Initialize toast
+  const toast = useToast();
 
   const handleMessageSubmit = async () => {
     if (!prompt.trim()) return;  
@@ -37,6 +40,13 @@ const ChatContainer = () => {
       const data = await response.json();
       setMessages([...messages, userMessage, { text: data.response, role: 'assistant' }]);
     } catch (error) {
+      toast({
+        title: "An error occurred.",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.error('Error:', error);
     } finally {
       setLoading(false);
@@ -85,6 +95,13 @@ const ChatContainer = () => {
       const data = await response.json();
       setMessages([{ text: initialMessage, role: 'user' }, { text: data.response, role: 'assistant' }]);
     } catch (error) {
+      toast({
+        title: "An error occurred.",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.error('Error:', error);
     } finally {
       setLoading(false);
