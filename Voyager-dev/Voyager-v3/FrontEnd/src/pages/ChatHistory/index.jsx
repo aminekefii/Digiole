@@ -200,33 +200,36 @@ export default function ChatHistoryList() {
                       <Th>Actions</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
-                    {files.map((file, index) => (
-                      <Tr key={index}>
-                        <Td>{file.name}</Td>
-                        <Td>
-                          <Button
-                            as="a"
-                            href={file.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            size="sm"
-                            variant="outline"
-                            bg="green.600"
-                            color="white.A700_01"
-                            letterSpacing="-0.08px"
-                            fontWeight={500}
-                            minW={{ base: "50px", md: "70px" }}
-                            borderRadius="20px"
-                            _hover={{ bg: "#EAF2BB", color: "black" }}
-                            fontSize={{ base: "xs", md: "sm" }}
-                          >
-                            Download
-                          </Button>
-                        </Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
+                
+
+<Tbody>
+  {files.map((file, index) => (
+    <Tr key={index}>
+      <Td>{file.name.split('_').slice(1).join('_')}</Td>
+      <Td>
+        <Button
+          as="a"
+          href={file.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          size="sm"
+          variant="outline"
+          bg="green.600"
+          color="white.A700_01"
+          letterSpacing="-0.08px"
+          fontWeight={500}
+          minW={{ base: "50px", md: "70px" }}
+          borderRadius="20px"
+          _hover={{ bg: "#EAF2BB", color: "black" }}
+          fontSize={{ base: "xs", md: "sm" }}
+        >
+          Download
+        </Button>
+      </Td>
+    </Tr>
+  ))}
+</Tbody>
+
                 </Table>
               </TableContainer>
             </Flex>
