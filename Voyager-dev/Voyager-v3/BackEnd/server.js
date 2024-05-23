@@ -596,6 +596,28 @@ app.get('/uploadedFiles', verifyToken, async (req, res) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
+app.delete('/deleteFirebasefile/:fileName', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.uid; // Extract user ID from decoded token
+    const fileName = req.params.fileName;
+    const filePath = `users/${userId}/uploadedFiles/${fileName}`;
+    
+    // Delete the file from Firebase Storage
+    await admin.storage().bucket().file(filePath).delete();
+
+    res.status(200).json({ message: 'File deleted successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to delete file' });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 const assistantFilePath = './voyager_assistant.json';
 const downloadFolder = './downloads';
 

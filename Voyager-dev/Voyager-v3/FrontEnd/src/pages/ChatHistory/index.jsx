@@ -72,6 +72,25 @@ export default function ChatHistoryList() {
     fetchFiles();
   }, [currentUser]);
 
+
+  const deleteFile = async (fileName) => {
+    try {
+      const token = await currentUser.getIdToken(true);
+      await axios.delete(`http://localhost:3000/deleteFirebasefile/${fileName}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      // Remove the deleted file from the state
+      setFiles(files.filter(file => file.name !== fileName));
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
+  };
+  
+
+
+
   return (
     <>
       <Helmet>
@@ -126,13 +145,13 @@ export default function ChatHistoryList() {
             alignItems="start"
             maxW="1341px"
             w="100%"
-            gap="20px"
+            gap="10px"
             px="0px"
             mx="auto"
             flexDirection={{ md: "row", base: "column" }}
             p={{ md: "", base: "20px" }}
           >
-            <Flex w={{ md: "60%", base: "100%" }} mb={{ base: "20px", md: "0" }} flexDirection="column">
+            <Flex w={{ md: "50%", base: "100%" }} mb={{ base: "20px", md: "0" }} flexDirection="column">
               <Heading as="h1" size="lg" mb="10px" ml="20px">Chat History</Heading>
               <TableContainer>
                 <Table variant="simple">
@@ -161,7 +180,7 @@ export default function ChatHistoryList() {
                             borderRadius="20px"
                             _hover={{ bg: "#EAF2BB", color: "black" }}
                             fontSize={{ base: "xs", md: "sm" }}
-                            mr="10px"
+                            mr="0px"
                           >
                             Preview
                           </Button>
@@ -178,7 +197,7 @@ export default function ChatHistoryList() {
                             borderRadius="20px"
                             _hover={{ bg: "#EAF2BB", color: "black" }}
                             fontSize={{ base: "xs", md: "sm" }}
-                            mr="20px"
+                            mr="10px"
                             onClick={() => deleteThread(thread.threadId)}
                           >
                             Delete
@@ -190,8 +209,8 @@ export default function ChatHistoryList() {
                 </Table>
               </TableContainer>
             </Flex>
-            <Flex w={{ md: "40%", base: "100%" }} flexDirection="column">
-              <Heading as="h1" size="lg" mb="10px" ml="20px">Uploaded Files</Heading>
+            <Flex w={{ md: "50%", base: "100%" }} flexDirection="column">
+              <Heading as="h1" size="lg" mb="10px" ml="10px">Uploaded Files</Heading>
               <TableContainer>
                 <Table variant="simple">
                   <Thead>
@@ -200,7 +219,8 @@ export default function ChatHistoryList() {
                       <Th>Actions</Th>
                     </Tr>
                   </Thead>
-                
+
+
 
 <Tbody>
   {files.map((file, index) => (
@@ -226,9 +246,27 @@ export default function ChatHistoryList() {
           Download
         </Button>
       </Td>
+      <Td>
+        <Button
+          size="sm"
+          variant="outline"
+          bg="red.600"
+          color="white.A700_01"
+          letterSpacing="-0.08px"
+          fontWeight={500}
+          minW={{ base: "50px", md: "70px" }}
+          borderRadius="20px"
+          _hover={{ bg: "#EAF2BB", color: "black" }}
+          fontSize={{ base: "xs", md: "sm" }}
+          onClick={() => deleteFile(file.name)}
+        >
+          Delete
+        </Button>
+      </Td>
     </Tr>
   ))}
 </Tbody>
+
 
                 </Table>
               </TableContainer>
