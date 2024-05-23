@@ -93,7 +93,7 @@ export default function ChatHistoryList() {
   return (
     <>
       <Helmet>
-        <title>Business Plan</title>
+        <title>Chat History</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
       <Box pb={{ md: "83px", base: "20px" }} bg="white.A700_01" w="100%">
@@ -173,7 +173,7 @@ export default function ChatHistoryList() {
             p={{ md: "", base: "20px" }}
           >
             <Flex w={{ md: "50%", base: "100%" }} mb={{ base: "20px", md: "0" }} flexDirection="column">
-              <Heading as="h1" size="lg" mb="10px" ml="20px">Chat History</Heading>
+              <Heading as="h1" fontFamily="sans-serif" fontSize="25px" color="grey.100" ml={{ base: "20px", md: "250px" }} mb="20px">Chat History</Heading>
               <TableContainer>
                 <Table variant="simple">
                   <Thead>
@@ -231,7 +231,7 @@ export default function ChatHistoryList() {
               </TableContainer>
             </Flex>
             <Flex w={{ md: "50%", base: "100%" }} flexDirection="column">
-              <Heading as="h1" size="lg" mb="10px" ml="10px">Uploaded Files</Heading>
+              <Heading as="h1" fontFamily="sans-serif" fontSize="25px" color="grey.100"  ml={{ base: "20px", md: "250px" }} mb="20px">Uploaded Files</Heading>
               <TableContainer>
                 <Table variant="simple">
                   <Thead>
@@ -285,8 +285,6 @@ export default function ChatHistoryList() {
                       </Tr>
                     ))}
                   </Tbody>
-
-
                 </Table>
               </TableContainer>
             </Flex>
