@@ -2,17 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from '../../components/contexts/authContext/index';
 import { doSignOut } from '../../components/firebase/auth';
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Heading } from '@chakra-ui/react';
 import ProfilePictue from 'components/ProfilePicUpdate';
 import { Link } from "react-router-dom";
-import {
-  Text,
-  Image,
-  Box,
-  Flex,
-  Button,
-  Container,
-} from "@chakra-ui/react";
+import { Box, Flex, Button, Container, Text, Image } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 
 export default function ChatHistoryList() {
@@ -58,7 +51,6 @@ export default function ChatHistoryList() {
       console.error("Error deleting thread:", error);
     }
   };
-  
 
   const [files, setFiles] = useState([]);
 
@@ -205,7 +197,7 @@ export default function ChatHistoryList() {
                   <Thead>
                     <Tr>
                       <Th>File Name</Th>
-                      <Th>Download URL</Th>
+                      <Th>Actions</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -213,7 +205,24 @@ export default function ChatHistoryList() {
                       <Tr key={index}>
                         <Td>{file.name}</Td>
                         <Td>
-                          <a href={file.url} target="_blank" rel="noopener noreferrer">{file.url}</a>
+                          <Button
+                            as="a"
+                            href={file.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            size="sm"
+                            variant="outline"
+                            bg="green.600"
+                            color="white.A700_01"
+                            letterSpacing="-0.08px"
+                            fontWeight={500}
+                            minW={{ base: "50px", md: "70px" }}
+                            borderRadius="20px"
+                            _hover={{ bg: "#EAF2BB", color: "black" }}
+                            fontSize={{ base: "xs", md: "sm" }}
+                          >
+                            Download
+                          </Button>
                         </Td>
                       </Tr>
                     ))}

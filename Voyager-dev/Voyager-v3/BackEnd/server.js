@@ -568,29 +568,32 @@ app.post('/upload', verifyToken, async (req, res) => {
   });
 });*/
 ///////////////////////////////////////////////////////////////////////////////////////
+const { Storage } = require('@google-cloud/storage');
+const bucket = admin.storage().bucket();
+
 
 app.get('/uploadedFiles', verifyToken, async (req, res) => {
   try {
-    const userId = req.user.uid; // Extract user ID from decoded token
-    const bucket = admin.storage().bucket();
+    const userId = req.user.uid;
     const [files] = await bucket.getFiles({ prefix: `users/${userId}/uploadedFiles/` });
 
-    // Extract file names from the files array
-    const fileNames = files.map(file => {
+    const fileNames = await Promise.all(files.map(async (file) => {
+      const [url] = await file.getSignedUrl({
+        action: 'read',
+        expires: '03-17-2025' // You can set the expiry date accordingly
+      });
       return {
-        name: file.name.split('/').pop(), // Extract only the file name from the full path
-        url: `https://storage.googleapis.com/${bucket.name}/${file.name}` // Get the download URL for the file
+        name: file.name.split('/').pop(),
+        url: url
       };
-    });
+    }));
 
-    // Send the list of file names and download URLs as response
     res.status(200).json({ files: fileNames });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Failed to retrieve files' });
   }
 });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const assistantFilePath = './voyager_assistant.json';
