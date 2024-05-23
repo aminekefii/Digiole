@@ -748,6 +748,32 @@ app.get('/threads', verifyToken, async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+app.delete('/threads/:threadId', verifyToken, async (req, res) => {
+  const userId = req.user.uid; // Extract user ID from decoded token
+  const { threadId } = req.params; // Get thread ID from URL parameters
+
+  try {
+    // Reference to the specific thread document in Firestore
+    const threadRef = admin.firestore().collection('chat').doc(userId).collection('threads').doc(threadId);
+    
+    // Check if the thread exists
+    const threadDoc = await threadRef.get();
+    if (!threadDoc.exists) {
+      return res.status(404).json({ error: "Thread not found" });
+    }
+    
+    // Delete the thread document
+    await threadRef.delete();
+    
+    // Return success response
+    res.status(200).json({ message: "Thread deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting thread:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 
 // GET route for fetching chat history
