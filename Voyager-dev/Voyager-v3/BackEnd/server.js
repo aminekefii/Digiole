@@ -621,15 +621,28 @@ app.delete('/deleteFirebasefile/:fileName', verifyToken, async (req, res) => {
 const assistantFilePath = './voyager_assistant.json';
 const downloadFolder = './downloads';
 
+
+
 app.delete('/delete-files', async (req, res) => {
   try {
     // Read the voyager_assistant.json file
     const assistantData = JSON.parse(fs.readFileSync(assistantFilePath, 'utf8'));
     const assistantId = assistantData.assistantId;
+    const fileIds = assistantData.file_ids || [];
 
     // Delete the assistant using OpenAI API
     const response = await openai.beta.assistants.del(assistantId);
     console.log(response);
+
+    // Delete the files listed in the file_ids array
+    for (const fileId of fileIds) {
+      try {
+        const fileResponse = await openai.files.del(fileId);
+        console.log(`File with ID ${fileId} deleted successfully`, fileResponse);
+      } catch (fileErr) {
+        console.error(`Error deleting file with ID ${fileId}:`, fileErr);
+      }
+    }
 
     // Get the list of files in the uploads folder and delete them
     fs.readdir(uploadFolder, (err, uploadFiles) => {
@@ -678,6 +691,7 @@ app.delete('/delete-files', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
