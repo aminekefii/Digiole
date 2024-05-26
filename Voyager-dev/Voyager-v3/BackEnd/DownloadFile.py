@@ -1,9 +1,16 @@
 import sys
 from openai import OpenAI
 from colorama import Fore
+from dotenv import load_dotenv
+import os
 
 def main(file_ids):
-    api_key = ""
+    load_dotenv()  
+    api_key = os.getenv('OPENAI_API_KEY')
+    
+    if not api_key:
+        raise ValueError("API key not found. Please set the OPENAI_API_KEY environment variable in the .env file.")
+
     output_path = './downloads/buissnessplan.txt'
 
     def write_file(file_id, count, output_path=output_path):
