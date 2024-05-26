@@ -48,8 +48,6 @@ export default function ChatPreview() {
     fetchChatHistory();
   }, [threadId, currentUser]);
 
-
-
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
@@ -118,9 +116,6 @@ export default function ChatPreview() {
           ml=""
         >
 
-
-
-
           <Flex
             flexDirection="column"
             width="100%"
@@ -142,12 +137,11 @@ export default function ChatPreview() {
                   <Text color="black">Thread ID: {threadId}</Text>
                   <Heading as="h2" fontSize="xl">Messages</Heading>
                   <List spacing={3} mt={4} >
-                    {chatHistory.map((message, index) => (
+                    {chatHistory.slice(1).map((message, index) => (
                       <ListItem key={index}>
                         <Flex mb="15px">
                           {message.role === 'assistant' ? (
                             <Image src="/images/img_voyager_icon2.svg" h="17px" alignSelf="end" w="16px" />
-
                           ) : (
                             <Image src={photoURL} borderRadius="50%" h="20px" w="20px" />
                           )}
@@ -169,7 +163,6 @@ export default function ChatPreview() {
                             <ListItem className='display-linebreak'>{message.content}</ListItem>
                           )}
                         </List>
-
                       </ListItem>
                     ))}
                   </List>
