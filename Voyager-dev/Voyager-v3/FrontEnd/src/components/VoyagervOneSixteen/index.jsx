@@ -1,8 +1,6 @@
 import React from "react";
-import { Button, Image, Flex, Heading, Box, Text, AbsoluteCenter, Container, IconButton } from "@chakra-ui/react";
+import { Button, Image, Flex, Heading, Box, Text, AbsoluteCenter, Container } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-
-
 
 export default function VoyagervOneSixteen({
   pagetitle = "Page Title",
@@ -19,75 +17,72 @@ export default function VoyagervOneSixteen({
 }) {
   return (
     <Box {...props}>
-
       <AbsoluteCenter w="100%" h="100%" m="auto" minW={{ base: "320px" }}>
         <Image
           src="images/16.png"
-          w="100%" h="100%"
+          w="100%"
+          h="100%"
           position="absolute"
-
           bottom="0px"
           right="0px"
           top="0px"
           justifyContent="center"
         />
         <Box alignSelf="end">
-
           <Box h="820px" position="relative">
-
             <Flex w="94%" justifyContent="flex-end" position="absolute" right="0px" top="3%" m="auto">
               <Flex gap="25px" w="100%" flexDirection="column">
-              <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
-  <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ md: "row", base: "column" }}>
-    <Flex gap="12px" w={{ md: "10%", base: "100%" }} justifyContent="left" alignItems="center">
-      <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
-      <Image src="images/img_voyager.svg" h="12px" />
-    </Flex>
-   
-    <Flex alignItems="center" justifyContent="space-between" gap="50px">
-      <Text
-        color="gray.50"
-        letterSpacing="-0.08px"
-        textAlign="center"
-        fontWeight={500}
-        fontSize={{ base: "sm", sm: "md" }}
-        _hover={{ textDecoration: "underline", color: "white" }}
-      >
-        FAQ
-      </Text>
-      <Text
-        color="gray.50"
-        letterSpacing="-0.08px"
-        textAlign="center"
-        fontWeight={500}
-        fontSize={{ base: "sm", sm: "md" }}
-        _hover={{ textDecoration: "underline", color: "white" }}
-        ml="20px"
-      >
-        Contact
-      </Text>
-      <Button
-        as={Link}
-        to="/login"
-        size="sm"
-        variant="outline"
-        colorScheme="lime_100"
-        color="white.A700_01"
-        letterSpacing="-0.08px"
-        fontWeight={500}
-        minW={{ base: "50px", md: "70px" }}
-        borderRadius="20px"
-        _hover={{ bg: "#EAF2BB" , color: "black" }}
-        fontSize={{ base: "xs", md: "sm" }}
-        ml="20px"
-      >
-        {signInWith}
-      </Button>
-    </Flex>
-  </Flex>
-</Container>
+                <Container maxW="1268px" w="100%" px="0px" mx="auto" p={{ base: "20px" }}>
+                  <Flex justifyContent="space-between" alignItems="center" gap="20px" flexDirection={{ base: "row", md: "row" }}>
+                    <Flex gap="12px" w={{ base: "80%", md: "10%" }} justifyContent="left" alignItems="center">
+                      <Image src="images/img_voyager_icon.svg" h="32px" w="32px" />
+                      <Image src="images/img_voyager.svg" h="12px" />
+                    </Flex>
 
-                <Box h="623px" position="relative" maxW="1340px" w="100%" mx="auto" p={{ md: "", base: "20px" }}>
+                    <Flex alignItems="center" justifyContent="space-between" gap={{ base: "10px", md: "50px" }}>
+                      <Text
+                        color="gray.50"
+                        letterSpacing="-0.08px"
+                        textAlign="center"
+                        fontWeight={500}
+                        fontSize={{ base: "sm", md: "md" }}
+                        _hover={{ textDecoration: "underline", color: "white" }}
+                      >
+                        FAQ
+                      </Text>
+                      <Text
+                        color="gray.50"
+                        letterSpacing="-0.08px"
+                        textAlign="center"
+                        fontWeight={500}
+                        fontSize={{ base: "sm", md: "md" }}
+                        _hover={{ textDecoration: "underline", color: "white" }}
+                        ml="20px"
+                      >
+                        Contact
+                      </Text>
+                      <Button
+                        as={Link}
+                        to="/login"
+                        size="sm"
+                        variant="outline"
+                        colorScheme="lime_100"
+                        color="white.A700_01"
+                        letterSpacing="-0.08px"
+                        fontWeight={500}
+                        minW={{ base: "70px", md: "90px" }}
+                        borderRadius="20px"
+                        _hover={{ bg: "#EAF2BB", color: "black" }}
+                        fontSize={{ base: "xs", md: "sm" }}
+                        ml="20px"
+                      >
+                        {signInWith}
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </Container>
+
+                <Box h="623px" position="relative" maxW="1340px" w="100%" mx="auto" p={{ base: "20px" }}>
                   <AbsoluteCenter
                     w="100%"
                     display="flex"
@@ -95,28 +90,27 @@ export default function VoyagervOneSixteen({
                     alignItems="start"
                     h="100%"
                     m="auto"
-                    flexDirection={{ md: "row", base: "column" }}
+                    flexDirection={{ base: "column", md: "row" }}
                   >
-                    <Text size="2xl" color="white.A700" mt="257px" textAlign="left" zIndex={1}>
+                    <Text size="2xl" color="white.A700" mt={{ base: "200px", md: "257px" }} textAlign="left" zIndex={1}>
                       {voyagerapp}
                     </Text>
-
                   </AbsoluteCenter>
                   <Heading
                     size="xl"
                     as="h1"
                     color="white.A700"
-                    fontSize="68px"
-                    w="75%"
+                    fontSize={{ base: "32px", md: "40px", lg: "68px" }}
+                    w={{ base: "90%", md: "75%", lg: "100%" }}
                     position="absolute"
                     left="0px"
-                    top="14%"
-                    m="auto"
-                    fontWeight={800}
+                    top={{ base: "10%", md: "14%" }}
+                    m="0px"
+                    fontWeight="800"
                   >
                     {p7xl}
                   </Heading>
-                  <Flex gap="18px" w="30%" position="absolute" bottom="41%" left="0px" m="auto">
+                  <Flex   pr={{ base: "30px", md: "10px" }} gap="18px" w={{ base: "100%", md: "47%" }} position="absolute" bottom="41%" left="0px" m="auto" flexDirection={{ base: "column", md: "row" }} > 
                     <Button
                       colorScheme="lime_200"
                       rightIcon={<Image src="images/img_arrowright_blue_gray_900.svg" />}
@@ -128,7 +122,10 @@ export default function VoyagervOneSixteen({
                       borderStyle="solid"
                       w="100%"
                       borderRadius="24px"
-                      px={{ base: "20px", sm: "" }}
+                      px={{ base: "20px", sm: "16px", md: "20px" }}
+                      fontSize={{ base: "sm", md: "md", }}
+                      mr={{ base: "10px", md: "" }}
+
                     >
                       {getEarlyAcces}
                     </Button>
@@ -139,8 +136,11 @@ export default function VoyagervOneSixteen({
                       fontWeight={500}
                       w="100%"
                       borderRadius="24px"
-                      px={{ base: "20px", sm: "" }}
+                      px={{ base: "20px", sm: "16px", md: "20px" }}
                       color="white.A700"
+                      fontSize={{ base: "sm", md: "md" }}
+                      mr={{ base: "10px", md: "" }}
+
                     >
                       {exploreUse}
                     </Button>
@@ -149,8 +149,8 @@ export default function VoyagervOneSixteen({
               </Flex>
             </Flex>
           </Box>
-        </Box >
-      </AbsoluteCenter >
-    </Box >
+        </Box>
+      </AbsoluteCenter>
+    </Box>
   );
 }

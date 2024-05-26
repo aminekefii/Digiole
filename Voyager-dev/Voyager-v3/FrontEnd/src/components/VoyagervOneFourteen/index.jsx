@@ -40,7 +40,7 @@ export default function VoyagervOneFourteen({
       <Text size="xl" color="gray.700_01" ml={{ md: "50px", base: "0px" }}>
         {voyagerapps}
       </Text>
-      <Container mb="49px" w="100%" display="flex" maxW="1452px" px="0px" mx="auto" p={{ md: "", base: "20px" }}>
+      <Container mb="49px" w="95%" display="flex" maxW="1452px" px="0px" mx="auto" p={{ md: "20px", base: "20px" }}>
         <Flex gap="100px" w="91%" flexDirection={{ md: "row", base: "column" }}>
           <Flex gap="49px" w={{ md: "21%", base: "100%" }} flexDirection="column" alignItems="center">
             <Image src="images/img_funding.svg" h={{ md: "248.48px", base: "auto" }} mt="25.48px" alignSelf="stretch" />

@@ -235,14 +235,15 @@ export default function Footer({ ...props }) {
                 </Flex>
               
               </Box>
-              <Flex mt="50px" w={{ md: "270px", base: "100%" }} justifyContent="flex-end" ml="120px">
+              <Flex mt="50px" w={{ md: "250px", base: "90%" }} justifyContent={{ md: "flex-end", base: "start" }} ml="10px" pr="10px" mr="20px">
             <Image src="images/img_ecosystemos_logo.svg" h="49px" />
-          </Flex>
+          
           <Link href="#">
-            <Text size="lg" textAlign="center" ml="300px" mt="2px">
+            <Text size="lg" textAlign="center" ml="10px" mt="2px">
               by Digiole
             </Text>
           </Link>
+          </Flex>
             </Flex>
           
           </Flex>

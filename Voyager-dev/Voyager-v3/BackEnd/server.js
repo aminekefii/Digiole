@@ -121,7 +121,7 @@ async function getOrCreateAssistant() {
         { type: "code_interpreter" }, // Code interpreter tool
         { type: "retrieval" }, // Retrieval tool
       ],
-      model: "gpt-3.5-turbo-0125",
+      model: "gpt-4-turbo",
     };
 
     const assistant = await openai.beta.assistants.create(assistantConfig);

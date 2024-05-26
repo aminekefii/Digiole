@@ -56,6 +56,7 @@ export default function LandingPage() {
             bg="white.A700"
             flexDirection="column"
             py={{ md: "69px", base: "20px" }}
+            
           />
           <VoyagervOneFive
             h="477px"

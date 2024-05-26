@@ -11,51 +11,55 @@ export default function VoyagervOneFifteen({
       <Container
         w="100%"
         display="flex"
-        justifyContent="flex-end"
+        justifyContent="space-between"
         alignItems="center"
         maxW="1336px"
         px="0px"
         mx="auto"
-        flexDirection={{ md: "row", base: "column" }}
-        p={{ md: "", base: "20px" }}
+        flexDirection={{ base: "column", md: "row" }}
+        p={{ base: "20px" }}
       >
-        <Flex gap="12px" w={{ md: "44%", base: "100%" }} flexDirection="column">
-          <Heading size="md" as="h1" fontSize="47px">
+        <Flex gap="12px" w={{ base: "100%", md: "44%" }} flexDirection="column">
+          <Heading size="md" as="h1" fontSize={{ base: "32px", md: "47px" }}>
             {intelligent}
           </Heading>
-          <Text size="xl" color="gray.700_01" w={{ md: "84%", base: "100%" }}>
+          <Text size="xl" color="gray.700_01" w="100%">
             {description}
           </Text>
         </Flex>
-        <Box h="696px" flex={{ md: 1, base: "unset" }} position="relative" w={{ md: "auto", base: "100%" }}>
+        <Box h={{ base: "auto", md: "696px" }} w="100%" position="relative" mt={{ base: "20px", md: "0" }}>
           <Image
             src="images/img_rectangle_3476.png"
-            h="696px"
-            w="96%"
+            h={{ base: "auto", md: "696px" }}
+            w="100%"
             position="absolute"
-            left="0px"
-            bottom="0px"
-            right="0px"
-            top="0px"
-            justifyContent="center"
+            left="0"
+            bottom="0"
+            right="0"
+            top="0"
             m="auto"
+            objectFit="cover"
           />
           <Flex
             w="100%"
             justifyContent="center"
-            position="absolute"
-            bottom="0px"
-            right="0px"
-            left="0px"
+            position="relative"
+            bottom="0"
+            right="0"
+            left="0"
             m="auto"
-            flexDirection={{ md: "row", base: "column" }}
+            flexDirection={{ base: "column", md: "row" }}
+            alignItems="center"
+            pb={{ base: "10px", md: "" }}
           >
-            <Image src="images/img_mockup_8copia_1.png" w={{ md: "42%", base: "100%" }} h="auto" />
+           
             <Image
-              src="images/img_mockup_copia_3.png"
-              ml={{ md: "-249px", base: "0px" }}
-              w={{ md: "58%", base: "100%" }}
+              src="images/intelligent.png"
+              mt={{ base: "150px", md: "160px"  }}
+              ml={{ base: "0", md: "200px" }}
+              w={{ base: "70%", md: "58%" }}
               h="auto"
+              pb={{ base: "10px", md: "" }}
             />
           </Flex>
         </Box>
