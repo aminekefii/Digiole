@@ -1,7 +1,6 @@
 
 const admin = require('firebase-admin');
 
-// Function to upload thread details JSON to Firebase Storage
 async function uploadThreadDetailsToStorage(userId, threadId) {
   try {
     const threadDetails = { threadId: threadId };
