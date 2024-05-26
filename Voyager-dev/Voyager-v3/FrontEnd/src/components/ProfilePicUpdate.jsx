@@ -1,18 +1,33 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ProfilePic} from './firebase/firebase'; 
+import { ProfilePic } from './firebase/firebase'; 
 import { auth } from './firebase/firebase';
 import { AuthContext } from './contexts/authContext/index';
 import { Button, Image, Text, Heading, Flex, Container, Box } from "@chakra-ui/react";
+
 function ProfilePicUpdate() {
   const { currentUser } = useContext(AuthContext);
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState(process.env.PUBLIC_URL + "/images/Profilepic.png");
-
- 
   const [files, setFiles] = useState([]);
+  const [modal, setModal] = useState(false);
+
+  const buttonStyle = {
+    marginLeft: 'auto',
+    fontSize: '0.80rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    fontWeight: 'bold',
+    color: 'black',
+    border: '1px solid #8b5cf6',
+    backgroundColor: 'rgb(217 249 157)',
+    borderRadius: '0.375rem',
+    padding: '0.5rem 1rem',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s, color 0.2s'
+  };
 
   const handleChange = e => {
     if (e.target.files[0]) {
@@ -20,6 +35,7 @@ function ProfilePicUpdate() {
       setFiles([e.target.files[0]]);
     }
   };
+
   const handleClick = async () => {
     try {
         const uploadToast = toast.info('Upload in progress...', {
@@ -41,7 +57,7 @@ function ProfilePicUpdate() {
         };
 
         await ProfilePic(photo, auth.currentUser, setLoading, updateProgress); 
-        const photoURL = await auth.currentUser.photoURL; // Retrieve the updated photo URL
+        const photoURL = await auth.currentUser.photoURL;
         setPhotoURL(photoURL);
 
         toast.success('Profile picture updated successfully', {
@@ -55,22 +71,18 @@ function ProfilePicUpdate() {
             theme: 'light'
         });
 
-       
         toast.dismiss(uploadToast);
     } catch (error) {
         console.error(error);
         toast.error(error.message);
     }
-};
+  };
 
-  
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
     }
-  }, [currentUser])
-
-  const [modal, setModal] = useState(false);
+  }, [currentUser]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -103,7 +115,7 @@ function ProfilePicUpdate() {
                 }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', height: '180px' }}>
-                  <input type="file" accept="image/*" onChange={handleChange} />
+                  <input type="file" accept="image/*" onChange={handleChange} style={buttonStyle} />
                   {files.length > 0 && (
                     <Image src={URL.createObjectURL(files[0])} alt="Preview" borderRadius="10px" boxSize="100px" />
                   )}

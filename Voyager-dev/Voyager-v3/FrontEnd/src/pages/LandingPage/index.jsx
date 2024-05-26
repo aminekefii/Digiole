@@ -25,9 +25,6 @@ import {
 } from "@chakra-ui/react";
 
 
-// Remove the global error event listener
-window.onerror = null;
-
 export default function LandingPage() {
 
   const { currentUser } = useAuth();

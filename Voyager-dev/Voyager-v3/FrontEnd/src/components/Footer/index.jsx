@@ -187,18 +187,9 @@ export default function Footer({ ...props }) {
                     *
                   </Text>
                   <Text as="span" color="gray.100_01" fontSize="14px" fontWeight={200} fontStyle="italic">
-                    Indicates require fiel
+                    Indicates require field
                   </Text>
-                  <Text
-                    as="span"
-                    color="gray.100_01"
-                    letterSpacing="0.70px"
-                    fontSize="14px"
-                    fontWeight={200}
-                    fontStyle="italic"
-                  >
-                    d
-                  </Text>
+                 
                 </Text>
               </Flex>
               <Box pb="7px">
@@ -206,7 +197,7 @@ export default function Footer({ ...props }) {
                   <Text letterSpacing="-0.08px" fontWeight={500}>
                     Email
                   </Text>
-                  <Input size="xs" variant="outline" colorScheme="indigo_50_03" alignSelf="stretch" borderRadius="20px"  borderColor="white.A700_01"/>
+                  <Input size="xs" variant="outline" colorScheme="indigo_50_03" alignSelf="stretch" borderRadius="20px" borderColor="white.A700_01" />
                   <Flex gap="19px" alignSelf="stretch" flexDirection="column" alignItems="start">
                     <Checkbox
                       value="false"
@@ -222,33 +213,30 @@ export default function Footer({ ...props }) {
                       size="md"
                       colorScheme="lime_200"
                       color="blue_gray.900_04"
-                   
+
                       fontWeight={500}
                       w="100%"
                       borderRadius="20px"
-                                            px={{ base: "20px", sm: "" }}
+                      px={{ base: "20px", sm: "" }}
                     >
                       Subscribe
                     </Button>
                   </Flex>
-                  
+
                 </Flex>
-              
+
               </Box>
               <Flex mt="50px" w={{ md: "250px", base: "90%" }} justifyContent={{ md: "flex-end", base: "start" }} ml="10px" pr="10px" mr="20px">
-            <Image src="images/img_ecosystemos_logo.svg" h="49px" />
-          
-          <Link href="#">
-            <Text size="lg" textAlign="center" ml="10px" mt="2px">
-              by Digiole
-            </Text>
-          </Link>
-          </Flex>
+                <Image src="images/img_ecosystemos_logo.svg" h="49px" />
+
+                <Link href="#">
+                  <Text size="lg" textAlign="center" ml="10px" mt="2px">
+                    by Digiole
+                  </Text>
+                </Link>
+              </Flex>
             </Flex>
-          
           </Flex>
-        
-         
         </Flex>
       </Container>
     </Box>

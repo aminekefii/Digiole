@@ -120,7 +120,8 @@ export default function VoyagervOneSixteen({
                       borderColor="blue_gray.900"
                       borderWidth="1px"
                       borderStyle="solid"
-                      w="100%"
+                      w={{ base: "40%", md: "100%" }}
+
                       borderRadius="24px"
                       px={{ base: "20px", sm: "16px", md: "20px" }}
                       fontSize={{ base: "sm", md: "md", }}
@@ -134,7 +135,7 @@ export default function VoyagervOneSixteen({
                       colorScheme="lime_300"
                       letterSpacing="-0.08px"
                       fontWeight={500}
-                      w="100%"
+                      w={{ base: "40%", md: "100%" }}
                       borderRadius="24px"
                       px={{ base: "20px", sm: "16px", md: "20px" }}
                       color="white.A700"

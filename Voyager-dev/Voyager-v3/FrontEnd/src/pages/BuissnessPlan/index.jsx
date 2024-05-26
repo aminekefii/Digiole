@@ -102,7 +102,6 @@ export default function Buissnessplan() {
           >
             <Chatsidebar float="left"  />
             <Box w={{ md: "100%", base: "100%" }}  ml={{ md: "100px", base: "0" }} mt="10px">
-           
               <ChatContainer />
             </Box>
           </Container>
