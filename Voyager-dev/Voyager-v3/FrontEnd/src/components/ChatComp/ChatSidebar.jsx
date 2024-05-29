@@ -80,6 +80,7 @@ const Chatsidebar = () => {
       minH="87vh"
       transition="all 0.3s ease-in-out"
       position="relative"
+      
     >
       <IconButton
         aria-label="Toggle Sidebar"

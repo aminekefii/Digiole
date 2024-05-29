@@ -18,8 +18,7 @@ def main(file_ids):
         file_content = file_data.read()
         separator_start = f'\n\n\n\nFILE # {count + 1}\n\n\n\n'
        
-        with open(output_path, "ab") as file:
-            file.write(separator_start.encode())
+        with open(output_path, "wb") as file:  
             file.write(file_content.rstrip(b'# \n').rstrip(b'#').rstrip(b' \n'))
 
     try:

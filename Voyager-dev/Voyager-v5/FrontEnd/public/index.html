@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>landing page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Content Security Policy -->
+</head>
+
+<body>
+  <div class="" id="root"></div>
+  <script>
+    window.onerror = function (message, source, lineno, colno, error) {
+      // Check if the error message matches the script error message
+      if (message === 'Script error.') {
+        // Return true to indicate that the error has been handled
+        return true;
+      }
+      // For other errors, let them bubble up
+      return false;
+    };
+  </script>
+  <script>
+    window.embeddedChatbotConfig = {
+      chatbotId: "iz-X4O8UUvGPY7VpFbgGj",
+      domain: "www.chatbase.co"
+    }
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="iz-X4O8UUvGPY7VpFbgGj" domain="www.chatbase.co" defer>
+  </script>
+</body>
+
+</html>
